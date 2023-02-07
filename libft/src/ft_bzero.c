@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilyes@student.42.fr>             +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 00:40:57 by ilandols          #+#    #+#             */
-/*   Updated: 2022/09/25 22:33:48 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:20:59 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
 	char	*p;
+	size_t	i;
 
-	p = s;
+	p = (char *)s;
 	i = 0;
 	while (i < n)
 	{
-		*p = 0;
-		p++;
+		p[i] = '\0';
 		i++;
 	}
+	return ;
 }

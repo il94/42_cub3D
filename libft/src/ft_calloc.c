@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilyes@student.42.fr>             +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 00:44:23 by ilandols          #+#    #+#             */
-/*   Updated: 2022/09/25 22:33:48 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:22:09 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	if (!p)
 		return (NULL);
 	c = p;
-	ft_bzero(c, nmemb);
+	ft_bzero(c, nmemb * size);
 	return (p);
 }
