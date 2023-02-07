@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:24:50 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/07 18:23:03 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/07 20:07:31 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,53 +30,6 @@ static t_bool	check_file_format(char *file, int fd)
 	return (TRUE);
 }
 
-// static t_texture	enum_check(char *tmp)
-// {
-// 	if (!ft_strcmp(tmp, "NO"))
-// 		return (NO);
-// 	if (!ft_strcmp(tmp, "SO"))
-// 		return (SO);
-// 	if (!ft_strcmp(tmp, "WE"))
-// 		return (WE);
-// 	if (!ft_strcmp(tmp, "EA"))
-// 		return (EA);
-// 	if (!ft_strcmp(tmp, "F"))
-// 		return (F);
-// 	if (!ft_strcmp(tmp, "C"))
-// 		return (C);
-// 	return (ERROR);
-// }
-
-// static void	check_sprite(t_game *game, char **file_content)
-// {
-// 	int	i;
-// 	char *tmp;
-
-// 	i = 0;
-// 	game->sprite = malloc(sizeof(char *) * 6);
-// 	// if (!game->sprite)
-// 	// 	"nik";
-// 	tmp = NULL;
-// 	while (file_content[i])
-// 	{
-// 		// printf("LINE = %s\n", file_content[i]);
-// 		tmp = ft_strcut_left(file_content[i], ' ');
-// 		// if (!tmp)
-// 			// "nik";
-// 		if (enum_check(tmp) != ERROR)
-// 		{
-// 			game->sprite[enum_check(tmp)] = file_content[i];
-// 			printf("SPRTIE = %s\n", game->sprite[enum_check(tmp)]);
-// 		}
-// 		else if (file_content[i][0] != '\n')
-// 			break ;
-// 		free(tmp);
-// 		i++;
-// 	}
-// 	free(tmp);
-
-// 	// sprite[NO] = mafonctiontahlesofus("NO ", 3);
-// }
 
 static t_texture	enum_check(char *tmp)
 {
@@ -94,7 +47,6 @@ static t_texture	enum_check(char *tmp)
 		return (C);
 	return (ERROR);
 }
-
 static void	check_sprite(t_game *game, char **file_content)
 {
 	int	i;
@@ -122,8 +74,49 @@ static void	check_sprite(t_game *game, char **file_content)
 		}
 		i++;
 	}
-	ft_free_array(game->sprite);
-	// sprite[NO] = mafonctiontahlesofus("NO ", 3);
+	i = 0;
+	while (game->sprite[i])
+		i++;
+	if (i != 6)
+	{
+		printf("pas cool\n");
+		ft_free_array_size(game->sprite, 7);
+	}
+
+	
+}
+
+void	get_rgb_value(t_game *game, int idx, int target[3])
+{
+	char	*str;
+	char	**values;
+	int		i;
+	int		value;
+
+	str = ft_strcut_right(game->sprite[idx], ' ');
+	// if (!str)
+	// 	nik
+	values = ft_split(str, ',');
+	// if (!values)
+	// 	nik
+	i = 0;
+	// if (ft_get_size_array(values) != 3)
+	// 	bimbadoum
+	while (i < 3)
+	{
+		value = ft_atoi(values[i]);
+		if (ft_str_isdigit(values[i]))
+			target[i] = ft_atoi(values[i]);
+		// else
+		// {
+		// 	saperlipopette
+		// }
+		// if (game->f_rgb[i] < 0 && game->f_rgb[i] > 255)
+		// 	nik
+		i++;
+	}
+	free(str);
+	ft_free_array(values);
 }
 
 t_bool    parser(t_game *game, int nb_parameters, char *file)
@@ -148,7 +141,12 @@ t_bool    parser(t_game *game, int nb_parameters, char *file)
 		return (FALSE);// perror ? exit ?
 	}
 	check_sprite(game, file_content);
+	get_rgb_value(game, 4, game->f_rgb);
+	get_rgb_value(game, 5, game->c_rgb);
+	printf("VALUES = %d %d %d\n", game->f_rgb[0], game->f_rgb[1], game->f_rgb[2]);
+	printf("VALUES = %d %d %d\n", game->c_rgb[0], game->c_rgb[1], game->c_rgb[2]);
 	ft_free_array(file_content);
+	ft_free_array(game->sprite);
 	return (TRUE);
 }
 

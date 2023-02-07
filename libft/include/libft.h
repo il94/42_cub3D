@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 00:50:41 by ilandols          #+#    #+#             */
-/*   Updated: 2022/12/07 17:52:29 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:35:56 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ int			ft_str_isalnum(char *str);
 int			ft_str_isalpha(char *str);
 int			ft_str_isdigit(char *str);
 int			ft_strrncmp(const char *s1, const char *s2, size_t n);
+void		ft_free_array_size(char **elements, int n);
 
 #endif
