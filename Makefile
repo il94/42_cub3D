@@ -39,7 +39,7 @@ OBJ_DIR = obj/
 #                                   SOURCES                                    #
 #==============================================================================#
 
-SRC = main.c initialisation.c parsing.c \
+SRC = main.c initialisation.c parsing.c free_memory.c \
 
 #==============================================================================#
 #                                   HEADERS                                    #
