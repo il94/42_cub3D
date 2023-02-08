@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/07 18:16:28 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/08 16:43:46 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+#include "../mlx_linux/mlx.h"
 #include "../libft/include/libft.h"
 
 typedef enum e_texture{
@@ -41,6 +42,10 @@ typedef struct s_game{
 
 /* parsing.c */
 t_bool    parser(t_game *game, int nb_parameters, char *file);
+
+/* free_memory.c */
+void	free_all_elements(t_game *game);
+void    free_all_and_exit(t_game *game, char *str_error);
 
 
 /* initiatlisation.c */
