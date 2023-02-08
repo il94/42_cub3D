@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/08 17:58:36 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:21:00 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		check_file_format(t_game *game, char *file);
 t_texture	enum_check(char *tmp);
 
 /* parsing_map.c */
+void	parse_map(t_game *game);
 void	check_map(t_game *game, char **file_content);
 
 /* parsing_data_map.c */
