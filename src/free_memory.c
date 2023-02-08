@@ -6,14 +6,22 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/08 16:42:37 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:46:44 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+void	verify_alloc(t_game *game, void *ptr)
+{
+	if (!ptr)
+		free_all_and_exit(game, ERROR_MALLOC);
+}
+
 void	free_all_elements(t_game *game)
 {
+	if (game->fd != -1)
+		close(game->fd);
 	if (game->sprite)
 		ft_free_array_size(game->sprite, 7);
 	if (game->map)
@@ -27,7 +35,7 @@ void	free_all_elements(t_game *game)
 	}
 }
 
-void    free_all_and_exit(t_game *game, char *str_error)
+void	free_all_and_exit(t_game *game, char *str_error)
 {
 	free_all_elements(game);
 	if (str_error)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilyes@student.42.fr>             +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 22:13:21 by ilandols          #+#    #+#             */
-/*   Updated: 2022/09/25 22:33:48 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:39:29 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,34 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (j < size_result)
 		result[j++] = s1[i++];
 	result[j] = '\0';
+	return (result);
+}
+
+char	*ft_strtrim_free(char *s1, char const *set)
+{
+	char	*result;
+	int		size_s1;
+	int		size_result;
+	int		i;
+	int		j;
+
+	if (!s1)
+		return (NULL);
+	size_s1 = ft_strlen(s1);
+	size_result = get_size_result(s1, set, size_s1);
+	if (size_result < 0)
+		return (NULL);
+	result = malloc((size_result + 1) * sizeof(char));
+	if (!result)
+		return (NULL);
+	i = 0;
+	while (s1[i] && is_charset(s1[i], set))
+		i++;
+	j = 0;
+	while (j < size_result)
+		result[j++] = s1[i++];
+	result[j] = '\0';
+	if (s1)
+		free(s1);
 	return (result);
 }

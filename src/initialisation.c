@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/07 18:22:36 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:46:29 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_game_struct(t_game *src)
 {
 	src->mlx_ptr = NULL;
 	src->win_ptr = NULL;
-	// src->sprite = NULL;
-	// src->map = NULL;
+	src->fd = -1;
+	src->sprite = NULL;
+	src->map = NULL;
 }
