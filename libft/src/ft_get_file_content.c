@@ -34,7 +34,7 @@ char	**ft_get_file_content(int fd)
 		}
 		free(line);
 	}
-	result = ft_split(stash, '\n');
+	result = ft_split_charset_n(stash, "\n");
 	free(stash);
 	if (!result)
 		return (NULL);

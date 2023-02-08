@@ -52,7 +52,7 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c \
 		ft_get_file_content.c ft_print_exit.c ft_strcmp.c ft_pathjoin.c \
 		ft_strcut_right.c ft_strcut_left.c ft_perror_exit.c ft_split_charset.c \
 		ft_strjoin_free.c ft_delete_char.c ft_str_isalnum.c ft_str_isalpha.c \
-		ft_str_isdigit.c ft_strrncmp.c \
+		ft_str_isdigit.c ft_strrncmp.c ft_split_charset_n.c \
 
 #==============================================================================#
 #                                   HEADERS                                    #
