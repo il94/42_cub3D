@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 18:25:01 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/09 19:30:18 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,30 @@ static void	check_map_surended_wall(t_game *game, char **map)
 
 static void	get_player_info(t_game *game, int i, int j)
 {
-	game->player.p_x = j;
-	game->player.p_y = i;
+	game->player.map_x = j;
+	game->player.map_y = i;
+	game->player.x = j * 50;
+	game->player.y = i * 50;
 	if (game->map[i][j] == 'N')
 	{
-		game->player.dir_x = game->player.p_x;
-		game->player.dir_y = game->player.p_y + 0.5;
+		game->player.dir_x = game->player.x;
+		game->player.dir_y = game->player.y - 10;
 		
 	}
 	if (game->map[i][j] == 'S')
 	{
-		game->player.dir_x = game->player.p_x;
-		game->player.dir_y = game->player.p_y - 0.5;
+		game->player.dir_x = game->player.x;
+		game->player.dir_y = game->player.y + 10;
 	}
 	if (game->map[i][j] == 'W')
 	{
-		game->player.dir_x = game->player.p_x - 0.5;
-		game->player.dir_y = game->player.p_y;
+		game->player.dir_x = game->player.x - 10;
+		game->player.dir_y = game->player.y;
 	}
 	if (game->map[i][j] == 'E')
 	{
-		game->player.dir_x = game->player.p_x + 0.5;
-		game->player.dir_y = game->player.p_y;	
+		game->player.dir_x = game->player.x + 10;
+		game->player.dir_y = game->player.y;	
 	}
 }
 

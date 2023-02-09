@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/09 13:06:31 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/09 19:16:45 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,11 @@ void	init_game_struct(t_game *src)
 	src->sprite = NULL;
 	src->file_content = NULL;
 	src->map = NULL;
+
+
+	src->move_up = FALSE;
+	src->move_right = FALSE;
+	src->move_down = FALSE;
+	src->move_left = FALSE;
+
 }

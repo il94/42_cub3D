@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 18:14:59 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/09 19:23:20 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@
 # include "../mlx_linux/mlx.h"
 # include "../libft/include/libft.h"
 
-#define PI 3.14159265
+# define PI 3.14159265
 
 # define ERROR_MALLOC "Error malloc\n"
 # define KEY_ESC 65307
+
+# define KEY_W 119
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 97
 
 # define BLACK 0x0
 # define GREY 0x6E6E6E
@@ -43,10 +48,12 @@ typedef enum e_texture{
 }	t_texture;
 
 typedef struct s_player{
-	float	p_x;
-	float	p_y;
-	float	dir_x;
-	float	dir_y;
+	int		map_x;
+	int		map_y;
+	int		x;
+	int		y;
+	int		dir_x;
+	int		dir_y;
 }	t_player;
 
 typedef struct s_img {
@@ -75,6 +82,18 @@ typedef struct s_game{
 	int		fd;
 	char	**file_content;
 	
+
+
+	t_bool	move_up;
+	t_bool	move_right;
+	t_bool	move_down;
+	t_bool	move_left;
+
+
+
+
+
+	
 }   t_game;
 
 
@@ -85,6 +104,7 @@ int	run(t_game *game);
 void	put_render(t_game *game);
 
 /* input_keyboard.c */
+int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
 
 /* init_mlx.c */
