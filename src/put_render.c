@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 17:00:52 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:24:49 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ void	put_minimap(t_game *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			if (game->map[y][x] == '0' || check_player_carac(game->map[y][x]))
+			if (game->map[y][x] == '0')
 				draw_tile(&game->minimap, WHITE, x * 48, y * 48);
+			else if (check_player_carac(game->map[y][x]))
+				draw_tile(&game->minimap, PURPLE, x * 48, y * 48);
 			else if (game->map[y][x] == '1')
 				draw_tile(&game->minimap, GREY, x * 48, y * 48);
 			else
-				draw_tile(&game->minimap, GREY, x * 48, y * 48);			
+				draw_tile(&game->minimap, BLACK, x * 48, y * 48);			
 			x++;
 		}
 		y++;

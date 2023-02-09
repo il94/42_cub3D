@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 16:54:10 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:14:59 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 
 # include "../mlx_linux/mlx.h"
 # include "../libft/include/libft.h"
+
+#define PI 3.14159265
 
 # define ERROR_MALLOC "Error malloc\n"
 # define KEY_ESC 65307
@@ -39,6 +42,13 @@ typedef enum e_texture{
 	ERROR
 }	t_texture;
 
+typedef struct s_player{
+	float	p_x;
+	float	p_y;
+	float	dir_x;
+	float	dir_y;
+}	t_player;
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
@@ -50,15 +60,17 @@ typedef struct s_img {
 }				t_img;
 
 typedef struct s_game{
-    void    *mlx_ptr;
-    void    *win_ptr;
-    char    **map;
-	
-	t_img	minimap;
+    void    	*mlx_ptr;
+    void   		*win_ptr;
 
-    char    **sprite;
-	int		f_rgb[3];
-	int		c_rgb[3];
+	t_player	player;
+
+    char    	**map;
+	t_img		minimap;
+
+    char    	**sprite;
+	int			f_rgb[3];
+	int			c_rgb[3];
 
 	int		fd;
 	char	**file_content;

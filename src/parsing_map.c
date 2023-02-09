@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 15:27:09 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:25:01 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,33 @@ static void	check_map_surended_wall(t_game *game, char **map)
 	}
 }
 
+static void	get_player_info(t_game *game, int i, int j)
+{
+	game->player.p_x = j;
+	game->player.p_y = i;
+	if (game->map[i][j] == 'N')
+	{
+		game->player.dir_x = game->player.p_x;
+		game->player.dir_y = game->player.p_y + 0.5;
+		
+	}
+	if (game->map[i][j] == 'S')
+	{
+		game->player.dir_x = game->player.p_x;
+		game->player.dir_y = game->player.p_y - 0.5;
+	}
+	if (game->map[i][j] == 'W')
+	{
+		game->player.dir_x = game->player.p_x - 0.5;
+		game->player.dir_y = game->player.p_y;
+	}
+	if (game->map[i][j] == 'E')
+	{
+		game->player.dir_x = game->player.p_x + 0.5;
+		game->player.dir_y = game->player.p_y;	
+	}
+}
+
 static void	check_carac(t_game *game, char **map)
 {
 	int	i;
@@ -70,6 +97,7 @@ static void	check_carac(t_game *game, char **map)
 			{
 				if (!check_player_carac(map[i][j]))
 					free_all_and_exit(game, "Parsing Error : Invalide carac\n");
+				get_player_info(game,i ,j);
 				n++;
 			}
 			j++;
@@ -99,6 +127,7 @@ static void	get_map(t_game *game, char **file_content)
 	verify_alloc(game, game->map);
 	dup_line_into_map(game, tmp);
 	ft_print_array(game->map);
+	
 }
 
 void	check_map(t_game *game, char **file_content)
