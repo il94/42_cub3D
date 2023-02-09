@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialisation.c                                   :+:      :+:    :+:   */
+/*   input_keyboard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/09 13:06:31 by ilandols         ###   ########.fr       */
+/*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
+/*   Updated: 2023/02/09 15:48:06 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void	init_game_struct(t_game *src)
+int	key_press(int keycode, t_game *game)
 {
-	src->mlx_ptr = NULL;
-	src->win_ptr = NULL;
-	src->fd = -1;
-	src->sprite = NULL;
-	src->file_content = NULL;
-	src->map = NULL;
+	if (keycode == KEY_ESC)
+		mlx_loop_end(game->mlx_ptr);
+	return (0);
 }

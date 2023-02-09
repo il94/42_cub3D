@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/08 17:46:44 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:19:38 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	free_all_elements(t_game *game)
 		close(game->fd);
 	if (game->sprite)
 		ft_free_array_size(game->sprite, 7);
+	if (game->file_content)
+		ft_free_array(game->file_content);
 	if (game->map)
 		ft_free_array(game->map);
+	if (game->minimap.img)
+		mlx_destroy_image(game->mlx_ptr, game->minimap.img);	
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->mlx_ptr)

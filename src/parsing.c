@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:24:50 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/08 19:29:02 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/09 15:28:28 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	parser(t_game *game, int nb_parameters, char *file)
 {
-	char	**file_content;
 	int		fd;
 
 	if (nb_parameters != 1)
@@ -23,19 +22,10 @@ void	parser(t_game *game, int nb_parameters, char *file)
 	if (game->fd == -1)
 		free_all_and_exit(game, "Invalid file\n");
 	check_file_format(game, file);
-	file_content = ft_get_file_content(game->fd);
-	// ft_print_array_n(file_content);
-	verify_alloc(game, file_content);
-	check_sprite(game, file_content);
+	game->file_content = ft_get_file_content(game->fd);
+	verify_alloc(game, game->file_content);
+	check_sprite(game, game->file_content);
 	get_rgb_value(game, 4, game->f_rgb);
 	get_rgb_value(game, 5, game->c_rgb);
-	check_map(game, file_content);
-	ft_free_array(file_content);
+	check_map(game, game->file_content);
 }
-
-/*
-sprites path ok :
-	path ok
-map is ok :
-	no space close to 0
-*/
