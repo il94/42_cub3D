@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_keyboard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 19:52:34 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/10 14:59:43 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ int	key_release(int keycode, t_game *game)
 
 int	key_press(int keycode, t_game *game)
 {
-// 	game->move_up = FALSE;
-// 	game->move_right = FALSE;
-// 	game->move_down = FALSE;
-// 	game->move_left = FALSE;
 	if (keycode == KEY_W)
 		game->move_up = TRUE;
 	else if (keycode == KEY_D)

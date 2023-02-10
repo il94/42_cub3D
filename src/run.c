@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 19:54:52 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/10 14:53:19 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	move_player(t_game *game)
 
 int	run(t_game *game)
 {
+	usleep(7000);
 	put_render(game);
 	move_player(game);
 }
