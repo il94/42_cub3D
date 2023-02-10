@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 19:30:18 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/10 18:39:22 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,23 @@ static void	get_player_info(t_game *game, int i, int j)
 {
 	game->player.map_x = j;
 	game->player.map_y = i;
-	game->player.x = j * 50;
-	game->player.y = i * 50;
+	game->player.px_x = j * 50;
+	game->player.px_y = i * 50;
+	
 	if (game->map[i][j] == 'N')
-	{
-		game->player.dir_x = game->player.x;
-		game->player.dir_y = game->player.y - 10;
+		game->player.angle = (M_PI / 2) + 0.5;
 		
-	}
 	if (game->map[i][j] == 'S')
-	{
-		game->player.dir_x = game->player.x;
-		game->player.dir_y = game->player.y + 10;
-	}
+		game->player.angle = (3*M_PI) / 2;
+
 	if (game->map[i][j] == 'W')
-	{
-		game->player.dir_x = game->player.x - 10;
-		game->player.dir_y = game->player.y;
-	}
+		game->player.angle = M_PI;
+		
 	if (game->map[i][j] == 'E')
-	{
-		game->player.dir_x = game->player.x + 10;
-		game->player.dir_y = game->player.y;	
-	}
+		game->player.angle = 2*M_PI;
+		
+	game->player.dir_x = cos(game->player.angle) * 10;
+	game->player.dir_y = -sin(game->player.angle) * 10;
 }
 
 static void	check_carac(t_game *game, char **map)
@@ -137,4 +131,7 @@ void	check_map(t_game *game, char **file_content)
 	get_map(game, file_content);
 	check_carac(game, game->map);
 	check_map_surended_wall(game, game->map);
+	printf("angle %f\n", game->player.angle);
+	printf("dir_x %f\n", game->player.dir_x);
+	printf("dir_y %f\n", game->player.dir_y);
 }

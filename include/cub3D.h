@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/10 15:05:52 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:43:08 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,18 @@ typedef struct s_player{
 	float	angle;
 }	t_player;
 
+typedef struct s_ray
+{
+	float	x;
+	float	y;
+	float	offset_x;
+	float	offset_y;
+	int		map_x;
+	int		map_y;
+	float	angle;
+}	t_ray;
+
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
@@ -80,6 +92,7 @@ typedef struct s_game{
     void   		*win_ptr;
 
 	t_player	player;
+	t_ray		ray;
 
     char    	**map;
 	t_img		minimap;
@@ -95,7 +108,9 @@ typedef struct s_game{
 	t_bool	move_right;
 	t_bool	move_down;
 	t_bool	move_left;
-
+	t_bool	move_dir_left;
+	t_bool	move_dir_right;
+	
 
 
 

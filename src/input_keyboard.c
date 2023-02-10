@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_keyboard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/10 14:59:43 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:39:38 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int	key_release(int keycode, t_game *game)
 		game->move_down = FALSE;
 	else if (keycode == KEY_A)
 		game->move_left = FALSE;
+	
+	else if (keycode == KEY_LEFT)
+		game->move_dir_left = FALSE;
+	else if (keycode == KEY_RIGHT)
+		game->move_dir_right = FALSE;
 	return (0);
 }
 
@@ -35,6 +40,10 @@ int	key_press(int keycode, t_game *game)
 		game->move_down = TRUE;
 	else if (keycode == KEY_A)
 		game->move_left = TRUE;
+	else if (keycode == KEY_LEFT)
+		game->move_dir_left = TRUE;
+	else if (keycode == KEY_RIGHT)
+		game->move_dir_right = TRUE;
 	if (keycode == KEY_ESC)
 		mlx_loop_end(game->mlx_ptr);
 	return (0);
