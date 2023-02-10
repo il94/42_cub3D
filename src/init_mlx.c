@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 18:18:33 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/10 14:54:30 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@ void	init_mlx(t_game *game)
 {
 	game->mlx_ptr = mlx_init();
 	verify_alloc(game, game->mlx_ptr);
-	game->win_ptr = mlx_new_window(game->mlx_ptr, 1500, 1300, "Cub3D");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	verify_alloc(game, game->win_ptr);
 
-	game->minimap.img = mlx_new_image(game->mlx_ptr, 1500, 1300);
+	game->minimap.img = mlx_new_image(game->mlx_ptr, W_MINIMAP, H_MINIMAP);
 	verify_alloc(game, game->minimap.img);
-	game->minimap.addr = mlx_get_data_addr(game->minimap.img, &game->minimap.bpp, &game->minimap.line, &game->minimap.end);
+	game->minimap.addr = mlx_get_data_addr(game->minimap.img, 
+		&game->minimap.bpp, &game->minimap.line, &game->minimap.end);
 	verify_alloc(game, game->minimap.addr);
 
 
 	mlx_hook(game->win_ptr, 2, 1L << 0, key_press, game);
-	// mlx_hook(game->win, 3, 1L << 1, key_release, game);
+	mlx_hook(game->win_ptr, 3, 1L << 1, key_release, game);
 	mlx_hook(game->win_ptr, 17, 0, mlx_loop_end, game->mlx_ptr);
 	mlx_loop_hook(game->mlx_ptr, run, game);
 	mlx_loop(game->mlx_ptr);

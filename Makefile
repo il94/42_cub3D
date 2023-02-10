@@ -17,6 +17,7 @@ MAKE_SILENT = make --no-print-directory
 LIBFT = -L libft -lft
 LIBX = -L mlx_linux -lmlx_Linux
 LIBXFLAGS = -lmlx -lXext -lX11
+LIBMATHS = -lm
 
 #==============================================================================#
 #                                    COLORS                                    #
@@ -64,7 +65,7 @@ $(NAME) : $(OBJ)
 	$(MAKE_SILENT) -C libft
 	$(MAKE_SILENT) -C mlx_linux	
 	echo "$(YELLOW)Making Cub3D$(END)"
-	$(CC) $(OBJ) $(LIBFT) $(LIBX) $(LIBXFLAGS) -o $(NAME)
+	$(CC) $(OBJ) $(LIBFT) $(LIBX) $(LIBXFLAGS) $(LIBMATHS) -o $(NAME)
 	echo "$(GREEN)Done$(END)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEAD) Makefile
