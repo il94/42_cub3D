@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 19:30:18 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/11 21:26:50 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 static void	dup_line_into_map(t_game *game, int tmp)
 {
@@ -57,29 +57,8 @@ static void	get_player_info(t_game *game, int i, int j)
 {
 	game->player.map_x = j;
 	game->player.map_y = i;
-	game->player.x = j * 50;
-	game->player.y = i * 50;
-	if (game->map[i][j] == 'N')
-	{
-		game->player.dir_x = game->player.x;
-		game->player.dir_y = game->player.y - 10;
-		
-	}
-	if (game->map[i][j] == 'S')
-	{
-		game->player.dir_x = game->player.x;
-		game->player.dir_y = game->player.y + 10;
-	}
-	if (game->map[i][j] == 'W')
-	{
-		game->player.dir_x = game->player.x - 10;
-		game->player.dir_y = game->player.y;
-	}
-	if (game->map[i][j] == 'E')
-	{
-		game->player.dir_x = game->player.x + 10;
-		game->player.dir_y = game->player.y;	
-	}
+	game->player.px_x = j * 48 + 24;
+	game->player.px_y = i * 48 + 24;
 }
 
 static void	check_carac(t_game *game, char **map)
@@ -99,7 +78,7 @@ static void	check_carac(t_game *game, char **map)
 			{
 				if (!check_player_carac(map[i][j]))
 					free_all_and_exit(game, "Parsing Error : Invalide carac\n");
-				get_player_info(game,i ,j);
+				get_player_info (game, i, j);
 				n++;
 			}
 			j++;
@@ -129,7 +108,6 @@ static void	get_map(t_game *game, char **file_content)
 	verify_alloc(game, game->map);
 	dup_line_into_map(game, tmp);
 	ft_print_array(game->map);
-	
 }
 
 void	check_map(t_game *game, char **file_content)

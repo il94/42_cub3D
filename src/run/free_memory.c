@@ -6,11 +6,11 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 16:19:38 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:14:42 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 void	verify_alloc(t_game *game, void *ptr)
 {
@@ -29,7 +29,7 @@ void	free_all_elements(t_game *game)
 	if (game->map)
 		ft_free_array(game->map);
 	if (game->minimap.img)
-		mlx_destroy_image(game->mlx_ptr, game->minimap.img);	
+		mlx_destroy_image(game->mlx_ptr, game->minimap.img);
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->mlx_ptr)

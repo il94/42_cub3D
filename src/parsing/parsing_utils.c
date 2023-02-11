@@ -6,11 +6,11 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:54:56 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/09 15:26:35 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:38:35 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 int	check_space_around(char **map, int i, int j)
 {
