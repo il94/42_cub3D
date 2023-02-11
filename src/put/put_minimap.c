@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:27:13 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:17:15 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	put_minimap(t_game *game)
 		}
 		y++;
 	}
+	cast_ray_h(game);
 	put_player(game);
 	put_image(&game->render, &game->minimap, 50, 50);
 }

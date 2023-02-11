@@ -49,6 +49,8 @@ SRC = main.c \
 		put/put_render.c put/put_utils.c put/put_minimap.c \
 		\
 		run/run.c run/utils.c run/input_keyboard.c run/free_memory.c \
+		run/ray_casting.c \
+
 
 #==============================================================================#
 #                                   HEADERS                                    #

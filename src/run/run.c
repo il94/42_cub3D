@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:14:06 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/11 22:01:03 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,28 @@ void	move_player(t_game *game)
 		game->player.px_y += 5;
 	if (game->move_left)
 		game->player.px_x -= 5;
+
+	if (game->move_dir_left)
+	{
+		game->player.angle += 0.1;
+		if (game->player.angle > (2 * M_PI))
+			game->player.angle = 0;
+		game->player.dir_x = cos(game->player.angle) * TILE;
+		game->player.dir_y = -sin(game->player.angle) * TILE;
+	}
+	if (game->move_dir_right)
+	{
+		game->player.angle -= 0.1;
+		if (game->player.angle < 0)
+			game->player.angle = (2 * M_PI);
+		game->player.dir_x = cos(game->player.angle) * TILE;
+		game->player.dir_y = -sin(game->player.angle) * TILE;
+	}
 }
 
 int	run(t_game *game)
 {
 	// usleep(7000);
 	put_render(game);
-	// move_player(game);
+	move_player(game);
 }

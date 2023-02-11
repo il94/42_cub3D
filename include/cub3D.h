@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:18:58 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/11 21:46:33 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,24 @@ typedef struct s_player{
 	float	dir_y;
 }	t_player;
 
+// typedef s_ray{
+// 	float	horizontal_x;
+// 	float	horizontal_y;
+// 	float	vertical_x;
+// 	float	vertical_y;
+// 	float angle;
+// }	t_ray;
+
+typedef struct s_ray
+{
+	float	x;
+	float	y;
+	float	offset_x;
+	float	offset_y;
+	float	angle;
+}	t_ray;
+
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
@@ -91,6 +109,9 @@ typedef struct s_game{
     void   		*win_ptr;
 
     char    	**map;
+
+	t_ray		ray;
+	
     char    	**sprite;
 	int			f_rgb[3];
 	int			c_rgb[3];
@@ -101,6 +122,8 @@ typedef struct s_game{
 	t_bool	move_right;
 	t_bool	move_down;
 	t_bool	move_left;
+	t_bool	move_dir_left;
+	t_bool	move_dir_right;
 
 	t_player	player;
 	
@@ -129,6 +152,8 @@ float	to_rad(float degrees);
 void	move_player(t_game *game);
 int		run(t_game *game);
 
+/* ray_casting.c */
+void	cast_ray_h(t_game *game);
 /*============================================================================*/
 
 /* put_minimap.c */
