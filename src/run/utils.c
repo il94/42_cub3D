@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 20:49:50 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:14:28 by ilandols         ###   ########.fr       */
+/*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
+/*   Updated: 2023/02/11 21:16:08 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
-int	main(int ac, char **av)
+float	get_coeff(int y_end, int y_start, int x_end, int x_start)
 {
-	t_game	game;
+	float	result;
 
-	init(&game);
-	parser(&game, ac - 1, av[1]);
-	init_mlx(&game);
-	free_all_elements(&game);
-	return (0);
+	result = (float)(abs(y_end - y_start)) / (abs(x_end - x_start));
+	if (result == INFINITY)
+		result = 0;
+	return (result);
+}
+
+void	swap(int *a, int *b)
+{
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+float	to_rad(float degrees)
+{
+	return (degrees * (M_PI / 180));
 }

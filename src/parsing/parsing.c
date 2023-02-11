@@ -6,11 +6,11 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:24:50 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/09 15:28:28 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:38:35 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 void	parser(t_game *game, int nb_parameters, char *file)
 {

@@ -40,8 +40,15 @@ OBJ_DIR = obj/
 #                                   SOURCES                                    #
 #==============================================================================#
 
-SRC = main.c initialisation.c free_memory.c parsing.c parsing_utils.c \
-		parsing_data_map.c parsing_map.c init_mlx.c input_keyboard.c run.c put_render.c \
+SRC = main.c \
+		init/init.c init/init_mlx.c \
+		\
+		parsing/parsing.c parsing/parsing_utils.c parsing/parsing_map.c \
+		parsing/parsing_data_map.c \
+		\
+		put/put_render.c put/put_utils.c put/put_minimap.c \
+		\
+		run/run.c run/utils.c run/input_keyboard.c run/free_memory.c \
 
 #==============================================================================#
 #                                   HEADERS                                    #
@@ -59,7 +66,11 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 #                                   MAKEFILE                                   #
 #==============================================================================#
 
-all : $(OBJ_DIR) $(NAME)
+all : $(NAME)
+
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEAD) Makefile
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
 	$(MAKE_SILENT) -C libft
@@ -68,11 +79,8 @@ $(NAME) : $(OBJ)
 	$(CC) $(OBJ) $(LIBFT) $(LIBX) $(LIBXFLAGS) $(LIBMATHS) -o $(NAME)
 	echo "$(GREEN)Done$(END)"
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEAD) Makefile
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR) :
-	$(MKDIR) $(OBJ_DIR)
+# $(OBJ_DIR) :
+# 	$(MKDIR) $(OBJ_DIR)
 
 bonus : all
 
