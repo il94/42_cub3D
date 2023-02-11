@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:46:33 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/11 23:32:31 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define PURPLE 0xDAABF9
 # define WHITE 0xFFFFFF
 # define RED 0xFF1A55
-
+# define GREEN 0x008000
 # define WIDTH 2560
 # define HEIGHT 1440
 
@@ -47,6 +47,7 @@
 # define H_MINIMAP HEIGHT / 4
 # define TILE 48
 # define PLAYER_MINIMAP 9
+# define POINT 9
 
 # define FOV 80 //a definir
 
@@ -154,6 +155,7 @@ int		run(t_game *game);
 
 /* ray_casting.c */
 void	cast_ray_h(t_game *game);
+void	cast_ray_v(t_game *game);
 /*============================================================================*/
 
 /* put_minimap.c */
