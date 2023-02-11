@@ -42,6 +42,7 @@ OBJ_DIR = obj/
 
 SRC = main.c initialisation.c free_memory.c parsing.c parsing_utils.c \
 		parsing_data_map.c parsing_map.c init_mlx.c input_keyboard.c run.c put_render.c \
+		ray_casting.c
 
 #==============================================================================#
 #                                   HEADERS                                    #

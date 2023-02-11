@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/10 17:43:08 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/11 21:04:02 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,20 @@ typedef struct s_player{
 	float	angle;
 }	t_player;
 
+// typedef s_ray{
+// 	float	horizontal_x;
+// 	float	horizontal_y;
+// 	float	vertical_x;
+// 	float	vertical_y;
+// 	float angle;
+// }	t_ray;
+
 typedef struct s_ray
 {
 	float	x;
 	float	y;
 	float	offset_x;
 	float	offset_y;
-	int		map_x;
-	int		map_y;
 	float	angle;
 }	t_ray;
 
@@ -110,19 +116,18 @@ typedef struct s_game{
 	t_bool	move_left;
 	t_bool	move_dir_left;
 	t_bool	move_dir_right;
-	
-
-
-
-
-	
 }   t_game;
 
 
 /* run.c */
 int	run(t_game *game);
 
+/* ray_casting.c*/
+void	cast_ray_h(t_game *game);
+void	cast_ray_v(t_game *game);
+
 /* put_render.c */
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	put_render(t_game *game);
 
 /* input_keyboard.c */

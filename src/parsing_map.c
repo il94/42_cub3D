@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/10 18:39:22 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/11 15:32:17 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static void	get_player_info(t_game *game, int i, int j)
 {
 	game->player.map_x = j;
 	game->player.map_y = i;
-	game->player.px_x = j * 50;
-	game->player.px_y = i * 50;
+	game->player.px_x = j * 50 + 25;
+	game->player.px_y = i * 50 + 25;
 	
 	if (game->map[i][j] == 'N')
-		game->player.angle = (M_PI / 2) + 0.5;
+		game->player.angle = (M_PI / 2) - 0.4;
 		
 	if (game->map[i][j] == 'S')
 		game->player.angle = (3*M_PI) / 2;
