@@ -3,49 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:01:12 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/12 15:44:48 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/12 23:22:00 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-static int	check_inter(t_game *game, int i, int j)
-{	
-	if (game->map[i][j] && (game->map[i][j] == '0'))
-		return (1);
-	return (0);
-}
-
-
-int	check_wall(t_game *game, int i, int j)
-{
-	if (i > ft_get_size_array(game->map) || i < 0)
-	{
-//		printf("IF 1 YOPOLOP\n");
-		return (1);
-	}
-	if (j > ft_strlen(game->map[i]))
-	{
-//		printf("IF 2 YOPOLOP\n");
-		return (1);
-	}
-	if (game->map[i][j] && (game->map[i][j] == '1' || game->map[i][j] == '\0'))
-	{
-		// printf("I = %d | J = %d\n", i, j);
-		// printf("IF 3 YOPOLOP\n");
-		return (1);
-	}
-	// else
-	// {
-	// 	printf("I = %d | J = %d\n", i, j);
-	// 	printf("SALUT\n");
-
-	// }
-	return (0);
-}
 
 static void	put_point(t_game *game, int x, int y, int color)
 {
@@ -65,156 +30,102 @@ static void	put_point(t_game *game, int x, int y, int color)
 	}
 }
 
-void	hit_dat_wall(t_game *game, int y, int x, int facing)
+static void	print_ray(t_ray ray, t_fpos first)
 {
-	int	i = 0;
-	while (game->ray.x >= 0 && game->ray.x <= WIDTH && game->ray.y >= 0 && game->ray.y <= HEIGHT)
-	{
-		put_point(game, game->ray.x, game->ray.y, GREEN);
-		if (check_wall(game, y, x))
-			break ;
-		game->ray.x += game->ray.offset_x;
-		game->ray.y += game->ray.offset_y;
-		// if (check_inter(game, y, x))
-		{
-			if (facing)
-				y--;
-			else
-				y++;	
-		}
-	}
-	if (game->ray.x >= 0 && game->ray.x <= WIDTH && game->ray.y >= 0 && game->ray.y <= HEIGHT)
-		put_point(game, game->ray.x, game->ray.y, RED);
+	printf("PX\nx = %f | y = %f\n\nOFF H\nx = %f | y = %f\n\nOFF V\nx = %f | y = %f\n\n F POS\nx = %f | y = %f\n\nANGLE = %f\n================\n", ray.px.x, ray.px.y, ray.offset_h.x, ray.offset_h.y, ray.offset_v.x, ray.offset_v.y, first.x, first.y, ray.angle);
 }
 
-void	cast_ray_v(t_game *game)
+// static int	find_wall(t_game *game, t_bool up, t_bool left)
+// {
+// 	t_pos	pos;
+// 	int		i;
+	
+// 	pos.x = game->player.map_x;
+// 	pos.y = game->player.map_y;
+	
+// 	i = 0;
+// 	if (up)
+// 	{
+// 		while (game->map[pos.y][pos.x] != '1')
+// 		{
+			
+// 			i++;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		while (game->map[pos.y][pos.x] != '1')
+// 			i++;
+// 	}
+// 	return (i);
+// }
+
+void	ray_casting(t_game *game)
 {
-	/* VERTICAL */
-	int	facing_up;
-	int	facing_down;
-	int	facing_left;
-	int	facing_right;
-	
-	facing_up = 0;
-	facing_left = 0;
-	game->ray.angle = game->player.angle;
-	if (game->ray.angle > 0 && game->ray.angle < M_PI)
-		facing_up = 1;
-	if (game->ray.angle > 0.5 * M_PI && game->ray.angle < 1.5 * M_PI)
-		facing_left = 1;
-	facing_down = !facing_up;
-	facing_right = !facing_left;
+	// game->player.map_x = 6;
+	// game->player.map_y = 3;
+	game->player.px_x = 317;
+	game->player.px_y = 170;
+	game->player.angle = 1.894395;
+	game->ray.angle = 1.894395;
 
-	game->ray.x = (int)(game->player.px_x / TILE) * TILE; //base left
-	game->ray.offset_x = -TILE;
-	// if (game->ray.angle > 3 * M_PI / 2 && game->ray.angle < M_PI / 2) //right
-	// if ((game->ray.angle > 3 * M_PI / 2 && game->ray.angle < M_PI * 2)
-	// 	|| 	(game->ray.angle > 0 && game->ray.angle < M_PI / 2)) //right
-	if (facing_right)
+	t_bool	to_up;
+	t_bool	to_left;
+	t_fpos	pos;
+	t_fpos	first_pos;
+
+	first_pos.x = 0;
+	first_pos.y = 0;
+	// game->ray.angle = game->player.angle;
+
+	to_up = FALSE;
+	if (game->ray.angle >= PI_0 && game->ray.angle < M_PI)
+		to_up = TRUE;
+	to_left = FALSE;
+	if (game->ray.angle >= PI_90 && game->ray.angle < PI_270)
+		to_left = TRUE;
+
+
+	if (to_up)
 	{
-		// printf("SALUT\n");
-		game->ray.x += TILE;	
-		game->ray.offset_x *= -1;
+		printf("To up\n");
+		pos.y = game->player.px_y - (game->player.map_y * TILE);
 	}
-	// printf("PLOP\n");
-	if (game->ray.angle == 3 * M_PI / 2 || game->ray.angle == M_PI / 2)
-	{
-		game->ray.x = game->player.px_y;
-		game->ray.y = game->player.px_x;
-		return ;
-	}
-	// printf("game->ray.angle = %f\n", game->ray.angle);
-	// if (game->ray.angle < 0.05)
-	// {
-	// 	printf("VAL \n");	
-	// 	game->ray.y = game->player.px_y;
-	// 	return ;
-	// }
-	game->ray.y = game->player.px_y + ((game->player.px_x - game->ray.x) * tan(game->ray.angle));
-	// printf("game->ray.y = %f\n", game->ray.y);
-	game->ray.offset_y = TILE / tan(game->ray.angle);
-		printf("nearest x hit : %f\n", tan(game->ray.angle));
-	// if (game->ray.offset_y == INFINITY)
-	// 	game->ray.offset_y = 6 * 48;
-		if (game->ray.offset_y > 0 && facing_up) //up
-			game->ray.offset_y *= -1;
-		if (game->ray.offset_y < 0 && facing_down)//down
-			game->ray.offset_y *= -1;
-
-	
-	printf("nearest x hit : %f\n", game->ray.x);
-	printf("nearest y hit : %f\n", game->ray.y);
-		
-	printf("offset x hit : %f\n", game->ray.offset_x);
-	printf("offset y hit : %f\n", game->ray.offset_y);
-
-	printf("player x: %f\n", game->player.px_x);
-	printf("player y: %f\n", game->player.px_y);
-
-	printf("angle: %f\n", game->ray.angle);
-	// if (game->ray.x >= 0 && game->ray.x <= WIDTH && game->ray.y >= 0 && game->ray.y <= HEIGHT)
-	// 	put_point(game, game->ray.x, game->ray.y, RED);
-	if (facing_right)
-		hit_dat_wall(game, (int)(game->ray.y / TILE), (int)(game->ray.x / TILE) + 1, 0);
 	else
-		hit_dat_wall(game, (int)(game->ray.y / TILE), (int)(game->ray.x / TILE), 1);
- }
-
-void	cast_ray_h(t_game *game)
-{
-	/* HORIZONTAL */
-	int	facing_left;
-	int	facing_right;
-
-	facing_left = 0;
-	game->ray.angle = game->player.angle;
-	if (game->ray.angle > 0.5 * M_PI && game->ray.angle < 1.5 * M_PI)
-		facing_left = 1;
-	facing_right = !facing_left;
-	
-	game->ray.y = (int)(game->player.px_y / TILE) * TILE; // if (game->ray.angle < M_PI)
-	game->ray.offset_y = -TILE;
-	if (game->ray.angle > M_PI)
 	{
-		game->ray.y += TILE;	
-		game->ray.offset_y *= -1;
+		printf("To down\n");
+		pos.y = (game->player.map_y * TILE + TILE) - game->player.px_y;
 	}
-
-	if (game->ray.angle == M_PI || game->ray.angle == 0)
+	if (to_left)
 	{
-		game->ray.y = game->player.px_x;
-		game->ray.x = game->player.px_y;
-		return ; 
+		printf("To left\n\n");
+		pos.x = game->player.px_x - (game->player.map_x * TILE);
 	}
-
-	game->ray.x = game->player.px_x + ((game->player.px_y - game->ray.y) / tan(game->ray.angle));
-	game->ray.offset_x = TILE / tan(game->ray.angle);
-	if (game->ray.offset_x > 0 && facing_left)
-		game->ray.offset_x *= -1;
-	if (game->ray.offset_x < 0 && facing_right)
-		game->ray.offset_x *= -1;
-
-
-	//printf("angle: %f\n", game->ray.angle);
-	if (game->ray.angle < M_PI)
-		hit_dat_wall(game, (int)(game->ray.y / TILE) - 1, (int)(game->ray.x / TILE), 1);
 	else
-		hit_dat_wall(game, (int)(game->ray.y / TILE), (int)(game->ray.x / TILE), 0);
+	{
+		printf("To right\n\n");
+		pos.x = (game->player.map_x * TILE + TILE) - game->player.px_x;
+	}
+
+	if (to_up && to_left) //1er cas
+	{
+		game->ray.offset_h.x = TILE;
+		game->ray.offset_v.y = TILE;
+
+		first_pos.x = game->player.px_x - pos.y / -tan(game->ray.angle) ;
+		first_pos.y = game->player.px_y - pos.y;
+
+		// game->ray.offset_h.y = ?;
+		// game->ray.offset_v.x = ?;
+	}
+
+	
+	
+	printf("POS MAP = %d %d\n", game->player.map_x, game->player.map_y);
+	printf("POS  PX = %f %f\n\n", game->player.px_x, game->player.px_y);
+	printf("POS TMP = %f %f\n\n", pos.x, pos.y);
+	print_ray(game->ray, first_pos);
+
+	
+	
 }
-	// if (game->ray.angle == M_PI || game->ray.angle == 0) // pas sur de celle la
-	// 	return ;
-	// else if (game->ray.angle < M_PI)
-	// {
-	// 	game->ray.offset_x = TILE / tan(game->ray.angle);
-	// 	game->ray.y = game->player.px_y - (int)(game->player.px_y / TILE) * TILE;
-	// 	game->ray.x = game->ray.y / tan(game->ray.angle);
-	// 	put_pixel(&game->minimap, (int)game->player.px_x + game->ray.x, (int)game->player.px_y - game->ray.y, PURPLE);
-		
-	// }
-	// else if (game->ray.angle > M_PI)
-	// {
-	// 	game->ray.offset_x = TILE / tan(game->ray.angle);
-	// 	game->ray.y = game->player.px_y - (int)(game->player.px_y / TILE) * TILE;
-	// 	game->ray.x = game->ray.y / tan(game->ray.angle);
-	// 	put_pixel(&game->minimap, (int)game->player.px_x + game->ray.x, (int)game->player.px_y - game->ray.y, PURPLE);
-	// }

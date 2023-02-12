@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 15:42:44 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/12 20:10:43 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include "../libft/include/libft.h"
 
 # define _USE_MATH_DEFINES
+# define PI_0 0
+# define PI_90 M_PI / 2
+# define PI_180 M_PI
+# define PI_270 3 * M_PI / 2
 
 # define ERROR_MALLOC "Error malloc\n"
 
@@ -42,16 +46,16 @@
 # define GREEN 0x008000
 // # define WIDTH 2560
 // # define HEIGHT 1440
-# define WIDTH 12 * 48 + 100 //temp
-# define HEIGHT 6 * 48 + 100 //temp
-
-# define W_MINIMAP 12 * 48
-# define H_MINIMAP 6 * 48
 # define TILE 50
+# define WIDTH 12 * TILE + TILE * 2 //temp
+# define HEIGHT 6 * TILE + TILE * 2 //temp
+
+# define W_MINIMAP 12 * TILE
+# define H_MINIMAP 6 * TILE
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
-# define FOV 60 //a definir
+# define FOV 120 //a definir
 
 typedef enum e_texture{
 	NO,
@@ -63,10 +67,10 @@ typedef enum e_texture{
 	ERROR
 }	t_texture;
 
-// typedef struct s_pos{
-// 	float	x;
-// 	float	y;	
-// }	t_pos;
+typedef struct s_fpos{
+	float	x;
+	float	y;	
+}	t_fpos;
 
 
 typedef struct s_player{
@@ -79,20 +83,11 @@ typedef struct s_player{
 	float	dir_y;
 }	t_player;
 
-// typedef s_ray{
-// 	float	horizontal_x;
-// 	float	horizontal_y;
-// 	float	vertical_x;
-// 	float	vertical_y;
-// 	float angle;
-// }	t_ray;
-
 typedef struct s_ray
 {
-	float	x;
-	float	y;
-	float	offset_x;
-	float	offset_y;
+	t_fpos	px;
+	t_fpos	offset_h;
+	t_fpos	offset_v;
 	float	angle;
 }	t_ray;
 
@@ -114,7 +109,6 @@ typedef struct s_game{
     char    	**map;
 
 	t_ray		ray;
-	t_ray		ray2;
 	
     char    	**sprite;
 	int			f_rgb[3];
@@ -157,8 +151,7 @@ void	move_player(t_game *game);
 int		run(t_game *game);
 
 /* ray_casting.c */
-void	cast_ray_h(t_game *game);
-void	cast_ray_v(t_game *game);
+void	ray_casting(t_game *game);
 /*============================================================================*/
 
 /* put_minimap.c */

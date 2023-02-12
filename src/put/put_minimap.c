@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 15:42:12 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/12 22:56:23 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void	put_direction_line(t_game *game)
 
 	start.x = game->player.px_x;
 	start.y = game->player.px_y;
-	end.x = game->ray.x;
-	end.y = game->ray.y;
+	end.x = game->player.px_x + game->player.dir_x;
+	end.y = game->player.px_y + game->player.dir_y;
 	if (start.x > end.x)
 	{
 		swap(&start.x, &end.x);
@@ -142,8 +142,7 @@ void	put_minimap(t_game *game)
 		}
 		y++;
 	}
+	ray_casting(game);
 	put_player(game);
-	// cast_ray_h(game);
-	cast_ray_v(game);
 	put_image(&game->render, &game->minimap, 50, 50);
 }
