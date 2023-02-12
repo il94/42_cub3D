@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:01:12 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/12 01:57:52 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:41:30 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@ int	check_wall(t_game *game, int i, int j)
 {
 	if (i > ft_get_size_array(game->map) || i < 0)
 	{
-		// printf("IF 1 YOPOLOP\n");
+		printf("IF 1 YOPOLOP\n");
 		return (1);
 	}
 	if (j > ft_strlen(game->map[i]))
 	{
-		// printf("IF 2 YOPOLOP\n");
+		printf("IF 2 YOPOLOP\n");
 		return (1);
 	}
 	if (game->map[i][j] && (game->map[i][j] == '1' || game->map[i][j] == '\0'))
 	{
-		// printf("I = %d | J = %d\n", i, j);
-		// printf("IF 3 YOPOLOP\n");
+		printf("I = %d | J = %d\n", i, j);
+		printf("IF 3 YOPOLOP\n");
 		return (1);
 	}
-	// else
-	// {
-	// 	printf("I = %d | J = %d\n", i, j);
-	// 	printf("SALUT\n");
+	else
+	{
+		printf("I = %d | J = %d\n", i, j);
+		printf("SALUT\n");
 
-	// }
+	}
 	return (0);
 }
 

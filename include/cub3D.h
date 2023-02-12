@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 02:03:22 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 12:11:24 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@
 # define WHITE 0xFFFFFF
 # define RED 0xFF1A55
 # define GREEN 0x008000
-# define WIDTH 2560
-# define HEIGHT 1440
+// # define WIDTH 2560
+// # define HEIGHT 1440
+# define WIDTH 12 * 48 + 100 //temp
+# define HEIGHT 6 * 48 + 100 //temp
 
 # define W_MINIMAP 12 * 48
 # define H_MINIMAP 6 * 48
