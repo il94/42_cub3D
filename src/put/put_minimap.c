@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 12:35:03 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:42:12 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static void	put_vertical_line(t_game *game, int y_start)
 	}
 }
 
-static void	put_line(t_game *game, t_pos start, t_pos end, float coeff)
+static void	put_line(t_game *game, t_pos start, t_pos end, double coeff)
 {
 	t_pos	pos;
-	float	error;
+	double	error;
 
 	pos.x = start.x;
 	pos.y = start.y;
@@ -143,7 +143,7 @@ void	put_minimap(t_game *game)
 		y++;
 	}
 	put_player(game);
-	cast_ray_h(game);
-	// cast_ray_v(game);
+	// cast_ray_h(game);
+	cast_ray_v(game);
 	put_image(&game->render, &game->minimap, 50, 50);
 }

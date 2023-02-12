@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 12:11:24 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:42:44 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@
 
 # define W_MINIMAP 12 * 48
 # define H_MINIMAP 6 * 48
-# define TILE 48
+# define TILE 50
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
-# define FOV 90 //a definir
+# define FOV 60 //a definir
 
 typedef enum e_texture{
 	NO,

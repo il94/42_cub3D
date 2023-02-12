@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 12:43:00 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 15:22:36 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,21 @@ void	move_player(t_game *game)
 	{
 		game->player.angle += 0.1;
 		if (game->player.angle > (2 * M_PI))
-			game->player.angle = 0;
-		game->player.dir_x = cos(game->player.angle) * TILE;
-		game->player.dir_y = -sin(game->player.angle) * TILE;
+			game->player.angle = 0.00001;
 	}
 	if (game->move_dir_right)
 	{
 		game->player.angle -= 0.1;
-		if (game->player.angle < 0)
-			game->player.angle = (2 * M_PI);
-		game->player.dir_x = cos(game->player.angle) * TILE;
-		game->player.dir_y = -sin(game->player.angle) * TILE;
+		if (game->player.angle < 0.00005)
+			game->player.angle = (2 * M_PI - 0.00001);
 	}
+	game->player.dir_x = cos(game->player.angle) * TILE;
+	game->player.dir_y = -sin(game->player.angle) * TILE;
 }
 
 int	run(t_game *game)
 {
-	usleep(7000);
+	usleep(45000);
 	put_render(game);
 	move_player(game);
 }
