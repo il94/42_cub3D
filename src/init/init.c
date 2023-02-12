@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/11 21:27:19 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 13:21:26 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 static void	init_player_struct(t_game *game)
 {
+	game->player.map_x = 0;
+	game->player.map_y = 0;
+	game->player.px_x = 0;
+	game->player.px_y = 0;
 	game->player.angle = to_rad(FOV);
 	game->player.dir_x = cos(game->player.angle) * TILE;
 	game->player.dir_y = -sin(game->player.angle) * TILE;
@@ -31,6 +35,20 @@ static void	init_game_struct(t_game *game)
 	game->move_right = FALSE;
 	game->move_down = FALSE;
 	game->move_left = FALSE;
+	game->move_dir_left = FALSE;
+	game->move_dir_right = FALSE;
+
+	game->ray.x = 0;
+	game->ray.y = 0;
+	game->ray.offset_x = 0;
+	game->ray.offset_y = 0;
+	game->ray.angle = 0;
+
+	game->ray2.x = 0;
+	game->ray2.y = 0;
+	game->ray2.offset_x = 0;
+	game->ray2.offset_y = 0;
+	game->ray2.angle = 0;
 }
 
 void	init(t_game *game)
