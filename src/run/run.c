@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 22:01:03 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/12 02:14:16 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,31 @@
 void	move_player(t_game *game)
 {
 	if (game->move_up)
+	{
 		game->player.px_y -= 5;
+		if (game->player.px_y <= 0)
+			game->player.px_y = 0;
+	}
 	if (game->move_right)
+	{
 		game->player.px_x += 5;
+		if (game->player.px_x >= W_MINIMAP)
+			game->player.px_x = W_MINIMAP;
+	}
 	if (game->move_down)
+	{
 		game->player.px_y += 5;
+		if (game->player.px_y >= H_MINIMAP)
+			game->player.px_y = H_MINIMAP;
+	}
 	if (game->move_left)
+	{
 		game->player.px_x -= 5;
+		if (game->player.px_x <= 0)
+			game->player.px_x = 0;
+	}
+
+
 
 	if (game->move_dir_left)
 	{

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 23:32:31 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 02:03:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@
 # define WIDTH 2560
 # define HEIGHT 1440
 
-# define W_MINIMAP WIDTH / 4
-# define H_MINIMAP HEIGHT / 4
+# define W_MINIMAP 12 * 48
+# define H_MINIMAP 6 * 48
 # define TILE 48
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
-# define FOV 80 //a definir
+# define FOV 90 //a definir
 
 typedef enum e_texture{
 	NO,
@@ -112,6 +112,7 @@ typedef struct s_game{
     char    	**map;
 
 	t_ray		ray;
+	t_ray		ray2;
 	
     char    	**sprite;
 	int			f_rgb[3];

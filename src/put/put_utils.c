@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:11:45 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/12 02:09:39 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	put_pixel(t_img *dst_img, int x, int y, int color)
 {
 	char	*dst;
 
+	if (x < 0 || y < 0 || x > dst_img->width || y > dst_img->height)
+		return;
 	dst = dst_img->addr + y * dst_img->line + x * dst_img->bpp / 8;
 	if (color >= -1 && y >= 0 && x >= 0 && color != *(int *)dst)
 		*(unsigned int *)dst = color;
