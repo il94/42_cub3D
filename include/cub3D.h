@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 15:42:44 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/13 13:44:06 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,19 @@
 # define ERROR_MALLOC "Error malloc\n"
 
 # define KEY_ESC 65307
+
+/* QWERTY */
 # define KEY_W 119
 # define KEY_D 100
 # define KEY_S 115
 # define KEY_A 97
+
+/* AZERTY */
+// # define KEY_W 122
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 113
+
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
