@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 20:10:43 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/14 02:00:37 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,18 @@
 # define ERROR_MALLOC "Error malloc\n"
 
 # define KEY_ESC 65307
-# define KEY_W 119
+
+/* QWERTY */
+// # define KEY_W 119
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 97
+
+/* AZERTY */
+# define KEY_W 122
 # define KEY_D 100
 # define KEY_S 115
-# define KEY_A 97
+# define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -44,14 +52,18 @@
 # define WHITE 0xFFFFFF
 # define RED 0xFF1A55
 # define GREEN 0x008000
+# define BLUE 0x0000FF
 // # define WIDTH 2560
 // # define HEIGHT 1440
-# define TILE 50
+# define TILE 48
 # define WIDTH 12 * TILE + TILE * 2 //temp
 # define HEIGHT 6 * TILE + TILE * 2 //temp
 
+
 # define W_MINIMAP 12 * TILE
 # define H_MINIMAP 6 * TILE
+# define MAX_MINIMAP sqrtf(powf(W_MINIMAP, 2) + powf(H_MINIMAP, 2))
+
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
@@ -89,6 +101,8 @@ typedef struct s_ray
 	t_fpos	offset_h;
 	t_fpos	offset_v;
 	float	angle;
+	t_bool	to_up;
+	t_bool	to_left;
 }	t_ray;
 
 
@@ -137,9 +151,10 @@ void	verify_alloc(t_game *game, void *ptr);
 void	free_all_elements(t_game *game);
 void    free_all_and_exit(t_game *game, char *str_error);
 
-/* input_keyboard.c */
+/* process_inputs */
 int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
+void	process_inputs(t_game *game);
 
 /* utils.c */
 float	get_coeff(int y_end, int y_start, int x_end, int x_start);
@@ -147,7 +162,6 @@ void	swap(int *a, int *b);
 float	to_rad(float degrees);
 
 /* run.c */
-void	move_player(t_game *game);
 int		run(t_game *game);
 
 /* ray_casting.c */
@@ -194,5 +208,9 @@ void	init_mlx(t_game *game);
 
 /* main.c */
 int	main(int ac, char **av);
+
+/* temp.c */
+void	put_point(t_game *game, int x, int y, int color);
+void	print_ray(t_ray ray);
 
 #endif

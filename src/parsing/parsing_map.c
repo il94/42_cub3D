@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:26:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/14 01:59:48 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ static void	get_map(t_game *game, char **file_content)
 	game->map = malloc(sizeof(char *) * (i - tmp + 1));
 	verify_alloc(game, game->map);
 	dup_line_into_map(game, tmp);
-	ft_print_array(game->map);
 }
 
 void	check_map(t_game *game, char **file_content)

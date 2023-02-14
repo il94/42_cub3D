@@ -1,16 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_keyboard.c                                   :+:      :+:    :+:   */
+/*   process_inputs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:47:55 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/13 21:47:12 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+static void	move_player(t_game *game, int x, int y)
+{
+	if (game->map[y / TILE][x / TILE] == '0'
+		|| game->map[y / TILE][x / TILE] == 'N')
+	{
+		game->player.px_x = x;
+		game->player.px_y = y;
+	}
+	if (game->player.map_x != x / TILE || game->player.map_y != y / TILE)
+	{
+		game->player.map_x = x / TILE;
+		game->player.map_y = y / TILE;
+	}
+}
+
+void	process_inputs(t_game *game)
+{
+	if (game->move_up)
+		move_player(game, game->player.px_x, game->player.px_y - 5);
+	if (game->move_right)
+		move_player(game, game->player.px_x + 5, game->player.px_y);
+	if (game->move_down)
+		move_player(game, game->player.px_x, game->player.px_y + 5);
+	if (game->move_left)
+		move_player(game, game->player.px_x - 5, game->player.px_y);
+
+	if (game->move_dir_left)
+	{
+		game->player.angle += 0.1;
+		if (game->player.angle > (2 * M_PI))
+			game->player.angle = 0.00001;
+	}
+	if (game->move_dir_right)
+	{
+		game->player.angle -= 0.1;
+		if (game->player.angle < 0.00005)
+			game->player.angle = (2 * M_PI - 0.00001);
+	}
+	game->player.dir_x = cos(game->player.angle) * MAX_MINIMAP;
+	game->player.dir_y = -sin(game->player.angle) * MAX_MINIMAP;
+}
 
 int	key_release(int keycode, t_game *game)
 {

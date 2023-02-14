@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 22:56:23 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:48:57 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void	put_direction_line(t_game *game)
 
 	start.x = game->player.px_x;
 	start.y = game->player.px_y;
-	end.x = game->player.px_x + game->player.dir_x;
-	end.y = game->player.px_y + game->player.dir_y;
+	end.x = game->ray.px.x;
+	end.y = game->ray.px.y;
 	if (start.x > end.x)
 	{
 		swap(&start.x, &end.x);
