@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/13 14:12:36 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:22:06 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_player_struct(t_game *game)
 	game->player.map_y = 0;
 	game->player.px_x = 0;
 	game->player.px_y = 0;
-	game->player.angle = to_rad(FOV);
+	game->player.angle = to_rad(ANGLE_PLAYER);
 	game->player.dir_x = cos(game->player.angle) * TILE;
 	game->player.dir_y = -sin(game->player.angle) * TILE;
 }

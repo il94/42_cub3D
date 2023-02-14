@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/13 21:48:57 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:57:40 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	put_vertical_line(t_game *game, int y_start)
 	int	y_end;
 
 	y = game->player.px_y;
-	y_end = y + game->player.dir_y;
+	y_end = game->ray.px.y;
 	while ((y != y_end))
 	{
 		put_pixel(&game->minimap, game->player.px_x, y, RED);
@@ -55,7 +55,7 @@ static void	put_line(t_game *game, t_pos start, t_pos end, double coeff)
 	}
 }
 
-static void	put_direction_line(t_game *game)
+void	put_direction_line(t_game *game)
 {
 	t_pos	start;
 	t_pos	end;
@@ -94,7 +94,6 @@ static void	put_player(t_game *game)
 		}
 		x++;
 	}
-	put_direction_line(game);
 }
 
 static void	put_image_tile(t_game *game, int color, int x, int y)
@@ -142,7 +141,6 @@ void	put_minimap(t_game *game)
 		}
 		y++;
 	}
-	ray_casting(game);
 	put_player(game);
 	put_image(&game->render, &game->minimap, 50, 50);
 }

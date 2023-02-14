@@ -46,7 +46,7 @@ SRC = main.c temp.c \
 		parsing/parsing.c parsing/parsing_utils.c parsing/parsing_map.c \
 		parsing/parsing_data_map.c \
 		\
-		put/put_render.c put/put_utils.c put/put_minimap.c \
+		put/put_render.c put/put_utils.c put/put_minimap.c put/put_column.c \
 		\
 		run/run.c run/utils.c run/process_inputs.c run/free_memory.c \
 		run/ray_casting.c \

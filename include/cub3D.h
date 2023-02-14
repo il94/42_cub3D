@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/14 02:00:37 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:02:17 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-// # define KEY_W 119
-// # define KEY_D 100
-// # define KEY_S 115
-// # define KEY_A 97
-
-/* AZERTY */
-# define KEY_W 122
+# define KEY_W 119
 # define KEY_D 100
 # define KEY_S 115
-# define KEY_A 113
+# define KEY_A 97
+
+/* AZERTY */
+// # define KEY_W 122
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -53,11 +53,13 @@
 # define RED 0xFF1A55
 # define GREEN 0x008000
 # define BLUE 0x0000FF
-// # define WIDTH 2560
-// # define HEIGHT 1440
+
+
+# define WIDTH 1920
+# define HEIGHT 1080
 # define TILE 48
-# define WIDTH 12 * TILE + TILE * 2 //temp
-# define HEIGHT 6 * TILE + TILE * 2 //temp
+// # define WIDTH 12 * TILE + TILE * 2 //temp
+// # define HEIGHT 6 * TILE + TILE * 2 //temp
 
 
 # define W_MINIMAP 12 * TILE
@@ -67,7 +69,8 @@
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
-# define FOV 120 //a definir
+# define FOV 90	
+# define ANGLE_PLAYER 90	
 
 typedef enum e_texture{
 	NO,
@@ -140,6 +143,7 @@ typedef struct s_game{
 	t_player	player;
 	
 	t_img		render;
+	t_img		environnement;
 	t_img		minimap;
 }   t_game;
 
@@ -157,6 +161,7 @@ int		key_press(int keycode, t_game *game);
 void	process_inputs(t_game *game);
 
 /* utils.c */
+float	hypotenus(float px, float py, float rx, float ry);
 float	get_coeff(int y_end, int y_start, int x_end, int x_start);
 void	swap(int *a, int *b);
 float	to_rad(float degrees);
@@ -168,7 +173,11 @@ int		run(t_game *game);
 void	ray_casting(t_game *game);
 /*============================================================================*/
 
+void	put_column(t_game *game, int n);
+
+
 /* put_minimap.c */
+void	put_direction_line(t_game *game);
 void	put_minimap(t_game *game);
 
 /* put_utils.c */
