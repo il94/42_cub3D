@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_column.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/14 19:29:58 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/14 20:05:49 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	put_column(t_game *game, int n)
 	// if (dif_angle < 0)
 	// 	dif_angle += (2*M_PI);
 	ray_dist = hypotenus(game->player.px_x, game->player.px_y, game->ray.px.x, game->ray.px.y);
-	size = HEIGHT / ray_dist * 48;
+	size = HEIGHT / ray_dist * TILE;
 	i = HEIGHT / 2;
 	// max = i + size;
 	// printf("I = %d | MAX = %d\n", i, max);
@@ -46,13 +46,13 @@ void	put_column(t_game *game, int n)
 	{
 		if (incr < size / 2)
 		{
-			put_pixel(&game->environnement, n, i - incr, RED);
-			put_pixel(&game->environnement, n, i + incr, RED);
+			put_pixel(&game->environnement, n, i - incr, PURPLE);
+			put_pixel(&game->environnement, n, i + incr, PURPLE);
 		}
 		else
 		{
-			put_pixel(&game->environnement, n, i - incr, GREY);
-			put_pixel(&game->environnement, n, i + incr, GREY);
+			put_pixel(&game->environnement, n, i - incr, BLACK);
+			put_pixel(&game->environnement, n, i + incr, BLACK);
 			
 		}
 		// printf("SALUT\n");

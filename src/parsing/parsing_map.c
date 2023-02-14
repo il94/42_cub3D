@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/14 01:59:48 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:05:40 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void	get_player_info(t_game *game, int i, int j)
 {
 	game->player.map_x = j;
 	game->player.map_y = i;
-	game->player.px_x = j * 48 + 24;
-	game->player.px_y = i * 48 + 24;
+	game->player.px_x = j * TILE + TILE / 2;
+	game->player.px_y = i * TILE + TILE / 2;
 }
 
 static void	check_carac(t_game *game, char **map)

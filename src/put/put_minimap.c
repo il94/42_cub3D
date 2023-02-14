@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/14 18:57:40 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/14 20:26:03 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static void	put_line(t_game *game, t_pos start, t_pos end, double coeff)
 	error = 0;
 	while (pos.x <= end.x)
 	{
-		put_pixel(&game->minimap, pos.x, pos.y, RED);
+		put_pixel(&game->render, pos.x + TILE, pos.y + TILE, RED);
 		error -= coeff;
 		while (error < -0.5)
 		{
 			if (pos.x < end.x)
-				put_pixel(&game->minimap, pos.x, pos.y, RED);
+				put_pixel(&game->render, pos.x + TILE, pos.y + TILE, RED);
 			if (start.y > end.y)
 				pos.y--;
 			else
@@ -120,6 +120,29 @@ static void	put_image_tile(t_game *game, int color, int x, int y)
 	}
 }
 
+void	put_raycasting(t_game *game, t_fpos ray)
+{
+	t_pos	start;
+	t_pos	end;
+	t_pos	pos;
+
+	start.x = game->player.px_x;
+	start.y = game->player.px_y;
+	end.x = ray.x;
+	end.y = ray.y;
+	if (start.x > end.x)
+	{
+		swap(&start.x, &end.x);
+		swap(&start.y, &end.y);
+	}
+	pos.x = start.x;
+	pos.y = start.y;
+	if (start.x == end.x && pos.y != end.y)
+		put_vertical_line(game, start.y);
+	else
+		put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
+}
+
 void	put_minimap(t_game *game)
 {
 	int	x;
@@ -142,5 +165,7 @@ void	put_minimap(t_game *game)
 		y++;
 	}
 	put_player(game);
-	put_image(&game->render, &game->minimap, 50, 50);
+	put_raycasting(game, game->ray1);
+	put_raycasting(game, game->ray2);
+	put_image(&game->render, &game->minimap, TILE, TILE);
 }

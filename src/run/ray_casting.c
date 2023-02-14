@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:01:12 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/14 19:03:21 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/14 20:29:50 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,23 +156,19 @@ static	t_fpos	init_start_h(t_game *game)
 
 void	ray_casting(t_game *game)
 {
-	int		i;
 	t_fpos	start_h;
 	t_fpos	start_v;
+	int		i;
 	
-	/* temp */
 	game->ray.angle = to_rad(ANGLE_PLAYER);
-	i = 0;
 	game->ray.angle = game->player.angle + to_rad(FOV / 2);
 	if (game->ray.angle > (2*M_PI))
 			game->ray.angle -= (2 * M_PI);
+	i = 0;
 	while (i < WIDTH)
 	{
-		// printf("%f\n", game->ray.angle);
 		game->ray.to_up = (game->ray.angle >= PI_0 && game->ray.angle < M_PI);
 		game->ray.to_left = (game->ray.angle >= PI_90 && game->ray.angle < PI_270);
-		/**/
-
 		start_h = init_start_h(game);
 		if (start_h.x < MAX_MINIMAP)
 			game->ray.offset_h.x = fabs(TILE / tan(game->ray.angle));
@@ -181,7 +177,10 @@ void	ray_casting(t_game *game)
 		game->ray.offset_v.y = fabs(TILE * tan(game->ray.angle));
 		game->ray.offset_v.x = TILE;
 		game->ray.px = get_collision(game, start_h, start_v);
-		put_direction_line(game);
+		if (i == 0)
+			game->ray1 = game->ray.px;
+		else if (i == WIDTH - 1)
+			game->ray2 = game->ray.px;
 		put_column(game, i);
 		game->ray.angle -= (to_rad(FOV) / (WIDTH));
 		if (game->ray.angle < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/14 19:02:17 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/14 20:19:41 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define TILE 48
+# define TILE 24
 // # define WIDTH 12 * TILE + TILE * 2 //temp
 // # define HEIGHT 6 * TILE + TILE * 2 //temp
 
@@ -127,6 +127,11 @@ typedef struct s_game{
 
 	t_ray		ray;
 	
+	/* temp */
+	t_fpos		ray1;
+	t_fpos		ray2;
+	/**/
+
     char    	**sprite;
 	int			f_rgb[3];
 	int			c_rgb[3];
