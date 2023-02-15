@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 16:19:22 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:29:43 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	move_player(t_game *game, int x, int y)
 		game->player.px.x = x;
 		game->player.px.y = y;
 	}
-	if (game->player.map.x != x / TILE || game->player.map.y != y / TILE)
+	if ((game->player.map.x != x / TILE || game->player.map.y != y / TILE)
+		&& game->map[y / TILE][x / TILE] != '1')
 	{
 		game->player.map.x = x / TILE;
 		game->player.map.y = y / TILE;
