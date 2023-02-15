@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_column.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/15 16:28:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:34:24 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ void	put_column(t_game *game, int n)
 		}
 		else if (i < size_column)
 		{
-			put_pixel(&game->environnement, n, middle - i, BROWN);
-			put_pixel(&game->environnement, n, middle + i, BROWN);
+			if (game->ray.wall)
+			{
+				put_pixel(&game->environnement, n, middle - i, BROWN);
+				put_pixel(&game->environnement, n, middle + i, BROWN);
+			}
+			else
+			{
+				put_pixel(&game->environnement, n, middle - i, D_BROWN);
+				put_pixel(&game->environnement, n, middle + i, D_BROWN);
+			}
 		}
 		else
 		{

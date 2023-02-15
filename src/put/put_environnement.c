@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_environnement.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 18:19:29 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:30:26 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,15 @@ static t_fpos	get_collision(t_game *game, t_fpos start_h, t_fpos start_v)
 	distance_h = hypotenus(game->player.px, result_h);
 	distance_v = hypotenus(game->player.px, result_v);
 	if (distance_h <= distance_v)
+	{
+		game->ray.wall = 0;
 		return (result_h);
+	}
 	else
+	{
+		game->ray.wall = 1;
 		return (result_v);
+	}
 }
 
 static	t_fpos	init_start_v(t_game *game)

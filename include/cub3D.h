@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 18:30:02 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:33:51 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define GREEN 0x31A851
 # define BLUE 0x335B96
 # define BROWN 0x966F33
+# define D_BROWN 0x8b5D2E
 
 # define WIDTH 960
 # define HEIGHT 600
@@ -102,6 +103,8 @@ typedef struct s_ray
 	float	angle;
 	t_bool	to_up;
 	t_bool	to_left;
+	
+	int		wall;
 }	t_ray;
 
 
@@ -142,7 +145,7 @@ typedef struct s_game{
 	t_bool	move_dir_right;
 
 	t_player	player;
-	
+
 	t_img		render;
 	t_img		environnement;
 	t_img		minimap;

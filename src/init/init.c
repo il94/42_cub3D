@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/15 16:05:07 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:22:27 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void	init_player_struct(t_game *game)
 	game->player.map.y = 0;
 	game->player.px.x = 0;
 	game->player.px.y = 0;
-	game->player.angle = to_rad(ANGLE_PLAYER);
+	// game->player.angle = to_rad(ANGLE_PLAYER);
 	game->player.dir.x = cos(game->player.angle) * SPEED;
 	game->player.dir.y = -sin(game->player.angle) * SPEED;
-	game->player.dir_side.x = cos(game->player.angle + to_rad(ANGLE_PLAYER + 90)) * SPEED;
-	game->player.dir_side.y = -sin(game->player.angle + to_rad(ANGLE_PLAYER + 90)) * SPEED;
+	game->player.dir_side.x = cos(game->player.angle + to_rad(90)) * SPEED;
+	game->player.dir_side.y = -sin(game->player.angle + to_rad(90)) * SPEED;
 }
 
 static void	init_game_struct(t_game *game)
