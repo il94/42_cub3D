@@ -3,98 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   put_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 15:42:12 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/15 16:02:25 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-static void	put_vertical_line(t_game *game, int y_start)
-{
-	int	y;
-	int	y_end;
-
-	y = game->player.px_y;
-	y_end = y + game->player.dir_y;
-	while ((y != y_end))
-	{
-		put_pixel(&game->minimap, game->player.px_x, y, RED);
-		if (y_start > y_end)
-			y--;
-		else
-			y++;
-	}
-}
-
-static void	put_line(t_game *game, t_pos start, t_pos end, double coeff)
-{
-	t_pos	pos;
-	double	error;
-
-	pos.x = start.x;
-	pos.y = start.y;
-	error = 0;
-	while (pos.x <= end.x)
-	{
-		put_pixel(&game->minimap, pos.x, pos.y, RED);
-		error -= coeff;
-		while (error < -0.5)
-		{
-			if (pos.x < end.x)
-				put_pixel(&game->minimap, pos.x, pos.y, RED);
-			if (start.y > end.y)
-				pos.y--;
-			else
-				pos.y++;
-			error += 1.0;
-		}
-		pos.x++;
-	}
-}
-
-static void	put_direction_line(t_game *game)
-{
-	t_pos	start;
-	t_pos	end;
-	t_pos	pos;
-
-	start.x = game->player.px_x;
-	start.y = game->player.px_y;
-	end.x = game->ray.x;
-	end.y = game->ray.y;
-	if (start.x > end.x)
-	{
-		swap(&start.x, &end.x);
-		swap(&start.y, &end.y);
-	}
-	pos.x = start.x;
-	pos.y = start.y;
-	if (start.x == end.x && pos.y != end.y)
-		put_vertical_line(game, start.y);
-	else
-		put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
-}
 
 static void	put_player(t_game *game)
 {
 	int	x;
 	int	y;
 
-	x = game->player.px_x - (PLAYER_MINIMAP / 2);
-	while (x < game->player.px_x + (PLAYER_MINIMAP / 2))
+	x = game->player.px.x - (PLAYER_MINIMAP / 2);
+	while (x < game->player.px.x + (PLAYER_MINIMAP / 2))
 	{
-		y = game->player.px_y - (PLAYER_MINIMAP / 2);
-		while (y < game->player.px_y + (PLAYER_MINIMAP / 2))
+		y = game->player.px.y - (PLAYER_MINIMAP / 2);
+		while (y < game->player.px.y + (PLAYER_MINIMAP / 2))
 		{
 			put_pixel(&game->minimap, x, y, PURPLE);
 			y++;
 		}
 		x++;
 	}
-	put_direction_line(game);
 }
 
 static void	put_image_tile(t_game *game, int color, int x, int y)
@@ -111,7 +44,8 @@ static void	put_image_tile(t_game *game, int color, int x, int y)
 		while (x_tile < TILE)
 		{
 			if (x_tile < 1 || x_tile > TILE - 1
-				|| y_tile < 1 || y_tile > TILE - 1)
+				|| y_tile < 1 || y_tile > TILE - 1
+				|| x + x_tile == W_MINIMAP - 1 || y + y_tile == H_MINIMAP - 1)
 				put_pixel(&game->minimap, x + x_tile, y + y_tile, BLACK);
 			else
 				put_pixel(&game->minimap, x + x_tile, y + y_tile, color);
@@ -143,7 +77,7 @@ void	put_minimap(t_game *game)
 		y++;
 	}
 	put_player(game);
-	// cast_ray_h(game);
-	cast_ray_v(game);
-	put_image(&game->render, &game->minimap, 50, 50);
+	put_raycasting_minimap(game, game->ray1);
+	put_raycasting_minimap(game, game->ray2);
+	put_image(&game->render, &game->minimap, TILE, TILE);
 }

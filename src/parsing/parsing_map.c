@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:26:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:02:25 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void	check_map_surended_wall(t_game *game, char **map)
 
 static void	get_player_info(t_game *game, int i, int j)
 {
-	game->player.map_x = j;
-	game->player.map_y = i;
-	game->player.px_x = j * 48 + 24;
-	game->player.px_y = i * 48 + 24;
+	game->player.map.x = j;
+	game->player.map.y = i;
+	game->player.px.x = j * TILE + TILE / 2;
+	game->player.px.y = i * TILE + TILE / 2;
 }
 
 static void	check_carac(t_game *game, char **map)
@@ -107,7 +107,6 @@ static void	get_map(t_game *game, char **file_content)
 	game->map = malloc(sizeof(char *) * (i - tmp + 1));
 	verify_alloc(game, game->map);
 	dup_line_into_map(game, tmp);
-	ft_print_array(game->map);
 }
 
 void	check_map(t_game *game, char **file_content)

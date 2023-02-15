@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 21:13:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:54:21 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void	init_mlx_addr(t_game *game)
 	game->minimap.addr = mlx_get_data_addr(game->minimap.img,
 			&game->minimap.bpp, &game->minimap.line, &game->minimap.end);
 	verify_alloc(game, game->minimap.addr);
+	game->environnement.addr = mlx_get_data_addr(game->environnement.img,
+			&game->environnement.bpp, &game->environnement.line, &game->environnement.end);
+	verify_alloc(game, game->environnement.addr);
 }
 
 static void	init_mlx_img(t_game *game)
@@ -32,6 +35,11 @@ static void	init_mlx_img(t_game *game)
 	verify_alloc(game, game->minimap.img);
 	game->minimap.width = W_MINIMAP;
 	game->minimap.height = H_MINIMAP;
+	game->environnement.img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
+	verify_alloc(game, game->environnement.img);
+	game->environnement.width = WIDTH;
+	game->environnement.height = HEIGHT;
+
 }
 
 void	init_mlx(t_game *game)

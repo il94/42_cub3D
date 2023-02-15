@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:49:50 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 15:41:19 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/14 01:58:10 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 int	main(int ac, char **av)
 {
 	t_game	game;
-
-	// printf("VAL = %f\n", M_PI - M_PI);
-	// printf("VAL = %f\n", M_PI / 2);
-	// printf("VAL = %f\n", M_PI);
-	// printf("VAL = %f\n", 3 * M_PI / 2);
-	// printf("VAL = %f\n", M_PI * 2);
 
 	init(&game);
 	parser(&game, ac - 1, av[1]);

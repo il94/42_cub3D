@@ -22,6 +22,10 @@
 # include "../libft/include/libft.h"
 
 # define _USE_MATH_DEFINES
+# define PI_0 0
+# define PI_90 M_PI / 2
+# define PI_180 M_PI
+# define PI_270 3 * M_PI / 2
 
 # define ERROR_MALLOC "Error malloc\n"
 
@@ -39,7 +43,6 @@
 // # define KEY_S 115
 // # define KEY_A 113
 
-
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
@@ -48,19 +51,24 @@
 # define PURPLE 0xDAABF9
 # define WHITE 0xFFFFFF
 # define RED 0xFF1A55
-# define GREEN 0x008000
-// # define WIDTH 2560
-// # define HEIGHT 1440
-# define WIDTH 12 * 48 + 100 //temp
-# define HEIGHT 6 * 48 + 100 //temp
+# define GREEN 0x31A851
+# define BLUE 0x335B96
+# define BROWN 0x966F33
 
-# define W_MINIMAP 12 * 48
-# define H_MINIMAP 6 * 48
-# define TILE 50
+# define WIDTH 960
+# define HEIGHT 600
+# define TILE 24
+
+# define W_MINIMAP 12 * TILE
+# define H_MINIMAP 6 * TILE
+# define MAX_MINIMAP sqrtf(powf(W_MINIMAP, 2) + powf(H_MINIMAP, 2))
+
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
-# define FOV 60 //a definir
+# define FOV 90	
+# define ANGLE_PLAYER 90	
+# define SPEED 5
 
 typedef enum e_texture{
 	NO,
@@ -72,37 +80,28 @@ typedef enum e_texture{
 	ERROR
 }	t_texture;
 
-// typedef struct s_pos{
-// 	float	x;
-// 	float	y;	
-// }	t_pos;
+typedef struct s_fpos{
+	float	x;
+	float	y;	
+}	t_fpos;
 
 
 typedef struct s_player{
-	int		map_x;
-	int		map_y;
-	float	px_x;
-	float	px_y;
+	t_pos	map;
+	t_fpos	px;
+	t_fpos	dir;
+	t_fpos	dir_side;
 	float	angle;
-	float	dir_x;
-	float	dir_y;
 }	t_player;
-
-// typedef s_ray{
-// 	float	horizontal_x;
-// 	float	horizontal_y;
-// 	float	vertical_x;
-// 	float	vertical_y;
-// 	float angle;
-// }	t_ray;
 
 typedef struct s_ray
 {
-	float	x;
-	float	y;
-	float	offset_x;
-	float	offset_y;
+	t_fpos	px;
+	t_fpos	offset_h;
+	t_fpos	offset_v;
 	float	angle;
+	t_bool	to_up;
+	t_bool	to_left;
 }	t_ray;
 
 
@@ -123,8 +122,12 @@ typedef struct s_game{
     char    	**map;
 
 	t_ray		ray;
-	t_ray		ray2;
 	
+	/* temp */
+	t_fpos		ray1;
+	t_fpos		ray2;
+	/**/
+
     char    	**sprite;
 	int			f_rgb[3];
 	int			c_rgb[3];
@@ -141,6 +144,7 @@ typedef struct s_game{
 	t_player	player;
 	
 	t_img		render;
+	t_img		environnement;
 	t_img		minimap;
 }   t_game;
 
@@ -152,25 +156,30 @@ void	verify_alloc(t_game *game, void *ptr);
 void	free_all_elements(t_game *game);
 void    free_all_and_exit(t_game *game, char *str_error);
 
-/* input_keyboard.c */
+/* process_inputs */
 int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
+void	process_inputs(t_game *game);
 
 /* utils.c */
+float	correc_angle(float angle);
+float	hypotenus(t_fpos start, t_fpos end);
 float	get_coeff(int y_end, int y_start, int x_end, int x_start);
 void	swap(int *a, int *b);
 float	to_rad(float degrees);
 
 /* run.c */
-void	move_player(t_game *game);
 int		run(t_game *game);
 
-/* ray_casting.c */
-void	cast_ray_h(t_game *game);
-void	cast_ray_v(t_game *game);
+
 /*============================================================================*/
 
+/* put_environnement.c */
+void	put_column(t_game *game, int n);
+void	put_environnement(t_game *game);
+
 /* put_minimap.c */
+void	put_direction_line(t_game *game);
 void	put_minimap(t_game *game);
 
 /* put_utils.c */
@@ -210,5 +219,13 @@ void	init_mlx(t_game *game);
 
 /* main.c */
 int	main(int ac, char **av);
+
+/* temp.c */
+void	put_vertical_line(t_game *game, int y_start);
+void	put_line(t_game *game, t_pos start, t_pos end, double coeff);
+void	put_direction_line(t_game *game);
+void	put_raycasting_minimap(t_game *game, t_fpos ray);
+void	put_point(t_game *game, int x, int y, int color);
+void	print_ray(t_ray ray);
 
 #endif

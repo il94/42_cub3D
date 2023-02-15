@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 22:16:11 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/15 13:08:49 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	put_render(t_game *game)
 {
+	put_environnement(game); // ray_casting
 	put_minimap(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 		game->render.img, 0, 0);

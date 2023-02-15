@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/12 13:21:26 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:05:07 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static void	init_player_struct(t_game *game)
 {
-	game->player.map_x = 0;
-	game->player.map_y = 0;
-	game->player.px_x = 0;
-	game->player.px_y = 0;
-	game->player.angle = to_rad(FOV);
-	game->player.dir_x = cos(game->player.angle) * TILE;
-	game->player.dir_y = -sin(game->player.angle) * TILE;
+	game->player.map.x = 0;
+	game->player.map.y = 0;
+	game->player.px.x = 0;
+	game->player.px.y = 0;
+	game->player.angle = to_rad(ANGLE_PLAYER);
+	game->player.dir.x = cos(game->player.angle) * SPEED;
+	game->player.dir.y = -sin(game->player.angle) * SPEED;
+	game->player.dir_side.x = cos(game->player.angle + to_rad(ANGLE_PLAYER + 90)) * SPEED;
+	game->player.dir_side.y = -sin(game->player.angle + to_rad(ANGLE_PLAYER + 90)) * SPEED;
 }
 
 static void	init_game_struct(t_game *game)
@@ -38,17 +40,13 @@ static void	init_game_struct(t_game *game)
 	game->move_dir_left = FALSE;
 	game->move_dir_right = FALSE;
 
-	game->ray.x = 0;
-	game->ray.y = 0;
-	game->ray.offset_x = 0;
-	game->ray.offset_y = 0;
+	game->ray.px.x = 0;
+	game->ray.px.y = 0;
+	game->ray.offset_h.x = 0;
+	game->ray.offset_h.y = 0;
+	game->ray.offset_v.x = 0;
+	game->ray.offset_v.y = 0;
 	game->ray.angle = 0;
-
-	game->ray2.x = 0;
-	game->ray2.y = 0;
-	game->ray2.offset_x = 0;
-	game->ray2.offset_y = 0;
-	game->ray2.angle = 0;
 }
 
 void	init(t_game *game)
