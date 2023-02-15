@@ -6,11 +6,29 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 18:54:36 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:29:02 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+float	correc_angle(float angle)
+{
+	float	result;
+
+	if (angle > (2 * M_PI))
+		result = angle - (2 * M_PI);
+	else if (angle < 0)
+		result = angle + (2 * M_PI);
+	else
+		result = angle;
+	return (result);
+}
+
+float	hypotenus(t_fpos start, t_fpos end)
+{
+	return (sqrt(((start.x - end.x) * (start.x - end.x)) + ((start.y - end.y) * (start.y - end.y))));
+}
 
 float	get_coeff(int y_end, int y_start, int x_end, int x_start)
 {

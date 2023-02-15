@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_inputs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/14 18:28:24 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/15 16:19:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,51 +17,38 @@ static void	move_player(t_game *game, int x, int y)
 	if (game->map[y / TILE][x / TILE] == '0'
 		|| game->map[y / TILE][x / TILE] == 'N')
 	{
-		game->player.px_x = x;
-		game->player.px_y = y;
+		game->player.px.x = x;
+		game->player.px.y = y;
 	}
-	if (game->player.map_x != x / TILE || game->player.map_y != y / TILE)
+	if (game->player.map.x != x / TILE || game->player.map.y != y / TILE)
 	{
-		game->player.map_x = x / TILE;
-		game->player.map_y = y / TILE;
+		game->player.map.x = x / TILE;
+		game->player.map.y = y / TILE;
 	}
 }
 
 void	process_inputs(t_game *game)
-{
-	// if (game->move_up)
-	// 	move_player(game, game->player.px_x + game->player.dir_x, game->player.px_y + game->player.dir_y);
-	// if (game->move_right)
-	// 	move_player(game, game->player.px_x - fabs(game->player.dir_x), game->player.px_y - fabs(game->player.dir_y));
-	// if (game->move_down)
-	// 	move_player(game, game->player.px_x - game->player.dir_x, game->player.px_y - game->player.dir_y);
-	// if (game->move_left)
-	// 	move_player(game, game->player.px_x + fabs(game->player.dir_x), game->player.px_y + fabs(game->player.dir_y));
-	
+{	
 	if (game->move_up)
-		move_player(game, game->player.px_x, game->player.px_y - 5);
+		move_player(game, game->player.px.x + game->player.dir.x,
+			game->player.px.y + game->player.dir.y);
 	if (game->move_right)
-		move_player(game, game->player.px_x + 5, game->player.px_y);
+		move_player(game, game->player.px.x - game->player.dir_side.x,
+			game->player.px.y - game->player.dir_side.y);
 	if (game->move_down)
-		move_player(game, game->player.px_x, game->player.px_y + 5);
+		move_player(game, game->player.px.x - game->player.dir.x,
+			game->player.px.y - game->player.dir.y);
 	if (game->move_left)
-		move_player(game, game->player.px_x - 5, game->player.px_y);
+		move_player(game, game->player.px.x + game->player.dir_side.x,
+			game->player.px.y + game->player.dir_side.y);
 	if (game->move_dir_left)
-	{
-		game->player.angle += 0.1;
-		if (game->player.angle > (2 * M_PI))
-			game->player.angle -= (2 * M_PI);
-	}
+		game->player.angle = correc_angle(game->player.angle + 0.1);
 	if (game->move_dir_right)
-	{
-		game->player.angle -= 0.1;
-		if (game->player.angle < 0)
-			game->player.angle += (2 * M_PI);
-	 }
-	game->player.dir_x = cos(game->player.angle) * MAX_MINIMAP;
-	game->player.dir_y = -sin(game->player.angle) * MAX_MINIMAP;
-	// game->player.dir_x = cos(game->player.angle) * 5;
-	// game->player.dir_y = -sin(game->player.angle) * 5;
+		game->player.angle = correc_angle(game->player.angle - 0.1);
+	game->player.dir.x = cos(game->player.angle) * SPEED;
+	game->player.dir.y = -sin(game->player.angle) * SPEED;
+	game->player.dir_side.x = cos(game->player.angle + to_rad(90)) * SPEED;
+	game->player.dir_side.y = -sin(game->player.angle + to_rad(90)) * SPEED;
 }
 
 int	key_release(int keycode, t_game *game)

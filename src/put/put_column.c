@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/14 20:05:49 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:28:39 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,57 +15,32 @@
 void	put_column(t_game *game, int n)
 {
 	float	ray_dist;
-	float	size;
+	float	size_column;
+	int		middle;
 	int		i;
-	int		dif_angle;
-	// int		max;
-	int		tmp = 0;
-	// dif_angle = game->player.angle - game->ray.angle;
-	// if (dif_angle < 0)
-	// 	dif_angle += (2*M_PI);
-	ray_dist = hypotenus(game->player.px_x, game->player.px_y, game->ray.px.x, game->ray.px.y);
-	size = HEIGHT / ray_dist * TILE;
-	i = HEIGHT / 2;
-	// max = i + size;
-	// printf("I = %d | MAX = %d\n", i, max);
-	int	incr = 0;
-	// while(incr < HEIGHT)
-	// {
-	// 	if (incr > (i - size / 2) && incr < (i + size / 2))
-	// 	{
-	// 		put_pixel(&game->environnement, n, i - incr, RED);
-	// 		put_pixel(&game->environnement, n, i + incr, RED);
-	// 	}
-	// 	else
-	// 		put_pixel(&game->environnement, n, incr, GREY);
-	// 	// printf("SALUT\n");
-	// 	incr++;
-	// }
 
-	while(incr < HEIGHT)
+	ray_dist = hypotenus(game->player.px, game->ray.px) * cos(game->player.angle - game->ray.angle);
+	ray_dist = fabs(TILE / ray_dist * HEIGHT);
+	size_column = ray_dist / 2;
+	middle = HEIGHT / 2;
+	i = 0;
+	while(i < HEIGHT)
 	{
-		if (incr < size / 2)
+		if (i < size_column && i >= size_column - 3)
 		{
-			put_pixel(&game->environnement, n, i - incr, PURPLE);
-			put_pixel(&game->environnement, n, i + incr, PURPLE);
+			put_pixel(&game->environnement, n, middle - i, BLACK);
+			put_pixel(&game->environnement, n, middle + i, BLACK);
+		}
+		else if (i < size_column)
+		{
+			put_pixel(&game->environnement, n, middle - i, BROWN);
+			put_pixel(&game->environnement, n, middle + i, BROWN);
 		}
 		else
 		{
-			put_pixel(&game->environnement, n, i - incr, BLACK);
-			put_pixel(&game->environnement, n, i + incr, BLACK);
-			
+			put_pixel(&game->environnement, n, middle - i, BLUE);
+			put_pixel(&game->environnement, n, middle + i, GREEN);
 		}
-		// printf("SALUT\n");
-		incr++;
+		i++;
 	}
-
-
-
-	// while(incr < size)
-	// {
-	// 	put_pixel(&game->environnement, n, i - incr, PURPLE);
-	// 	put_pixel(&game->environnement, n, i + incr, PURPLE);
-	// 	// printf("SALUT\n");
-	// 	incr++;
-	// }
 }

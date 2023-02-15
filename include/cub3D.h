@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/14 20:19:41 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:32:17 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,13 @@
 # define PURPLE 0xDAABF9
 # define WHITE 0xFFFFFF
 # define RED 0xFF1A55
-# define GREEN 0x008000
-# define BLUE 0x0000FF
+# define GREEN 0x31A851
+# define BLUE 0x335B96
+# define BROWN 0x966F33
 
-
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 960
+# define HEIGHT 600
 # define TILE 24
-// # define WIDTH 12 * TILE + TILE * 2 //temp
-// # define HEIGHT 6 * TILE + TILE * 2 //temp
-
 
 # define W_MINIMAP 12 * TILE
 # define H_MINIMAP 6 * TILE
@@ -71,6 +68,7 @@
 
 # define FOV 90	
 # define ANGLE_PLAYER 90	
+# define SPEED 5
 
 typedef enum e_texture{
 	NO,
@@ -89,13 +87,11 @@ typedef struct s_fpos{
 
 
 typedef struct s_player{
-	int		map_x;
-	int		map_y;
-	float	px_x;
-	float	px_y;
+	t_pos	map;
+	t_fpos	px;
+	t_fpos	dir;
+	t_fpos	dir_side;
 	float	angle;
-	float	dir_x;
-	float	dir_y;
 }	t_player;
 
 typedef struct s_ray
@@ -166,7 +162,8 @@ int		key_press(int keycode, t_game *game);
 void	process_inputs(t_game *game);
 
 /* utils.c */
-float	hypotenus(float px, float py, float rx, float ry);
+float	correc_angle(float angle);
+float	hypotenus(t_fpos start, t_fpos end);
 float	get_coeff(int y_end, int y_start, int x_end, int x_start);
 void	swap(int *a, int *b);
 float	to_rad(float degrees);
@@ -174,12 +171,12 @@ float	to_rad(float degrees);
 /* run.c */
 int		run(t_game *game);
 
-/* ray_casting.c */
-void	ray_casting(t_game *game);
+
 /*============================================================================*/
 
+/* put_environnement.c */
 void	put_column(t_game *game, int n);
-
+void	put_environnement(t_game *game);
 
 /* put_minimap.c */
 void	put_direction_line(t_game *game);
@@ -224,6 +221,10 @@ void	init_mlx(t_game *game);
 int	main(int ac, char **av);
 
 /* temp.c */
+void	put_vertical_line(t_game *game, int y_start);
+void	put_line(t_game *game, t_pos start, t_pos end, double coeff);
+void	put_direction_line(t_game *game);
+void	put_raycasting_minimap(t_game *game, t_fpos ray);
 void	put_point(t_game *game, int x, int y, int color);
 void	print_ray(t_ray ray);
 
