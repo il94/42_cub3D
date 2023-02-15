@@ -1,0 +1,6 @@
+.vscode
+obj
+cub3D
+mlx_linux/*.o
+mlx_linux/*.a
+mlx_linux/test
