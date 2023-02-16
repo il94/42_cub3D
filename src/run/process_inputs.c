@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_inputs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 18:29:43 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:24:25 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	move_player(t_game *game, int x, int y)
 {
 	if (game->map[y / TILE][x / TILE] == '0'
-		|| game->map[y / TILE][x / TILE] == 'N')
+		|| check_player_carac(game->map[y / TILE][x / TILE]))
 	{
 		game->player.px.x = x;
 		game->player.px.y = y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 16:02:25 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/15 19:19:58 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ static void	get_player_info(t_game *game, int i, int j)
 	game->player.map.y = i;
 	game->player.px.x = j * TILE + TILE / 2;
 	game->player.px.y = i * TILE + TILE / 2;
+	if (game->map[i][j] == 'N')
+		game->player.angle = to_rad(90);
+	if (game->map[i][j] == 'S')
+		game->player.angle = to_rad(270);
+	if (game->map[i][j] == 'W')
+		game->player.angle = to_rad(180);
+	if (game->map[i][j] == 'E')
+		game->player.angle = to_rad(0);
+		
 }
 
 static void	check_carac(t_game *game, char **map)
