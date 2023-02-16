@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 15:39:05 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:06:04 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 static void	move_player(t_game *game, float x, float y)
 {
-	int	x_int = x;
-	int	y_int = y;
-	
-	if (game->map[y_int / TILE][x_int / TILE] == '0'
-		|| check_player_carac(game->map[y_int / TILE][x_int / TILE]))
-	{
+	t_pos	target;
+
+	target.x = x / TILE;
+	target.y = y / TILE;
+	if (game->map[game->player.map.y][target.x] == '0'
+		|| check_player_carac(game->map[game->player.map.y][target.x]))
 		game->player.px.x = x;
+	if (game->map[target.y][game->player.map.x] == '0'
+		|| check_player_carac(game->map[target.y][game->player.map.x]))
 		game->player.px.y = y;
-	}
-	if ((game->player.map.x != x / TILE || game->player.map.y != y / TILE)
-		&& game->map[y_int / TILE][x_int / TILE] != '1')
+	if (game->map[(int)game->player.px.y / TILE]
+		[(int)game->player.px.x / TILE] != '1')
 	{
-		game->player.map.x = x / TILE;
-		game->player.map.y = y / TILE;
+		game->player.map.x = game->player.px.x / TILE;
+		game->player.map.y = game->player.px.y / TILE;
 	}
 }
 
