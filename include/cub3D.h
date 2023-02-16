@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 18:04:29 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 00:25:40 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@
 # define D_BROWN 0x8b5D2E
 # define CYAN 0x00FFFF
 
-# define WIDTH 1366
-# define HEIGHT 768
+# define WIDTH 960
+# define HEIGHT 600
 # define TILE 48
 
 # define MINIMAP 4 * TILE
@@ -149,7 +149,7 @@ typedef struct s_game{
 	t_img		render;
 	t_img		environnement;
 	t_img		minimap;
-	t_img		new_minimap;
+	t_img		trimmed_minimap;
 }   t_game;
 
 

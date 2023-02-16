@@ -23,11 +23,32 @@ static void	put_new_player(t_game *game)
 		x = MINIMAP / 2 - PLAYER_MINIMAP / 2;
 		while (x < PLAYER_MINIMAP * 2)
 		{
-			put_pixel(&game->new_minimap, x + TILE * 2, y + TILE * 2, PURPLE);
+			put_pixel(&game->trimmed_minimap, x + TILE * 2, y + TILE * 2, PURPLE);
 			x++;
 		}
 		y++;
 	}
+}
+
+static	t_bool	is_outside_map(t_game *game, t_pos start, int x, int y)
+{
+	t_pos	target;
+
+	target.x = start.x / TILE;
+	target.y = start.y / TILE;
+	if (start.y < 0 || start.y >= game->size_map.y)
+		return (TRUE);
+	else if (start.x < 0 || target.x > ft_strlen(game->map[target.y]))
+		return (TRUE);
+	else if (!game->map[target.y][target.x] || game->map[target.y][target.x] == ' ')
+	{
+		if (start.x % TILE == 0 && game->map[target.y][target.x - 1] == '1' && start.x < game->size_map.x)
+			return (FALSE);
+		else if (start.y % TILE == 0 && target.y > 0 && game->map[target.y - 1][target.x] == '1')
+			return (FALSE);
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 void	put_trimmed_minimap(t_game *game)
@@ -47,13 +68,13 @@ void	put_trimmed_minimap(t_game *game)
 		while (x < game->player.px.x + TILE * 2 + TILE)
 		{
 			if (x == 0 || x == MINIMAP - 1 || y == 0 || y == MINIMAP - 1)
-				put_pixel(&game->new_minimap, x, y, BLACK);
-			else if (start.x < 0 || start.y < 0 || start.x >= game->size_map.x || start.y >= game->size_map.y)
-				put_pixel(&game->new_minimap, x, y, BLUE);
+				put_pixel(&game->trimmed_minimap, x, y, BLACK);
+			else if (is_outside_map(game, start, x, y))
+				put_pixel(&game->trimmed_minimap, x, y, BLUE);
 			else
 			{
 				color = *(int *)(game->minimap.addr + start.y * game->minimap.line + start.x * 4);
-				put_pixel(&game->new_minimap, x, y, color);
+				put_pixel(&game->trimmed_minimap, x, y, color);
 			}
 			x++;
 			start.x++;
@@ -64,6 +85,6 @@ void	put_trimmed_minimap(t_game *game)
 	put_point(game, MINIMAP / 2, MINIMAP / 2, PURPLE);
 	put_raycasting_minimap(game, game->player.angle + to_rad(FOV / 2), game->ray1);
 	put_raycasting_minimap(game, game->player.angle - to_rad(FOV / 2), game->ray2);
-	put_image(&game->render, &game->new_minimap, TILE, TILE);
+	put_image(&game->render, &game->trimmed_minimap, TILE, TILE);
 
 }

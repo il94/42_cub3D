@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 18:01:23 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 21:26:39 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	init_mlx_addr(t_game *game)
 	game->environnement.addr = mlx_get_data_addr(game->environnement.img,
 			&game->environnement.bpp, &game->environnement.line, &game->environnement.end);
 	verify_alloc(game, game->environnement.addr);
-	game->new_minimap.addr = mlx_get_data_addr(game->new_minimap.img,
-			&game->new_minimap.bpp, &game->new_minimap.line, &game->new_minimap.end);
-	verify_alloc(game, game->new_minimap.addr);
+	game->trimmed_minimap.addr = mlx_get_data_addr(game->trimmed_minimap.img,
+			&game->trimmed_minimap.bpp, &game->trimmed_minimap.line, &game->trimmed_minimap.end);
+	verify_alloc(game, game->trimmed_minimap.addr);
 }
 
 static void	init_mlx_img(t_game *game)
@@ -42,10 +42,10 @@ static void	init_mlx_img(t_game *game)
 	verify_alloc(game, game->environnement.img);
 	game->environnement.width = WIDTH;
 	game->environnement.height = HEIGHT;
-	game->new_minimap.img = mlx_new_image(game->mlx_ptr, MINIMAP,  MINIMAP);
-	verify_alloc(game, game->new_minimap.img);
-	game->new_minimap.width = MINIMAP;
-	game->new_minimap.height = MINIMAP;
+	game->trimmed_minimap.img = mlx_new_image(game->mlx_ptr, MINIMAP,  MINIMAP);
+	verify_alloc(game, game->trimmed_minimap.img);
+	game->trimmed_minimap.width = MINIMAP;
+	game->trimmed_minimap.height = MINIMAP;
 
 }
 
