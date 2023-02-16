@@ -6,11 +6,13 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 01:05:23 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 01:35:24 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+/* SIGSEV map ouverte */
 
 int	run(t_game *game)
 {

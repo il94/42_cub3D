@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/14 18:55:51 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/16 01:34:03 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	free_all_elements(t_game *game)
 	if (game->environnement.img)
 		mlx_destroy_image(game->mlx_ptr, game->environnement.img);
 	if (game->render.img)
-		mlx_destroy_image(game->mlx_ptr, game->render.img);
+	// 	mlx_destroy_image(game->mlx_ptr, game->render.img);
+	// if (game->new_minimap.img)
+		mlx_destroy_image(game->mlx_ptr, game->new_minimap.img);
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game->mlx_ptr)

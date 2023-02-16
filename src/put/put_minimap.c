@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 16:02:25 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 03:43:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,11 @@ void	put_minimap(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '0' || check_player_carac(game->map[y][x]))
-				put_image_tile(game, WHITE, x, y);
-			else if (game->map[y][x] == '1')
-				put_image_tile(game, GREY, x, y);
+				put_image_tile(game, GREEN, x, y);
 			else
-				put_image_tile(game, BLACK, x, y);
+				put_image_tile(game, BROWN, x, y);
 			x++;
 		}
 		y++;
 	}
-	put_player(game);
-	put_raycasting_minimap(game, game->ray1);
-	put_raycasting_minimap(game, game->ray2);
-	put_image(&game->render, &game->minimap, TILE, TILE);
 }

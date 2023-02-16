@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:23:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 16:02:25 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 04:16:49 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	put_vertical_line(t_game *game, int y_start)
 	y_end = game->ray.px.y;
 	while ((y != y_end))
 	{
-		put_pixel(&game->minimap, game->player.px.x, y, RED);
+		put_pixel(&game->new_minimap, game->player.px.x, y, RED);
 		if (y_start > y_end)
 			y--;
 		else
@@ -39,12 +39,12 @@ void	put_line(t_game *game, t_pos start, t_pos end, double coeff)
 	error = 0;
 	while (pos.x <= end.x)
 	{
-		put_pixel(&game->minimap, pos.x, pos.y, RED);
+		put_pixel(&game->new_minimap, pos.x, pos.y, RED);
 		error -= coeff;
 		while (error < -0.5)
 		{
 			if (pos.x < end.x)
-				put_pixel(&game->minimap, pos.x, pos.y, RED);
+				put_pixel(&game->new_minimap, pos.x, pos.y, RED);
 			if (start.y > end.y)
 				pos.y--;
 			else
@@ -112,7 +112,7 @@ void	put_point(t_game *game, int x, int y, int color)
 		y_index = y - (POINT / 2);
 		while (y_index < y + (POINT / 2))
 		{
-			put_pixel(&game->minimap, x_index, y_index, color);
+			put_pixel(&game->new_minimap, x_index, y_index, color);
 			y_index++;
 		}
 		x_index++;

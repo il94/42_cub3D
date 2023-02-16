@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 01:10:02 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 04:21:56 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,14 @@
 
 # define WIDTH 960
 # define HEIGHT 600
-# define TILE 24
+# define TILE 48
 
-# define W_MINIMAP 33 * TILE
-# define H_MINIMAP 13 * TILE
+# define W_MINIMAP 14 * TILE
+# define H_MINIMAP 6 * TILE
 # define MAX_MINIMAP sqrtf(powf(W_MINIMAP, 2) + powf(H_MINIMAP, 2))
+
+# define NEW_MINIMAP 4 * TILE
+
 
 # define PLAYER_MINIMAP 9
 # define POINT 9
@@ -149,6 +152,7 @@ typedef struct s_game{
 	t_img		render;
 	t_img		environnement;
 	t_img		minimap;
+	t_img		new_minimap;
 }   t_game;
 
 
@@ -180,6 +184,9 @@ int		run(t_game *game);
 /* put_environnement.c */
 void	put_column(t_game *game, int n);
 void	put_environnement(t_game *game);
+
+/* put_new_minimap.c */
+
 
 /* put_minimap.c */
 void	put_direction_line(t_game *game);
