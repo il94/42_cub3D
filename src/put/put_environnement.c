@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 01:05:48 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:28:53 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	put_environnement(t_game *game)
 		game->ray.to_up = (game->ray.angle >= PI_0 && game->ray.angle < M_PI);
 		game->ray.to_left = (game->ray.angle >= PI_90 && game->ray.angle < PI_270);
 		start_h = init_start_h(game);
-		if (start_h.x < MAX_MINIMAP)
+		if (start_h.x < sqrtf(powf(game->size_map.x, 2) + powf(game->size_map.y, 2)))
 			game->ray.offset_h.x = fabs(TILE / tan(game->ray.angle));
 		game->ray.offset_h.y = TILE;
 		start_v = init_start_v(game);

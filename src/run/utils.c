@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 16:29:02 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:58:10 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ float	get_coeff(int y_end, int y_start, int x_end, int x_start)
 	return (result);
 }
 
-void	swap(int *a, int *b)
+void	swap(float *a, float *b)
 {
 	int	tmp;
 

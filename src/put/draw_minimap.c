@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_minimap.c                                      :+:      :+:    :+:   */
+/*   draw_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 16:02:25 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:27:33 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	put_image_tile(t_game *game, int color, int x, int y)
 		{
 			if (x_tile < 1 || x_tile > TILE - 1
 				|| y_tile < 1 || y_tile > TILE - 1
-				|| x + x_tile == W_MINIMAP - 1 || y + y_tile == H_MINIMAP - 1)
+				|| x + x_tile == game->size_map.x - 1 || y + y_tile == game->size_map.y - 1)
 				put_pixel(&game->minimap, x + x_tile, y + y_tile, BLACK);
 			else
 				put_pixel(&game->minimap, x + x_tile, y + y_tile, color);
@@ -55,7 +55,7 @@ static void	put_image_tile(t_game *game, int color, int x, int y)
 	}
 }
 
-void	put_minimap(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	int	x;
 	int	y;
@@ -67,17 +67,11 @@ void	put_minimap(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '0' || check_player_carac(game->map[y][x]))
-				put_image_tile(game, WHITE, x, y);
-			else if (game->map[y][x] == '1')
-				put_image_tile(game, GREY, x, y);
+				put_image_tile(game, GREEN, x, y);
 			else
-				put_image_tile(game, BLACK, x, y);
+				put_image_tile(game, BROWN, x, y);
 			x++;
 		}
 		y++;
 	}
-	put_player(game);
-	put_raycasting_minimap(game, game->ray1);
-	put_raycasting_minimap(game, game->ray2);
-	put_image(&game->render, &game->minimap, TILE, TILE);
 }
