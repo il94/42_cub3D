@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:23:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 04:16:49 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:37:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	put_vertical_line(t_game *game, int y_start)
 	}
 }
 
-void	put_line(t_game *game, t_pos start, t_pos end, double coeff)
+void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff)
 {
 	t_pos	pos;
 	double	error;
@@ -57,9 +57,9 @@ void	put_line(t_game *game, t_pos start, t_pos end, double coeff)
 
 void	put_direction_line(t_game *game)
 {
-	t_pos	start;
-	t_pos	end;
-	t_pos	pos;
+	t_fpos	start;
+	t_fpos	end;
+	t_fpos	pos;
 
 	start.x = game->player.px.x;
 	start.y = game->player.px.y;
@@ -78,16 +78,50 @@ void	put_direction_line(t_game *game)
 		put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
 }
 
-void	put_raycasting_minimap(t_game *game, t_fpos ray)
-{
-	t_pos	start;
-	t_pos	end;
-	t_pos	pos;
+// void	put_raycasting_minimap(t_game *game, t_fpos ray)
+// {
+// 	t_fpos	start;
+// 	t_fpos	end1;
+// 	t_fpos	end2;
+// 	t_fpos	pos;
+// 	// t_fpos	ray1;
+// 	// t_fpos	ray2;
 
-	start.x = game->player.px.x;
-	start.y = game->player.px.y;
-	end.x = ray.x;
-	end.y = ray.y;
+// 	start.x = MINIMAP / 2;
+// 	start.y = MINIMAP / 2;
+// 	end1.x = cos(game->player.angle - to_rad(FOV / 2)) + 20;
+// 	end1.y = -sin(game->player.angle - to_rad(FOV / 2)) + 20;
+// 	end2.x = cos(game->player.angle + to_rad(FOV / 2)) + 20;
+// 	end2.y = -sin(game->player.angle + to_rad(FOV / 2)) + 20;
+// 	if (start.x > end1.x)
+// 	{
+// 		swap(&start.x, &end1.x);
+// 		swap(&start.y, &end1.y);
+// 	}
+// 	if (start.x > end2.x)
+// 	{
+// 		swap(&start.x, &end2.x);
+// 		swap(&start.y, &end2.y);
+// 	}
+// 	pos.x = start.x;
+// 	pos.y = start.y;
+// 	if (start.x == end1.x && pos.y != end1.y)
+// 		put_vertical_line(game, start.y);
+// 	else
+// 		put_line(game, start, end1, get_coeff(end1.y, start.y, end1.x, start.x));
+// 	put_line(game, start, end2, get_coeff(end2.y, start.y, end2.x, start.x));
+// }
+
+void	put_raycasting_minimap(t_game *game, float angle, t_fpos ray)
+{
+	t_fpos	start;
+	t_fpos	end;
+	t_fpos	pos;
+
+	start.x = MINIMAP / 2;
+	start.y = MINIMAP / 2;
+	end.x = MINIMAP / 2 + (cos(angle) * hypotenus(game->player.px, ray));
+	end.y = MINIMAP / 2 + (-sin(angle) * hypotenus(game->player.px, ray));
 	if (start.x > end.x)
 	{
 		swap(&start.x, &end.x);

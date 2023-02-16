@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 19:19:58 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/16 17:29:58 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,31 @@ static void	get_map(t_game *game, char **file_content)
 	dup_line_into_map(game, tmp);
 }
 
+static t_pos	get_size_map(char **map)
+{
+	t_pos	result;
+	int		i;
+	int		size;
+
+	i = 0;
+	result.x = 0;
+	result.y = ft_get_size_array(map);
+	while (i < result.y)
+	{
+		size = ft_strlen(map[i]);
+		if (result.x < size)
+			result.x = size;
+		i++;
+	}
+	result.x *= TILE;
+	result.y *= TILE;
+	return (result);
+}
+
 void	check_map(t_game *game, char **file_content)
 {
 	get_map(game, file_content);
 	check_carac(game, game->map);
 	check_map_surended_wall(game, game->map);
+	game->size_map = get_size_map(game->map);
 }

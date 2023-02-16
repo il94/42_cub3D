@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 04:21:56 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:04:29 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,18 @@
 # define BLUE 0x335B96
 # define BROWN 0x966F33
 # define D_BROWN 0x8b5D2E
+# define CYAN 0x00FFFF
 
-# define WIDTH 960
-# define HEIGHT 600
+# define WIDTH 1366
+# define HEIGHT 768
 # define TILE 48
 
-# define W_MINIMAP 14 * TILE
-# define H_MINIMAP 6 * TILE
-# define MAX_MINIMAP sqrtf(powf(W_MINIMAP, 2) + powf(H_MINIMAP, 2))
-
-# define NEW_MINIMAP 4 * TILE
-
+# define MINIMAP 4 * TILE
 
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
-# define FOV 90	
+# define FOV 60	
 # define ANGLE_PLAYER 90	
 # define SPEED 5
 
@@ -126,6 +122,7 @@ typedef struct s_game{
     void   		*win_ptr;
 
     char    	**map;
+	t_pos		size_map;
 
 	t_ray		ray;
 	
@@ -172,7 +169,7 @@ void	process_inputs(t_game *game);
 float	correc_angle(float angle);
 float	hypotenus(t_fpos start, t_fpos end);
 float	get_coeff(int y_end, int y_start, int x_end, int x_start);
-void	swap(int *a, int *b);
+void	swap(float *a, float *b);
 float	to_rad(float degrees);
 
 /* run.c */
@@ -185,12 +182,12 @@ int		run(t_game *game);
 void	put_column(t_game *game, int n);
 void	put_environnement(t_game *game);
 
-/* put_new_minimap.c */
+/* put_trimmed_minimap.c */
+void	put_trimmed_minimap(t_game *game);
 
-
-/* put_minimap.c */
+/* draw_minimap.c */
 void	put_direction_line(t_game *game);
-void	put_minimap(t_game *game);
+void	draw_minimap(t_game *game);
 
 /* put_utils.c */
 void	put_pixel(t_img *dst_img, int x, int y, int color);
@@ -232,9 +229,9 @@ int	main(int ac, char **av);
 
 /* temp.c */
 void	put_vertical_line(t_game *game, int y_start);
-void	put_line(t_game *game, t_pos start, t_pos end, double coeff);
+void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff);
 void	put_direction_line(t_game *game);
-void	put_raycasting_minimap(t_game *game, t_fpos ray);
+void	put_raycasting_minimap(t_game *game, float angle, t_fpos ray);
 void	put_point(t_game *game, int x, int y, int color);
 void	print_ray(t_ray ray);
 
