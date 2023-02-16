@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 19:33:51 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/16 01:10:02 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@
 # define HEIGHT 600
 # define TILE 24
 
-# define W_MINIMAP 12 * TILE
-# define H_MINIMAP 6 * TILE
+# define W_MINIMAP 33 * TILE
+# define H_MINIMAP 13 * TILE
 # define MAX_MINIMAP sqrtf(powf(W_MINIMAP, 2) + powf(H_MINIMAP, 2))
 
 # define PLAYER_MINIMAP 9

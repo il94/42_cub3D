@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_environnement.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/15 19:30:26 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/16 01:05:48 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	put_environnement(t_game *game)
 	
 	game->ray.angle = to_rad(ANGLE_PLAYER);
 	game->ray.angle = game->player.angle + to_rad(FOV / 2);
-	if (game->ray.angle > (2*M_PI))
+	if (game->ray.angle > (2 * M_PI))
 			game->ray.angle -= (2 * M_PI);
 	i = 0;
 	while (i < WIDTH)
