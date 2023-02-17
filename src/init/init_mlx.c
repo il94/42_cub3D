@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 21:26:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 01:02:26 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ static void	init_mlx_addr(t_game *game)
 	game->trimmed_minimap.addr = mlx_get_data_addr(game->trimmed_minimap.img,
 			&game->trimmed_minimap.bpp, &game->trimmed_minimap.line, &game->trimmed_minimap.end);
 	verify_alloc(game, game->trimmed_minimap.addr);
+	game->wood.addr = mlx_get_data_addr(game->wood.img,
+			&game->wood.bpp, &game->wood.line, &game->wood.end);
+	verify_alloc(game, game->wood.addr);
 }
 
 static void	init_mlx_img(t_game *game)
@@ -46,7 +49,11 @@ static void	init_mlx_img(t_game *game)
 	verify_alloc(game, game->trimmed_minimap.img);
 	game->trimmed_minimap.width = MINIMAP;
 	game->trimmed_minimap.height = MINIMAP;
-
+	// printf("str = %s\n", &game->sprite[0][3]);
+	game->wood.img = mlx_xpm_file_to_image(game->mlx_ptr, "./sprites/e_04.xpm",
+		&game->wood.width, &game->wood.height);
+	verify_alloc(game, game->wood.img);
+	printf("1 = %d | 2 = %d\n", game->wood.width, game->wood.height);
 }
 
 void	init_mlx(t_game *game)

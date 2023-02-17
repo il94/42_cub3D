@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/17 00:25:40 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 01:00:14 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define WIDTH 960
 # define HEIGHT 600
 # define TILE 48
+
 
 # define MINIMAP 4 * TILE
 
@@ -150,6 +151,8 @@ typedef struct s_game{
 	t_img		environnement;
 	t_img		minimap;
 	t_img		trimmed_minimap;
+
+	t_img		wood;
 }   t_game;
 
 

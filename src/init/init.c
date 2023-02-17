@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/16 21:26:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 00:47:27 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	init_game_struct(t_game *game)
 	game->environnement.img = NULL;
 	game->minimap.img = NULL;
 	game->trimmed_minimap.img = NULL;
+	
+	game->wood.img = NULL;
 }
 
 void	init(t_game *game)
