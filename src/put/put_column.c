@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/17 03:17:58 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 16:52:44 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	put_column(t_game *game, int n)
 	middle = HEIGHT / 2;
 	i = 0;
 
-
 	int	offset;
 
 	if (game->ray.wall == 0) // horizontal
@@ -34,23 +33,25 @@ void	put_column(t_game *game, int n)
 		offset = (int)game->ray.px.y % TILE;
 
 	int	color;
+	float	ratio;
+	float		start;
+
+	start = HEIGHT / 2 - size_column / 2;
+	ratio = TILE / ray_dist;
 	// printf("offset = %d\n", offset);
+	// printf("ratio = %f\n", ratio);
+	// printf("size_column = %f\n", size_column);
 	while(i < HEIGHT)
 	{
 		
 		if (i < size_column)
 		{
-			color = *(int *)(game->wood.addr + i * game->wood.line + offset * 4);
-			// put_pixel(&game->environnement, n, middle - i, color);
-			// color = *(int *)(game->wood.addr + (TILE - middle - i) * game->wood.line + offset * 4);
-			// j = offset / 
-			// while (j < size_column)
-			{
-				// printf("j = %d\n", j);
-				put_pixel(&game->environnement, n, middle + i - size_column, color);
-				j++;
-			}
-			// put_pixel(&game->environnement, n, middle - i, color);
+			color = *(int *)(game->north.addr + (int)((size_column - i) * ratio) * game->north.line + offset * 4);
+			// if (ray_dist / 2 <= 10)
+				// printf("ray_dist = %f\n", ray_dist / 2);
+			put_pixel(&game->environnement, n, middle - (i), color);
+			color = *(int *)(game->north.addr + (int)(i * ratio + TILE / 2) * game->north.line + offset * 4);
+			put_pixel(&game->environnement, n, middle + i, color);
 		}
 		else
 		{

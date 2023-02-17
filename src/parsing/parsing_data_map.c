@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 16:48:28 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:03:38 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	check_sprite(t_game *game, char **file_content)
 		{
 			if (!game->sprite[index])
 			{
-				game->sprite[index] = ft_strdup(file_content[i]);
+				game->sprite[index] = ft_strdup(&file_content[i][3]);
+				printf("STR = %s\n", game->sprite[index]);
 				verify_alloc(game, game->sprite[index]);
 			}
 			else
