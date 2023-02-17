@@ -1,7 +1,7 @@
 NO sprites/e_04.xpm
-SO sprites/e_04.xpm
-WE sprites/e_04.xpm
-EA sprites/e_04.xpm
+SO sprites/e_00.xpm
+EA sprites/b_11.xpm
+WE sprites/c_05.xpm
 
 
 F 220,100,99
@@ -24,4 +24,4 @@ C 225,30,0
    1000001
    100N001
    1000001
-   1111111
+    11111

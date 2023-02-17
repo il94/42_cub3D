@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/17 16:50:41 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:05:57 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ static void	init_game_struct(t_game *game)
 	game->south.img = NULL;
 	game->west.img = NULL;
 	game->east.img = NULL;
+
+	// game->north_a = NULL
+	// game->north_sprite_number = 0;
+
 }
 
 void	init(t_game *game)

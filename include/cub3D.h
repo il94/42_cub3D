@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/17 16:48:42 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:22:13 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@
 # define ANGLE_PLAYER 90	
 # define SPEED 5
 
+# define ANIMATION 20000
+
 typedef enum e_texture{
 	NO,
 	SO,
@@ -106,7 +108,8 @@ typedef struct s_ray
 	t_bool	to_up;
 	t_bool	to_left;
 	
-	int		wall;
+	t_bool	wall_h;
+	t_bool	wall_v;
 }	t_ray;
 
 
@@ -156,8 +159,19 @@ typedef struct s_game{
 
 	t_img		north;
 	t_img		south;
-	t_img		east;
 	t_img		west;
+	t_img		east;
+
+	t_img		north_a[3];
+	// t_img		*north_a;
+	int			north_sprite_number;
+	// t_img		south_a[3];
+	// int			south_sprite_number;
+	// t_img		west_a[3];
+	// int			west_sprite_number;
+	// t_img		east_a[3];
+	// int			east_sprite_number;
+	
 }   t_game;
 
 
