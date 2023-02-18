@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 15:58:10 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:01:44 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ float	correc_angle(float angle)
 
 float	hypotenus(t_fpos start, t_fpos end)
 {
-	return (sqrt(((start.x - end.x) * (start.x - end.x)) + ((start.y - end.y) * (start.y - end.y))));
+	return (sqrt(((start.x - end.x) * (start.x - end.x))
+			+ ((start.y - end.y) * (start.y - end.y))));
 }
 
 float	get_coeff(int y_end, int y_start, int x_end, int x_start)

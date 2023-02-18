@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/17 18:33:19 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:35:36 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,6 @@ static void	init_mlx_img(t_game *game)
 	game->north_a[3].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/coin/c_03.xpm",
 		&game->north_a[3].width, &game->north_a[3].height);
 	verify_alloc(game, game->north_a[3].img);
-
-
-
-
-	
-	printf("SALUT\n");
 }
 
 void	init_mlx(t_game *game)
@@ -115,6 +109,7 @@ void	init_mlx(t_game *game)
 	init_mlx_addr(game);
 	mlx_hook(game->win_ptr, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win_ptr, 3, 1L << 1, key_release, game);
+	mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);
 	draw_minimap(game);
 	mlx_hook(game->win_ptr, 17, 0, mlx_loop_end, game->mlx_ptr);
 	mlx_loop_hook(game->mlx_ptr, run, game);

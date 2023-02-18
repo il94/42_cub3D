@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap.c                                      :+:      :+:    :+:   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 17:27:33 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:37:11 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	put_image_tile(t_game *game, int color, int x, int y)
 		{
 			if (x_tile < 1 || x_tile > TILE - 1
 				|| y_tile < 1 || y_tile > TILE - 1
-				|| x + x_tile == game->size_map.x - 1 || y + y_tile == game->size_map.y - 1)
+				|| x + x_tile == game->size_map.x - 1 || y + y_tile
+				== game->size_map.y - 1)
 				put_pixel(&game->minimap, x + x_tile, y + y_tile, BLACK);
 			else
 				put_pixel(&game->minimap, x + x_tile, y + y_tile, color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/17 20:22:13 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:44:29 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+
+# define KEY_SPACE 32
 
 # define BLACK 0x0
 # define GREY 0x6E6E6E
@@ -133,10 +135,11 @@ typedef struct s_game{
 	t_ray		ray;
 	
 	/* temp */
-	t_fpos		ray1;
-	t_fpos		ray2;
+	t_ray		ray1;
+	t_ray		ray2;
 	/**/
-
+	t_pos		mouse;
+	
     char    	**sprite;
 	int			f_rgb[3];
 	int			c_rgb[3];
@@ -185,6 +188,7 @@ void    free_all_and_exit(t_game *game, char *str_error);
 /* process_inputs */
 int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
+int 	mouse_move(int x, int y, t_game *game);
 void	process_inputs(t_game *game);
 
 /* utils.c */
@@ -203,6 +207,15 @@ int		run(t_game *game);
 /* put_environnement.c */
 void	put_column(t_game *game, int n);
 void	put_environnement(t_game *game);
+
+/* put_environnement_utils.c*/
+t_fpos	init_start_v(t_game *game);
+t_fpos	init_start_h(t_game *game);
+t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
+t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
+
+/* door.c */
+void	check_for_door(t_game *game);
 
 /* put_trimmed_minimap.c */
 void	put_trimmed_minimap(t_game *game);

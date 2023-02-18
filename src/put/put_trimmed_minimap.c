@@ -83,8 +83,8 @@ void	put_trimmed_minimap(t_game *game)
 		start.y++;
 	}
 	put_point(game, MINIMAP / 2, MINIMAP / 2, PURPLE);
-	put_raycasting_minimap(game, game->player.angle + to_rad(FOV / 2), game->ray1);
-	put_raycasting_minimap(game, game->player.angle - to_rad(FOV / 2), game->ray2);
+	put_raycasting_minimap(game, game->player.angle + to_rad(FOV / 2), game->ray1.px);
+	put_raycasting_minimap(game, game->player.angle - to_rad(FOV / 2), game->ray2.px);
 	put_image(&game->render, &game->trimmed_minimap, TILE, TILE);
 
 }
