@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:23:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 21:26:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/18 22:33:23 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,50 +78,27 @@ void	put_direction_line(t_game *game)
 		put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
 }
 
-// void	put_raycasting_minimap(t_game *game, t_fpos ray)
-// {
-// 	t_fpos	start;
-// 	t_fpos	end1;
-// 	t_fpos	end2;
-// 	t_fpos	pos;
-// 	// t_fpos	ray1;
-// 	// t_fpos	ray2;
-
-// 	start.x = MINIMAP / 2;
-// 	start.y = MINIMAP / 2;
-// 	end1.x = cos(game->player.angle - to_rad(FOV / 2)) + 20;
-// 	end1.y = -sin(game->player.angle - to_rad(FOV / 2)) + 20;
-// 	end2.x = cos(game->player.angle + to_rad(FOV / 2)) + 20;
-// 	end2.y = -sin(game->player.angle + to_rad(FOV / 2)) + 20;
-// 	if (start.x > end1.x)
-// 	{
-// 		swap(&start.x, &end1.x);
-// 		swap(&start.y, &end1.y);
-// 	}
-// 	if (start.x > end2.x)
-// 	{
-// 		swap(&start.x, &end2.x);
-// 		swap(&start.y, &end2.y);
-// 	}
-// 	pos.x = start.x;
-// 	pos.y = start.y;
-// 	if (start.x == end1.x && pos.y != end1.y)
-// 		put_vertical_line(game, start.y);
-// 	else
-// 		put_line(game, start, end1, get_coeff(end1.y, start.y, end1.x, start.x));
-// 	put_line(game, start, end2, get_coeff(end2.y, start.y, end2.x, start.x));
-// }
-
 void	put_raycasting_minimap(t_game *game, float angle, t_fpos ray)
 {
 	t_fpos	start;
 	t_fpos	end;
 	t_fpos	pos;
 
-	start.x = MINIMAP / 2;
-	start.y = MINIMAP / 2;
-	end.x = MINIMAP / 2 + (cos(angle) * hypotenus(game->player.px, ray));
-	end.y = MINIMAP / 2 + (-sin(angle) * hypotenus(game->player.px, ray));
+	t_fpos	tmp1 = game->player.px;
+
+	tmp1.x = (TMP * game->player.px.x / TILE);
+	tmp1.y = (TMP * game->player.px.y / TILE);
+
+	t_fpos	tmp2 = game->player.px;
+
+	tmp2.x = (TMP * ray.x / TILE);
+	tmp2.y = (TMP * ray.y / TILE);
+
+
+	start.x = TMP_MAP / 2;
+	start.y = TMP_MAP / 2;
+	end.x = TMP_MAP / 2 + (cos(angle) * hypotenus(tmp1, tmp2));
+	end.y = TMP_MAP / 2 + (-sin(angle) * hypotenus(tmp1, tmp2));
 	if (start.x > end.x)
 	{
 		swap(&start.x, &end.x);

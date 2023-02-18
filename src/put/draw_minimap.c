@@ -35,16 +35,16 @@ static void	put_image_tile(t_game *game, int color, int x, int y)
 	int	x_tile;
 	int	y_tile;
 
-	x = x * TILE;
-	y = y * TILE;
+	x = x * TMP;
+	y = y * TMP;
 	y_tile = 0;
-	while (y_tile < TILE)
+	while (y_tile < TMP)
 	{
 		x_tile = 0;
-		while (x_tile < TILE)
+		while (x_tile < TMP)
 		{
-			if (x_tile < 1 || x_tile > TILE - 1
-				|| y_tile < 1 || y_tile > TILE - 1
+			if (x_tile < 1 || x_tile > TMP - 1
+				|| y_tile < 1 || y_tile > TMP - 1
 				|| x + x_tile == game->size_map.x - 1 || y + y_tile == game->size_map.y - 1)
 				put_pixel(&game->minimap, x + x_tile, y + y_tile, BLACK);
 			else
@@ -67,11 +67,12 @@ void	draw_minimap(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '0' || check_player_carac(game->map[y][x]))
-				put_image_tile(game, GREEN, x, y);
+				put_image_tile(game, FLOOR, x, y);
 			else
-				put_image_tile(game, BROWN, x, y);
+				put_image_tile(game, FLOOR << 1, x, y);
 			x++;
 		}
 		y++;
 	}
+	// put_image(&game->render, &game->minimap, TMP, TMP);
 }

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/17 20:22:13 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 00:52:33 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-# define KEY_W 119
-# define KEY_D 100
-# define KEY_S 115
-# define KEY_A 97
-
-/* AZERTY */
-// # define KEY_W 122
+// # define KEY_W 119
 // # define KEY_D 100
 // # define KEY_S 115
-// # define KEY_A 113
+// # define KEY_A 97
+
+/* AZERTY */
+# define KEY_W 122
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -57,14 +57,19 @@
 # define D_BROWN 0x8b5D2E
 # define CYAN 0x00FFFF
 
+# define SKY 0x072533
+# define FLOOR 0x1FA3E0
+
 # define WIDTH 960
 # define HEIGHT 600
 // # define WIDTH 1920
 // # define HEIGHT 1080
-# define TILE 48
+# define TILE 128
+# define TMP 48
 
 
 # define MINIMAP 4 * TILE
+# define TMP_MAP 4 * TMP
 
 # define PLAYER_MINIMAP 9
 # define POINT 9
@@ -74,6 +79,7 @@
 # define SPEED 5
 
 # define ANIMATION 20000
+# define SCROLLING 128000
 
 typedef enum e_texture{
 	NO,

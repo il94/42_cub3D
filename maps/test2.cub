@@ -1,7 +1,7 @@
-NO sprites/e_04.xpm
-SO sprites/e_00.xpm
-EA sprites/b_11.xpm
-WE sprites/c_05.xpm
+NO sprites/xpm/wall_clouds.xpm
+SO sprites/xpm/wall_clouds.xpm
+EA sprites/xpm/wall_clouds.xpm
+WE sprites/xpm/wall_clouds.xpm
 
 
 F 220,100,99
@@ -17,11 +17,11 @@ C 225,30,0
 10001   10001
 100001 100001
 1000001000001
-1110000000111
+111000N000111
    1000001
    1000001
    1000001
    1000001
-   100N001
+   1000001
    1000001
     11111
