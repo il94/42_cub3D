@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 15:46:02 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 16:59:45 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ static void	init_mlx_img(t_game *game)
 	verify_alloc(game, game->render.img);
 	game->render.width = WIDTH;
 	game->render.height = HEIGHT;
-	game->minimap.img = mlx_new_image(game->mlx_ptr, game->size_map.x, game->size_map.y);
+	game->minimap.img = mlx_new_image(game->mlx_ptr, TMP * (game->size_map.x / TILE) + 1, TMP * (game->size_map.y / TILE) + 1);
 	verify_alloc(game, game->minimap.img);
-	game->minimap.width = game->size_map.x;
-	game->minimap.height = game->size_map.y;
+	game->minimap.width = TMP * (game->size_map.x / TILE) + 1;
+	game->minimap.height = TMP * (game->size_map.y / TILE) + 1;
 	game->environnement.img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
 	verify_alloc(game, game->environnement.img);
 	game->environnement.width = WIDTH;
 	game->environnement.height = HEIGHT;
-	game->trimmed_minimap.img = mlx_new_image(game->mlx_ptr, MINIMAP, MINIMAP);
+	game->trimmed_minimap.img = mlx_new_image(game->mlx_ptr, TMP_MAP, TMP_MAP);
 	verify_alloc(game, game->trimmed_minimap.img);
-	game->trimmed_minimap.width = MINIMAP;
-	game->trimmed_minimap.height = MINIMAP;
+	game->trimmed_minimap.width = TMP_MAP;
+	game->trimmed_minimap.height = TMP_MAP;
 	game->north.img = mlx_xpm_file_to_image(game->mlx_ptr, game->sprite[NO],
 		&game->north.width, &game->north.height);
 	verify_alloc(game, game->north.img);
@@ -85,16 +85,16 @@ static void	init_mlx_img(t_game *game)
 		&game->east.width, &game->east.height);
 	verify_alloc(game, game->east.img);
 
-	game->north_a[0].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/coin/c_00.xpm",
+	game->north_a[0].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
 		&game->north_a[0].width, &game->north_a[0].height);
 	verify_alloc(game, game->north_a[0].img);
-	game->north_a[1].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/coin/c_01.xpm",
+	game->north_a[1].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
 		&game->north_a[1].width, &game->north_a[1].height);
 	verify_alloc(game, game->north_a[1].img);
-	game->north_a[2].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/coin/c_02.xpm",
+	game->north_a[2].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
 		&game->north_a[2].width, &game->north_a[2].height);
 	verify_alloc(game, game->north_a[2].img);
-	game->north_a[3].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/coin/c_03.xpm",
+	game->north_a[3].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
 		&game->north_a[3].width, &game->north_a[3].height);
 	verify_alloc(game, game->north_a[3].img);
 }

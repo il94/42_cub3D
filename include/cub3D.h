@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/18 18:44:29 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:02:12 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,29 @@
 # define D_BROWN 0x8b5D2E
 # define CYAN 0x00FFFF
 
+# define SKY 0x072533
+# define FLOOR 0x1FA3E0
+
 # define WIDTH 960
 # define HEIGHT 600
 // # define WIDTH 1920
 // # define HEIGHT 1080
-# define TILE 48
+# define TILE 128
+# define TMP 48
 
 
 # define MINIMAP 4 * TILE
+# define TMP_MAP 4 * TMP
 
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
 # define FOV 60	
 # define ANGLE_PLAYER 90	
-# define SPEED 5
+# define SPEED 1
 
 # define ANIMATION 20000
+# define SCROLLING 128000
 
 typedef enum e_texture{
 	NO,
@@ -212,7 +218,7 @@ void	put_environnement(t_game *game);
 t_fpos	init_start_v(t_game *game);
 t_fpos	init_start_h(t_game *game);
 t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
-t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
+t_bool	is_horizontal_wall(char **map, t_fpos src, t_bool to_right);
 
 /* door.c */
 void	check_for_door(t_game *game);
