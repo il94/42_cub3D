@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/18 19:02:28 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:47:14 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /* SIGSEV map ouverte */
 
-	// usleep(60000);
 int	run(t_game *game)
 {
+	// usleep(60000);
 	put_render(game);
 	process_inputs(game);
 }

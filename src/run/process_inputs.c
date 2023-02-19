@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/18 19:11:52 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:48:13 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ void	process_inputs(t_game *game)
 int	mouse_move(int x, int y, t_game *game)
 {	
 	if (x < game->mouse.x)
-		game->player.angle = correc_angle(game->player.angle + 0.05);
+		game->player.angle = correc_angle(game->player.angle + 0.025);
 	else if (x > game->mouse.x)
-		game->player.angle = correc_angle(game->player.angle - 0.05);
-	game->mouse.x = x;
-	game->mouse.y = y;
+		game->player.angle = correc_angle(game->player.angle - 0.025);
+	// game->mouse.x = x;
+	// game->mouse.y = y;
+	mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIDTH / 2, HEIGHT / 2);
+	//mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
 }
 	// ou ca a ta guise ILYES
 	// if (x < game->mouse.x - 10)

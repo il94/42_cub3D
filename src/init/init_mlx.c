@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/18 17:35:36 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:46:02 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	init_mlx(t_game *game)
 	verify_alloc(game, game->win_ptr);
 	init_mlx_img(game);
 	init_mlx_addr(game);
+	mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
 	mlx_hook(game->win_ptr, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win_ptr, 3, 1L << 1, key_release, game);
 	mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);

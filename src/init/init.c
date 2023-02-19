@@ -6,7 +6,7 @@
 /*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/18 17:42:27 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 15:39:54 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	init_game_struct(t_game *game)
 	game->ray.offset_v.y = 0;
 	game->ray.angle = 0;
 
-	game->mouse.x = 0;
-	game->mouse.y = 0;
+	game->mouse.x = WIDTH / 2;
+	game->mouse.y = HEIGHT / 2;
 	
 	game->render.img = NULL;
 	game->environnement.img = NULL;
