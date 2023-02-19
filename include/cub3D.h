@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 00:52:33 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:35:12 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-// # define KEY_W 119
-// # define KEY_D 100
-// # define KEY_S 115
-// # define KEY_A 97
-
-/* AZERTY */
-# define KEY_W 122
+# define KEY_W 119
 # define KEY_D 100
 # define KEY_S 115
-# define KEY_A 113
+# define KEY_A 97
+
+/* AZERTY */
+// # define KEY_W 122
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -76,7 +76,7 @@
 
 # define FOV 60	
 # define ANGLE_PLAYER 90	
-# define SPEED 5
+# define SPEED 1
 
 # define ANIMATION 20000
 # define SCROLLING 128000

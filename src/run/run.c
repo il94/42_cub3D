@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/18 23:00:51 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 15:47:49 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	run(t_game *game)
 {
-	// usleep(60000);
+	// usleep(15000);
 	put_render(game);
 	process_inputs(game);
 	// printf("ANGLE PLAYER = %f\nDIR : x = %f | y = %f\nDIR SIDE : x = %f | y = %f\n\n============\n", game->player.angle, game->player.dir.x, game->player.dir.y, game->player.dir_side.x, game->player.dir_side.y);

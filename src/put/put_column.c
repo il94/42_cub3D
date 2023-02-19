@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/19 00:57:12 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:45:45 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,17 @@ int	get_offset_SCROLLING(t_game *game, int temp)
 	// 	scrolling = 4;
 	if (game->ray.wall_h)
 	{
-		// if (game->ray.angle >= 0 && game->ray.angle < PI_180)
-			offset = (int)game->ray.px.x % TILE + scrolling;
-		// else
-		// 	offset = (int)game->ray.px.x % TILE + TILE / scrolling + TILE;
+		if (game->ray.angle >= 0 && game->ray.angle < PI_180)
+			offset = (int)(game->ray.px.x + scrolling) % TILE;
+		else
+			offset = abs((int)(game->ray.px.x - scrolling) % TILE - TILE);
 	}
-	// else if (game->ray.wall_v)
 	else
 	{
-		// if (game->ray.angle >= PI_90 && game->ray.angle < PI_270)
-			offset = (int)game->ray.px.y % TILE + scrolling;
-		// else
-			// offset = (int)game->ray.px.y % TILE + TILE / scrolling + TILE;
+		if (game->ray.angle >= PI_90 && game->ray.angle < PI_270)
+			offset = abs((int)(game->ray.px.y - scrolling) % TILE - TILE);
+		else
+			offset = (int)(game->ray.px.y + scrolling) % TILE;
 	}
 	// if (offset > TILE)
 	// {
@@ -135,9 +134,9 @@ void	put_column(t_game *game, int n)
 
 	// if (game->ray.wall_h)
 	offset = get_offset_SCROLLING(game, temp2);
-	// 	offset = (int)game->ray.px.x % TILE;
+		// offset = (int)game->ray.px.x % TILE;
 	// else if (game->ray.wall_v)
-	// 	offset = (int)game->ray.px.y % TILE;
+		// offset = (int)game->ray.px.y % TILE;
 	// if (offset > TILE)
 	// 	offset = TILE;
 	int	color;
@@ -193,5 +192,6 @@ void	put_column(t_game *game, int n)
 		/**/
 	}
 	temp++;
-	temp2++;
+	if (temp % 15 == 0)
+		temp2++;
 }
