@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/12 02:09:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:13:12 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	put_pixel(t_img *dst_img, int x, int y, int color)
 	char	*dst;
 
 	if (x < 0 || y < 0 || x > dst_img->width || y > dst_img->height)
-		return;
+		return ;
 	dst = dst_img->addr + y * dst_img->line + x * dst_img->bpp / 8;
 	if (color >= -1 && y >= 0 && x >= 0 && color != *(int *)dst)
 		*(unsigned int *)dst = color;

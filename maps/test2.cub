@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO sprites/xpm/wall_clouds.xpm
+SO sprites/xpm/wall_clouds.xpm
+EA sprites/xpm/wall_clouds.xpm
+WE sprites/xpm/wall_clouds.xpm
 
 
 F 220,100,99
@@ -13,15 +13,15 @@ C 225,30,0
 1110000000111
 1000000000001
 1000001000001
-100001 100001
-10001   10001
-100001 100001
+1000011100001
+1000200020001
+1000011100001
 1000001000001
-1110000000111
+111000N000111
    1000001
    1000001
    1000001
    1000001
-   100N001
    1000001
-   1111111
+   1000001
+    11111

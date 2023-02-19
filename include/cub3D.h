@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/17 00:25:40 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 17:02:12 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
+# define KEY_SPACE 32
+
 # define BLACK 0x0
 # define GREY 0x6E6E6E
 # define PURPLE 0xDAABF9
@@ -57,18 +59,29 @@
 # define D_BROWN 0x8b5D2E
 # define CYAN 0x00FFFF
 
+# define SKY 0x072533
+# define FLOOR 0x1FA3E0
+
 # define WIDTH 960
 # define HEIGHT 600
-# define TILE 48
+// # define WIDTH 1920
+// # define HEIGHT 1080
+# define TILE 128
+# define TMP 48
+
 
 # define MINIMAP 4 * TILE
+# define TMP_MAP 4 * TMP
 
 # define PLAYER_MINIMAP 9
 # define POINT 9
 
 # define FOV 60	
 # define ANGLE_PLAYER 90	
-# define SPEED 5
+# define SPEED 1
+
+# define ANIMATION 20000
+# define SCROLLING 128000
 
 typedef enum e_texture{
 	NO,
@@ -103,7 +116,8 @@ typedef struct s_ray
 	t_bool	to_up;
 	t_bool	to_left;
 	
-	int		wall;
+	t_bool	wall_h;
+	t_bool	wall_v;
 }	t_ray;
 
 
@@ -127,10 +141,11 @@ typedef struct s_game{
 	t_ray		ray;
 	
 	/* temp */
-	t_fpos		ray1;
-	t_fpos		ray2;
+	t_ray		ray1;
+	t_ray		ray2;
 	/**/
-
+	t_pos		mouse;
+	
     char    	**sprite;
 	int			f_rgb[3];
 	int			c_rgb[3];
@@ -150,6 +165,22 @@ typedef struct s_game{
 	t_img		environnement;
 	t_img		minimap;
 	t_img		trimmed_minimap;
+
+	t_img		north;
+	t_img		south;
+	t_img		west;
+	t_img		east;
+
+	t_img		north_a[3];
+	// t_img		*north_a;
+	int			north_sprite_number;
+	// t_img		south_a[3];
+	// int			south_sprite_number;
+	// t_img		west_a[3];
+	// int			west_sprite_number;
+	// t_img		east_a[3];
+	// int			east_sprite_number;
+	
 }   t_game;
 
 
@@ -163,6 +194,7 @@ void    free_all_and_exit(t_game *game, char *str_error);
 /* process_inputs */
 int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
+int 	mouse_move(int x, int y, t_game *game);
 void	process_inputs(t_game *game);
 
 /* utils.c */
@@ -181,6 +213,15 @@ int		run(t_game *game);
 /* put_environnement.c */
 void	put_column(t_game *game, int n);
 void	put_environnement(t_game *game);
+
+/* put_environnement_utils.c*/
+t_fpos	init_start_v(t_game *game);
+t_fpos	init_start_h(t_game *game);
+t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
+t_bool	is_horizontal_wall(char **map, t_fpos src, t_bool to_right);
+
+/* door.c */
+void	check_for_door(t_game *game);
 
 /* put_trimmed_minimap.c */
 void	put_trimmed_minimap(t_game *game);

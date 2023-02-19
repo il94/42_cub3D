@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 21:26:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 00:01:20 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,27 @@ void	free_all_elements(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->render.img);
 	if (game->trimmed_minimap.img)
 		mlx_destroy_image(game->mlx_ptr, game->trimmed_minimap.img);
+	if (game->north.img)
+		mlx_destroy_image(game->mlx_ptr, game->north.img);
+	if (game->south.img)
+		mlx_destroy_image(game->mlx_ptr, game->south.img);
+	if (game->east.img)
+		mlx_destroy_image(game->mlx_ptr, game->east.img);
+	if (game->west.img)
+		mlx_destroy_image(game->mlx_ptr, game->west.img);
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+
+	if (game->north_a[0].img)
+		mlx_destroy_image(game->mlx_ptr, game->north_a[0].img);
+	if (game->north_a[1].img)
+		mlx_destroy_image(game->mlx_ptr, game->north_a[1].img);
+	if (game->north_a[2].img)
+		mlx_destroy_image(game->mlx_ptr, game->north_a[2].img);
+	if (game->north_a[2].img)
+		mlx_destroy_image(game->mlx_ptr, game->north_a[3].img);
+
+
 	if (game->mlx_ptr)
 	{
 		mlx_destroy_display(game->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 16:48:28 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:15:44 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	check_array_sprite_content(t_game *game)
 void	check_sprite(t_game *game, char **file_content)
 {
 	int	i;
+	int	tmp;
 	int	index;
 
 	i = 0;
@@ -39,7 +40,11 @@ void	check_sprite(t_game *game, char **file_content)
 		{
 			if (!game->sprite[index])
 			{
-				game->sprite[index] = ft_strdup(file_content[i]);
+				game->sprite[index] = ft_strcut_right(file_content[i], ' ');
+				tmp = 0;
+				while (game->sprite[index][tmp] != '\n')
+					tmp++;
+				game->sprite[index][tmp] = '\0';
 				verify_alloc(game, game->sprite[index]);
 			}
 			else

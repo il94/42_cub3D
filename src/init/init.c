@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/16 21:26:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 15:39:54 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,22 @@ static void	init_game_struct(t_game *game)
 	game->ray.offset_v.y = 0;
 	game->ray.angle = 0;
 
+	game->mouse.x = WIDTH / 2;
+	game->mouse.y = HEIGHT / 2;
+	
 	game->render.img = NULL;
 	game->environnement.img = NULL;
 	game->minimap.img = NULL;
 	game->trimmed_minimap.img = NULL;
+	
+	game->north.img = NULL;
+	game->south.img = NULL;
+	game->west.img = NULL;
+	game->east.img = NULL;
+
+	// game->north_a = NULL
+	// game->north_sprite_number = 0;
+
 }
 
 void	init(t_game *game)

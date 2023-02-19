@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/16 17:29:58 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:52:25 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ static void	get_player_info(t_game *game, int i, int j)
 		
 }
 
+static int	valid_carac(int c)
+{
+	if (c == '0' || c == '1' || c == '2' || c == '3' || c == ' ')
+		return (1);
+	return (0);
+}
+
 static void	check_carac(t_game *game, char **map)
 {
 	int	i;
@@ -83,7 +90,7 @@ static void	check_carac(t_game *game, char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ')
+			if (!valid_carac(map[i][j]))
 			{
 				if (!check_player_carac(map[i][j]))
 					free_all_and_exit(game, "Parsing Error : Invalide carac\n");
