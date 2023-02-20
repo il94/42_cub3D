@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_inputs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 15:48:13 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 19:38:29 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	move_player(t_game *game, float x, float y)
 void	process_inputs(t_game *game)
 {	
 	if (game->move_dir_left)
-		game->player.angle = correc_angle(game->player.angle + 0.1);
+		game->player.angle = correc_angle(game->player.angle + SENSI_KEY);
 	if (game->move_dir_right)
-		game->player.angle = correc_angle(game->player.angle - 0.1);
+		game->player.angle = correc_angle(game->player.angle - SENSI_KEY);
 	game->player.dir.x = cos(game->player.angle) * SPEED;
 	game->player.dir.y = -sin(game->player.angle) * SPEED;
 	game->player.dir_side.x = cos(game->player.angle + to_rad(90)) * SPEED;
@@ -66,28 +66,15 @@ void	process_inputs(t_game *game)
 
 int	mouse_move(int x, int y, t_game *game)
 {	
-	if (x < game->mouse.x)
-		game->player.angle = correc_angle(game->player.angle + 0.025);
-	else if (x > game->mouse.x)
-		game->player.angle = correc_angle(game->player.angle - 0.025);
-	// game->mouse.x = x;
-	// game->mouse.y = y;
-	mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIDTH / 2, HEIGHT / 2);
-	//mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
+	if (game->mouse_on)
+	{
+		if (x < game->mouse.x)
+			game->player.angle = correc_angle(game->player.angle + SENSI_MOUSE);
+		else if (x > game->mouse.x)
+			game->player.angle = correc_angle(game->player.angle - SENSI_MOUSE);
+		mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIDTH / 2, HEIGHT / 2);
+	}
 }
-	// ou ca a ta guise ILYES
-	// if (x < game->mouse.x - 10)
-	// {
-	// 	game->player.angle = correc_angle(game->player.angle + 0.1);
-	// 	game->mouse.x = x;
-	// 	game->mouse.y = y;
-	// }
-	// else if (x > game->mouse.x + 10)
-	// {
-	// 	game->player.angle = correc_angle(game->player.angle - 0.1);
-	// 	game->mouse.x = x;
-	// 	game->mouse.y = y;	
-	// }
 
 int	key_release(int keycode, t_game *game)
 {
@@ -104,7 +91,9 @@ int	key_release(int keycode, t_game *game)
 	else if (keycode == KEY_RIGHT)
 		game->move_dir_right = FALSE;
 	else if (keycode == KEY_SPACE)
-		check_for_door(game);
+		open_door(game);
+	else if (keycode == KEY_TAB)
+		game->mouse_on = !game->mouse_on;
 	return (0);
 }
 

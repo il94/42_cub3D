@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 16:59:45 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/20 04:11:55 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,13 @@ static void	init_mlx_addr(t_game *game)
 			&game->east.bpp, &game->east.line, &game->east.end);
 	verify_alloc(game, game->east.addr);
 
-	game->north_a[0].addr = mlx_get_data_addr(game->north_a[0].img,
-			&game->north_a[0].bpp, &game->north_a[0].line, &game->north_a[0].end);
-	verify_alloc(game, game->north_a[0].addr);
-	game->north_a[1].addr = mlx_get_data_addr(game->north_a[1].img,
-			&game->north_a[1].bpp, &game->north_a[1].line, &game->north_a[1].end);
-	verify_alloc(game, game->north_a[1].addr);
-	game->north_a[2].addr = mlx_get_data_addr(game->north_a[2].img,
-			&game->north_a[2].bpp, &game->north_a[2].line, &game->north_a[2].end);
-	verify_alloc(game, game->north_a[2].addr);
-	game->north_a[3].addr = mlx_get_data_addr(game->north_a[3].img,
-			&game->north_a[3].bpp, &game->north_a[3].line, &game->north_a[3].end);
-	verify_alloc(game, game->north_a[3].addr);
+	game->nothing.addr = mlx_get_data_addr(game->nothing.img,
+			&game->nothing.bpp, &game->nothing.line, &game->nothing.end);
+	verify_alloc(game, game->nothing.addr);
+
+	game->sky.addr = mlx_get_data_addr(game->sky.img,
+			&game->sky.bpp, &game->sky.line, &game->sky.end);
+	verify_alloc(game, game->sky.addr);
 
 }
 
@@ -85,18 +80,14 @@ static void	init_mlx_img(t_game *game)
 		&game->east.width, &game->east.height);
 	verify_alloc(game, game->east.img);
 
-	game->north_a[0].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
-		&game->north_a[0].width, &game->north_a[0].height);
-	verify_alloc(game, game->north_a[0].img);
-	game->north_a[1].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
-		&game->north_a[1].width, &game->north_a[1].height);
-	verify_alloc(game, game->north_a[1].img);
-	game->north_a[2].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
-		&game->north_a[2].width, &game->north_a[2].height);
-	verify_alloc(game, game->north_a[2].img);
-	game->north_a[3].img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/wall_clouds.xpm",
-		&game->north_a[3].width, &game->north_a[3].height);
-	verify_alloc(game, game->north_a[3].img);
+	game->nothing.img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/transparent_coin.xpm",
+		&game->nothing.width, &game->nothing.height);
+	verify_alloc(game, game->nothing.img);
+
+	game->sky.img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/stars.xpm",
+		&game->sky.width, &game->sky.height);
+	verify_alloc(game, game->sky.img);
+
 }
 
 void	init_mlx(t_game *game)

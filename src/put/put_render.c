@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/18 22:34:35 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/20 03:53:35 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	put_render(t_game *game)
 {
+	put_sky(game);
 	put_environnement(game);
 	draw_minimap(game);
 	put_trimmed_minimap(game);

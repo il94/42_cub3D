@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/19 15:39:54 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 20:14:25 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	init_game_struct(t_game *game)
 	game->move_left = FALSE;
 	game->move_dir_left = FALSE;
 	game->move_dir_right = FALSE;
+	game->mouse_on = FALSE;
 
 	game->ray.px.x = 0;
 	game->ray.px.y = 0;
@@ -49,6 +50,7 @@ static void	init_game_struct(t_game *game)
 	game->ray.offset_v.x = 0;
 	game->ray.offset_v.y = 0;
 	game->ray.angle = 0;
+	game->ray.door = 0;
 
 	game->mouse.x = WIDTH / 2;
 	game->mouse.y = HEIGHT / 2;
@@ -63,8 +65,9 @@ static void	init_game_struct(t_game *game)
 	game->west.img = NULL;
 	game->east.img = NULL;
 
-	// game->north_a = NULL
 	// game->north_sprite_number = 0;
+	game->nothing.img = NULL;
+	game->sky.img = NULL;
 
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 16:53:40 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:18:41 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	draw_minimap(t_game *game)
 		{
 			if (game->map[y][x] == '0' || check_player_carac(game->map[y][x]))
 				put_image_tile(game, FLOOR, x, y);
+			else if (game->map[y][x] == '2' || game->map[y][x] == '3')
+				put_image_tile(game, FLOOR << 2, x, y);
 			else
 				put_image_tile(game, FLOOR << 1, x, y);
 			x++;

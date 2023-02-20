@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 17:02:12 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/20 03:21:48 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define KEY_RIGHT 65363
 
 # define KEY_SPACE 32
+# define KEY_TAB 65289
 
 # define BLACK 0x0
 # define GREY 0x6E6E6E
@@ -78,10 +79,16 @@
 
 # define FOV 60	
 # define ANGLE_PLAYER 90	
-# define SPEED 1
+# define SPEED 1.5
+# define SENSI_KEY 0.025
+# define SENSI_MOUSE 0.02
+
+// # define SENSI_KEY 0.1
+// # define SENSI_MOUSE 0.025
 
 # define ANIMATION 20000
 # define SCROLLING 128000
+# define SCROLLING_SKY 512000
 
 typedef enum e_texture{
 	NO,
@@ -118,6 +125,8 @@ typedef struct s_ray
 	
 	t_bool	wall_h;
 	t_bool	wall_v;
+
+	int		door;
 }	t_ray;
 
 
@@ -143,6 +152,8 @@ typedef struct s_game{
 	/* temp */
 	t_ray		ray1;
 	t_ray		ray2;
+	t_ray		ray3;
+	t_ray		ray4;
 	/**/
 	t_pos		mouse;
 	
@@ -158,6 +169,8 @@ typedef struct s_game{
 	t_bool	move_left;
 	t_bool	move_dir_left;
 	t_bool	move_dir_right;
+	
+	t_bool	mouse_on;
 
 	t_player	player;
 
@@ -171,7 +184,10 @@ typedef struct s_game{
 	t_img		west;
 	t_img		east;
 
-	t_img		north_a[3];
+		t_img		sky;
+// t_img		north_a[3];
+	
+	t_img		nothing;
 	// t_img		*north_a;
 	int			north_sprite_number;
 	// t_img		south_a[3];
@@ -256,6 +272,12 @@ t_texture	enum_check(char *tmp);
 void    parser(t_game *game, int nb_parameters, char *file);
 
 /*============================================================================*/
+
+/* door.c */
+void	open_door(t_game *game);
+
+/*============================================================================*/
+
 
 /* init/init.c */
 void	init(t_game *src);
