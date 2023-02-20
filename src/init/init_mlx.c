@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/20 04:11:55 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:31:01 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static void	init_mlx_addr(t_game *game)
 	game->render.addr = mlx_get_data_addr(game->render.img,
 			&game->render.bpp, &game->render.line, &game->render.end);
 	verify_alloc(game, game->render.addr);
-	game->minimap.addr = mlx_get_data_addr(game->minimap.img,
-			&game->minimap.bpp, &game->minimap.line, &game->minimap.end);
-	verify_alloc(game, game->minimap.addr);
+	game->full_minimap.addr = mlx_get_data_addr(game->full_minimap.img,
+			&game->full_minimap.bpp, &game->full_minimap.line, &game->full_minimap.end);
+	verify_alloc(game, game->full_minimap.addr);
 	game->environnement.addr = mlx_get_data_addr(game->environnement.img,
 			&game->environnement.bpp, &game->environnement.line, &game->environnement.end);
 	verify_alloc(game, game->environnement.addr);
-	game->trimmed_minimap.addr = mlx_get_data_addr(game->trimmed_minimap.img,
-			&game->trimmed_minimap.bpp, &game->trimmed_minimap.line, &game->trimmed_minimap.end);
-	verify_alloc(game, game->trimmed_minimap.addr);
+	game->minimap.addr = mlx_get_data_addr(game->minimap.img,
+			&game->minimap.bpp, &game->minimap.line, &game->minimap.end);
+	verify_alloc(game, game->minimap.addr);
 	game->north.addr = mlx_get_data_addr(game->north.img,
 			&game->north.bpp, &game->north.line, &game->north.end);
 	verify_alloc(game, game->north.addr);
@@ -39,9 +39,6 @@ static void	init_mlx_addr(t_game *game)
 			&game->east.bpp, &game->east.line, &game->east.end);
 	verify_alloc(game, game->east.addr);
 
-	game->nothing.addr = mlx_get_data_addr(game->nothing.img,
-			&game->nothing.bpp, &game->nothing.line, &game->nothing.end);
-	verify_alloc(game, game->nothing.addr);
 
 	game->sky.addr = mlx_get_data_addr(game->sky.img,
 			&game->sky.bpp, &game->sky.line, &game->sky.end);
@@ -49,24 +46,33 @@ static void	init_mlx_addr(t_game *game)
 
 }
 
+static void	*new_mlx_new_image(t_game *game, t_img *img_struct, int width, int height)
+{
+	void	*image;
+
+	image = mlx_new_image(game->mlx_ptr, width, height);
+	verify_alloc(game, image);
+	img_struct->width = width;
+	img_struct->height = height;
+	return (image);
+}
+
 static void	init_mlx_img(t_game *game)
 {
-	game->render.img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
-	verify_alloc(game, game->render.img);
-	game->render.width = WIDTH;
-	game->render.height = HEIGHT;
-	game->minimap.img = mlx_new_image(game->mlx_ptr, TMP * (game->size_map.x / TILE) + 1, TMP * (game->size_map.y / TILE) + 1);
-	verify_alloc(game, game->minimap.img);
-	game->minimap.width = TMP * (game->size_map.x / TILE) + 1;
-	game->minimap.height = TMP * (game->size_map.y / TILE) + 1;
+	game->render.img = new_mlx_new_image(game, &game->render, WIDTH, HEIGHT);
+	
+	game->full_minimap.img = mlx_new_image(game->mlx_ptr, TILE_MINIMAP * (game->size_map.x / TILE) + 1, TILE_MINIMAP * (game->size_map.y / TILE) + 1);
+	verify_alloc(game, game->full_minimap.img);
+	game->full_minimap.width = TILE_MINIMAP * (game->size_map.x / TILE) + 1;
+	game->full_minimap.height = TILE_MINIMAP * (game->size_map.y / TILE) + 1;
 	game->environnement.img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
 	verify_alloc(game, game->environnement.img);
 	game->environnement.width = WIDTH;
 	game->environnement.height = HEIGHT;
-	game->trimmed_minimap.img = mlx_new_image(game->mlx_ptr, TMP_MAP, TMP_MAP);
-	verify_alloc(game, game->trimmed_minimap.img);
-	game->trimmed_minimap.width = TMP_MAP;
-	game->trimmed_minimap.height = TMP_MAP;
+	game->minimap.img = mlx_new_image(game->mlx_ptr, TMP_MAP, TMP_MAP);
+	verify_alloc(game, game->minimap.img);
+	game->minimap.width = TMP_MAP;
+	game->minimap.height = TMP_MAP;
 	game->north.img = mlx_xpm_file_to_image(game->mlx_ptr, game->sprite[NO],
 		&game->north.width, &game->north.height);
 	verify_alloc(game, game->north.img);
@@ -80,9 +86,6 @@ static void	init_mlx_img(t_game *game)
 		&game->east.width, &game->east.height);
 	verify_alloc(game, game->east.img);
 
-	game->nothing.img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/transparent_coin.xpm",
-		&game->nothing.width, &game->nothing.height);
-	verify_alloc(game, game->nothing.img);
 
 	game->sky.img = mlx_xpm_file_to_image(game->mlx_ptr, "sprites/xpm/stars.xpm",
 		&game->sky.width, &game->sky.height);

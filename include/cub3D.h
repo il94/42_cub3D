@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/20 03:21:48 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:24:58 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-# define KEY_W 119
-# define KEY_D 100
-# define KEY_S 115
-# define KEY_A 97
-
-/* AZERTY */
-// # define KEY_W 122
+// # define KEY_W 119
 // # define KEY_D 100
 // # define KEY_S 115
-// # define KEY_A 113
+// # define KEY_A 97
+
+/* AZERTY */
+# define KEY_W 122
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -68,11 +68,11 @@
 // # define WIDTH 1920
 // # define HEIGHT 1080
 # define TILE 128
-# define TMP 48
+# define TILE_MINIMAP 48
 
 
 # define MINIMAP 4 * TILE
-# define TMP_MAP 4 * TMP
+# define TMP_MAP 4 * TILE_MINIMAP
 
 # define PLAYER_MINIMAP 9
 # define POINT 9
@@ -146,22 +146,13 @@ typedef struct s_game{
 
     char    	**map;
 	t_pos		size_map;
-
-	t_ray		ray;
-	
-	/* temp */
-	t_ray		ray1;
-	t_ray		ray2;
-	t_ray		ray3;
-	t_ray		ray4;
-	/**/
-	t_pos		mouse;
-	
     char    	**sprite;
 	int			f_rgb[3];
 	int			c_rgb[3];
 	int			fd;
 	char		**file_content;
+
+	t_pos		mouse;
 
 	t_bool	move_up;
 	t_bool	move_right;
@@ -169,33 +160,35 @@ typedef struct s_game{
 	t_bool	move_left;
 	t_bool	move_dir_left;
 	t_bool	move_dir_right;
-	
 	t_bool	mouse_on;
+
+	t_ray		ray;
+	/* temp */
+	t_ray		ray1;
+	t_ray		ray2;
+	t_ray		ray3;
+	t_ray		ray4;
+	/**/
+
 
 	t_player	player;
 
 	t_img		render;
 	t_img		environnement;
+	t_img		full_minimap;
 	t_img		minimap;
-	t_img		trimmed_minimap;
 
 	t_img		north;
-	t_img		south;
-	t_img		west;
-	t_img		east;
-
-		t_img		sky;
-// t_img		north_a[3];
-	
-	t_img		nothing;
-	// t_img		*north_a;
 	int			north_sprite_number;
-	// t_img		south_a[3];
-	// int			south_sprite_number;
-	// t_img		west_a[3];
-	// int			west_sprite_number;
-	// t_img		east_a[3];
-	// int			east_sprite_number;
+	t_img		south;
+	int			south_sprite_number;
+	t_img		west;
+	int			west_sprite_number;
+	t_img		east;
+	int			east_sprite_number;
+
+	t_img		sky;
+	t_img		star;
 	
 }   t_game;
 

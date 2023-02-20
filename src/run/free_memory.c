@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 19:28:06 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:19:05 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	free_all_elements(t_game *game)
 		ft_free_array(game->file_content);
 	if (game->map)
 		ft_free_array(game->map);
-	if (game->minimap.img)
-		mlx_destroy_image(game->mlx_ptr, game->minimap.img);
+	if (game->full_minimap.img)
+		mlx_destroy_image(game->mlx_ptr, game->full_minimap.img);
 	if (game->environnement.img)
 		mlx_destroy_image(game->mlx_ptr, game->environnement.img);
 	if (game->render.img)
 		mlx_destroy_image(game->mlx_ptr, game->render.img);
-	if (game->trimmed_minimap.img)
-		mlx_destroy_image(game->mlx_ptr, game->trimmed_minimap.img);
+	if (game->minimap.img)
+		mlx_destroy_image(game->mlx_ptr, game->minimap.img);
 	if (game->north.img)
 		mlx_destroy_image(game->mlx_ptr, game->north.img);
 	if (game->south.img)
