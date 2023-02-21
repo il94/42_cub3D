@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 19:38:29 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:50:03 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static void	move_player(t_game *game, float x, float y)
 	if (old_pos_map.x != game->player.map.x
 		|| old_pos_map.y != game->player.map.y)
 		if (game->map[old_pos_map.y][old_pos_map.x] == '3')
+		{
+			system("cvlc sounds/close_bar.wav &");
 			game->map[old_pos_map.y][old_pos_map.x] = '2';
+		}
 }
 
 void	process_inputs(t_game *game)

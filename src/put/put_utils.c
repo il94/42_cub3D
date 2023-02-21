@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   put_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/18 19:13:12 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:44:03 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+int	get_color(t_game *game, t_img *src, int x, int y)
+{
+	return (*(int *)(src->addr + x * src->line + y * 4));
+}
 
 void	put_pixel(t_img *dst_img, int x, int y, int color)
 {

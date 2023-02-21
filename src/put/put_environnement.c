@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 17:32:34 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:31:29 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static t_fpos	get_vertical_collision(t_game *game, t_fpos start)
 	t_fpos	point;
 
 	point = start;
-	while (!is_vertical_wall(game->map, point, !game->ray.to_left))
+	while (!is_vertical_wall(game->map, point, !game->ray.left))
 	{
 		// put_point(game, point.x, point.y, GREEN);
-		if (game->ray.to_up)
+		if (game->ray.up)
 			point.y -= game->ray.offset_v.y;
 		else
 			point.y += game->ray.offset_v.y;
-		if (game->ray.to_left)
+		if (game->ray.left)
 			point.x -= game->ray.offset_v.x;
 		else
 			point.x += game->ray.offset_v.x;
@@ -37,14 +37,14 @@ static t_fpos	get_horizontal_collision(t_game *game, t_fpos start)
 	t_fpos	point;
 
 	point = start;
-	while (!is_horizontal_wall(game->map, point, !game->ray.to_up))
+	while (!is_horizontal_wall(game->map, point, !game->ray.up))
 	{
 		// put_point(game, point.x, point.y, GREEN);
-		if (game->ray.to_up)
+		if (game->ray.up)
 			point.y -= game->ray.offset_h.y;
 		else
 			point.y += game->ray.offset_h.y;
-		if (game->ray.to_left)
+		if (game->ray.left)
 			point.x -= game->ray.offset_h.x;
 		else
 			point.x += game->ray.offset_h.x;
@@ -58,8 +58,8 @@ static t_fpos	get_collision(t_game *game, t_fpos start_h, t_fpos start_v)
 	t_fpos	result_v;
 	float	distance_h;
 	float	distance_v;
-	
-	result_h = get_horizontal_collision(game, start_h);	
+
+	result_h = get_horizontal_collision(game, start_h);
 	result_v = get_vertical_collision(game, start_v);
 	distance_h = hypotenus(game->player.px, result_h);
 	distance_v = hypotenus(game->player.px, result_v);
@@ -77,39 +77,35 @@ static t_fpos	get_collision(t_game *game, t_fpos start_h, t_fpos start_v)
 	}
 }
 
+static void	catch_special_ray(t_game *game, int i)
+{
+	if (i == 0)
+		game->ray1 = game->ray;
+	else if (i == WIDTH - 1)
+		game->ray2 = game->ray;
+	else if (i == WIDTH / 2)
+		game->ray3 = game->ray;
+}
+
 void	put_environnement(t_game *game)
 {
 	t_fpos	start_h;
 	t_fpos	start_v;
 	int		i;
 
-	game->ray.angle = to_rad(ANGLE_PLAYER);
-	game->ray.angle = game->player.angle + to_rad(FOV / 2);
-	if (game->ray.angle > (2 * M_PI))
-			game->ray.angle -= (2 * M_PI);
+	game->ray.angle = correc_angle(game->player.angle + to_rad(FOV / 2));
 	i = 0;
 	while (i < WIDTH)
 	{
-		game->ray.to_up = (game->ray.angle >= PI_0 && game->ray.angle < M_PI);
-		game->ray.to_left = (game->ray.angle >= PI_90 && game->ray.angle < PI_270);
+		game->ray.up = (game->ray.angle >= PI_0 && game->ray.angle < M_PI);
+		game->ray.left = (game->ray.angle >= PI_90 && game->ray.angle < PI_270);
 		start_h = init_start_h(game);
-		if (start_h.x < sqrtf(powf(game->size_map.x, 2) + powf(game->size_map.y, 2)))
-			game->ray.offset_h.x = fabs(TILE / tan(game->ray.angle));
-		game->ray.offset_h.y = TILE;
 		start_v = init_start_v(game);
-		game->ray.offset_v.y = fabs(TILE * tan(game->ray.angle));
-		game->ray.offset_v.x = TILE;
+		init_offset(game);
 		game->ray.px = get_collision(game, start_h, start_v);
-		if (i == 0)
-			game->ray1 = game->ray;
-		else if (i == WIDTH - 1)
-			game->ray2 = game->ray;
-		else if (i == WIDTH / 2)
-			game->ray3 = game->ray;
+		catch_special_ray(game, i);
 		put_column(game, i);
-		game->ray.angle -= (to_rad(FOV) / (WIDTH));
-		if (game->ray.angle < 0)
-			game->ray.angle += (2 * M_PI);
+		game->ray.angle = correc_angle(game->ray.angle - to_rad(FOV) / (WIDTH));
 		i++;
 	}
 	put_image(&game->render, &game->environnement, 0, 0);

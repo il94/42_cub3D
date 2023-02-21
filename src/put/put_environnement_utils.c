@@ -6,11 +6,19 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:39:28 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/19 18:45:14 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:27:18 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+void	init_offset(t_game *game)
+{
+	game->ray.offset_h.y = TILE;
+	game->ray.offset_v.x = TILE;
+	game->ray.offset_h.x = fabs(TILE / tan(game->ray.angle));
+	game->ray.offset_v.y = fabs(TILE * tan(game->ray.angle));
+}
 
 t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right)
 {
@@ -44,7 +52,7 @@ t_fpos	init_start_v(t_game *game)
 {
 	t_fpos	start;
 
-	if (game->ray.to_left)
+	if (game->ray.left)
 	{
 		start.x = game->player.px.x - (game->player.map.x * TILE);
 		start.y = game->player.px.y + start.x * tan(game->ray.angle);
@@ -63,7 +71,7 @@ t_fpos	init_start_h(t_game *game)
 {
 	t_fpos	start;
 
-	if (game->ray.to_up)
+	if (game->ray.up)
 	{
 		start.y = game->player.px.y - (game->player.map.y * TILE);
 		start.x = game->player.px.x - start.y / -tan(game->ray.angle);

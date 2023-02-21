@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/20 14:24:58 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:51:26 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-// # define KEY_W 119
-// # define KEY_D 100
-// # define KEY_S 115
-// # define KEY_A 97
-
-/* AZERTY */
-# define KEY_W 122
+# define KEY_W 119
 # define KEY_D 100
 # define KEY_S 115
-# define KEY_A 113
+# define KEY_A 97
+
+/* AZERTY */
+// # define KEY_W 122
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -63,32 +63,29 @@
 # define SKY 0x072533
 # define FLOOR 0x1FA3E0
 
+# define TILE 128
 # define WIDTH 960
 # define HEIGHT 600
 // # define WIDTH 1920
 // # define HEIGHT 1080
-# define TILE 128
-# define TILE_MINIMAP 48
 
-
-# define MINIMAP 4 * TILE
-# define TMP_MAP 4 * TILE_MINIMAP
-
-# define PLAYER_MINIMAP 9
-# define POINT 9
+# define MNMP_TILE 48
+# define MINIMAP 4 * MNMP_TILE
+# define MNMP_WIDTH MNMP_TILE * (game->size_map.x / TILE) + 1
+# define MNMP_HEIGHT MNMP_TILE * (game->size_map.y / TILE) + 1
+# define MNMP_PLAYER 9
 
 # define FOV 60	
 # define ANGLE_PLAYER 90	
-# define SPEED 1.5
+# define SPEED 5
 # define SENSI_KEY 0.025
 # define SENSI_MOUSE 0.02
-
-// # define SENSI_KEY 0.1
-// # define SENSI_MOUSE 0.025
 
 # define ANIMATION 20000
 # define SCROLLING 128000
 # define SCROLLING_SKY 512000
+
+# define POINT 9
 
 typedef enum e_texture{
 	NO,
@@ -120,8 +117,8 @@ typedef struct s_ray
 	t_fpos	offset_h;
 	t_fpos	offset_v;
 	float	angle;
-	t_bool	to_up;
-	t_bool	to_left;
+	t_bool	up;
+	t_bool	left;
 	
 	t_bool	wall_h;
 	t_bool	wall_v;
@@ -167,9 +164,7 @@ typedef struct s_game{
 	t_ray		ray1;
 	t_ray		ray2;
 	t_ray		ray3;
-	t_ray		ray4;
 	/**/
-
 
 	t_player	player;
 
@@ -179,15 +174,13 @@ typedef struct s_game{
 	t_img		minimap;
 
 	t_img		north;
-	int			north_sprite_number;
 	t_img		south;
-	int			south_sprite_number;
 	t_img		west;
-	int			west_sprite_number;
 	t_img		east;
-	int			east_sprite_number;
 
+	t_bool		image_sky;
 	t_img		sky;
+
 	t_img		star;
 	
 }   t_game;
@@ -224,6 +217,7 @@ void	put_column(t_game *game, int n);
 void	put_environnement(t_game *game);
 
 /* put_environnement_utils.c*/
+void	init_offset(t_game *game);
 t_fpos	init_start_v(t_game *game);
 t_fpos	init_start_h(t_game *game);
 t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
@@ -232,14 +226,15 @@ t_bool	is_horizontal_wall(char **map, t_fpos src, t_bool to_right);
 /* door.c */
 void	check_for_door(t_game *game);
 
-/* put_trimmed_minimap.c */
-void	put_trimmed_minimap(t_game *game);
+/* put_minimap.c */
+void	put_minimap(t_game *game);
 
 /* draw_minimap.c */
 void	put_direction_line(t_game *game);
 void	draw_minimap(t_game *game);
 
 /* put_utils.c */
+int		get_color(t_game *game, t_img *src, int x, int y);
 void	put_pixel(t_img *dst_img, int x, int y, int color);
 void	put_image(t_img *dst_img, t_img *src_img, int x, int y);
 
@@ -271,9 +266,13 @@ void	open_door(t_game *game);
 
 /*============================================================================*/
 
-
 /* init/init.c */
 void	init(t_game *src);
+
+/* init/utils.c */
+void	*new_get_data_addr(t_game *game, t_img *sprite);
+void	*new_mlx_new_image(t_game *game, t_img *sprite, int width, int height);
+void	*new_xpm_to_image(t_game *game, t_img *sprite, char *path);
 
 /* init_mlx.c */
 void	init_mlx(t_game *game);
@@ -287,7 +286,7 @@ int	main(int ac, char **av);
 void	put_vertical_line(t_game *game, int y_start);
 void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff);
 void	put_direction_line(t_game *game);
-void	put_raycasting_minimap(t_game *game, float angle, t_fpos ray);
+void	put_minimap_ray(t_game *game, float angle, t_fpos ray);
 void	put_point(t_game *game, int x, int y, int color);
 void	print_ray(t_ray ray);
 

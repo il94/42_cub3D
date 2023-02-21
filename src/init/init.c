@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/20 14:25:05 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:10:09 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ static void	init_images(t_game *game)
 	game->south.img = NULL;
 	game->west.img = NULL;
 	game->east.img = NULL;
-	game->sky.img = NULL;
-	game->star.img = NULL;
 
-	game->north_sprite_number = 0;
-	game->south_sprite_number = 0;
-	game->west_sprite_number = 0;
-	game->east_sprite_number = 0;
+	game->image_sky = FALSE;
+	game->sky.img = NULL;
+
+	game->star.img = NULL;
 }
 
 static void	init_ray(t_game *game)

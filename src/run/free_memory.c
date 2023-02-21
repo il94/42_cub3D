@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/20 14:19:05 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:54:49 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	verify_alloc(t_game *game, void *ptr)
 
 void	free_all_elements(t_game *game)
 {
+	system("pkill vlc");
 	if (game->fd != -1)
 		close(game->fd);
 	if (game->sprite)
@@ -28,24 +29,34 @@ void	free_all_elements(t_game *game)
 		ft_free_array(game->file_content);
 	if (game->map)
 		ft_free_array(game->map);
+
+
+	// if (game->star.img)
+	// 	mlx_destroy_image(game->mlx_ptr, game->star.img);
+	if (game->sky.img)
+		mlx_destroy_image(game->mlx_ptr, game->sky.img);
+	if (game->west.img)
+		mlx_destroy_image(game->mlx_ptr, game->west.img);
+	if (game->east.img)
+		mlx_destroy_image(game->mlx_ptr, game->east.img);
+	if (game->south.img)
+		mlx_destroy_image(game->mlx_ptr, game->south.img);
+	if (game->north.img)
+		mlx_destroy_image(game->mlx_ptr, game->north.img);
+	if (game->minimap.img)
+		mlx_destroy_image(game->mlx_ptr, game->minimap.img);
 	if (game->full_minimap.img)
 		mlx_destroy_image(game->mlx_ptr, game->full_minimap.img);
 	if (game->environnement.img)
 		mlx_destroy_image(game->mlx_ptr, game->environnement.img);
 	if (game->render.img)
 		mlx_destroy_image(game->mlx_ptr, game->render.img);
-	if (game->minimap.img)
-		mlx_destroy_image(game->mlx_ptr, game->minimap.img);
-	if (game->north.img)
-		mlx_destroy_image(game->mlx_ptr, game->north.img);
-	if (game->south.img)
-		mlx_destroy_image(game->mlx_ptr, game->south.img);
-	if (game->east.img)
-		mlx_destroy_image(game->mlx_ptr, game->east.img);
-	if (game->west.img)
-		mlx_destroy_image(game->mlx_ptr, game->west.img);
+
+
+
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+
 	if (game->mlx_ptr)
 	{
 		mlx_destroy_display(game->mlx_ptr);

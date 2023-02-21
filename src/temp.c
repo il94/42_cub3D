@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:23:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/20 14:19:41 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:04:31 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	put_direction_line(t_game *game)
 		put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
 }
 
-void	put_raycasting_minimap(t_game *game, float angle, t_fpos ray)
+void	put_minimap_ray(t_game *game, float angle, t_fpos ray)
 {
 	t_fpos	start;
 	t_fpos	end;
@@ -129,19 +129,19 @@ void	put_raycasting_minimap(t_game *game, float angle, t_fpos ray)
 
 	t_fpos	tmp1 = game->player.px;
 
-	tmp1.x = (TILE_MINIMAP * game->player.px.x / TILE);
-	tmp1.y = (TILE_MINIMAP * game->player.px.y / TILE);
+	tmp1.x = (MNMP_TILE * game->player.px.x / TILE);
+	tmp1.y = (MNMP_TILE * game->player.px.y / TILE);
 
 	t_fpos	tmp2 = game->player.px;
 
-	tmp2.x = (TILE_MINIMAP * ray.x / TILE);
-	tmp2.y = (TILE_MINIMAP * ray.y / TILE);
+	tmp2.x = (MNMP_TILE * ray.x / TILE);
+	tmp2.y = (MNMP_TILE * ray.y / TILE);
 
 
-	start.x = TMP_MAP / 2;
-	start.y = TMP_MAP / 2;
-	end.x = TMP_MAP / 2 + (cos(angle) * hypotenus(tmp1, tmp2));
-	end.y = TMP_MAP / 2 + (-sin(angle) * hypotenus(tmp1, tmp2));
+	start.x = MINIMAP / 2;
+	start.y = MINIMAP / 2;
+	end.x = MINIMAP / 2 + (cos(angle) * hypotenus(tmp1, tmp2));
+	end.y = MINIMAP / 2 + (-sin(angle) * hypotenus(tmp1, tmp2));
 	if (start.x > end.x)
 	{
 		swap(&start.x, &end.x);
