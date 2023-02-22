@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_environnement_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:39:28 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/21 17:27:18 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:28:09 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right)
 
 	pos.x = src.x / TILE - 1 + to_right;
 	pos.y = src.y / TILE;
-
 	if (pos.y < 0 || pos.y >= ft_get_size_array(map))
 		return (1);
 	return (pos.x < 0 || pos.x > ft_strlen(map[pos.y])
@@ -56,7 +55,7 @@ t_fpos	init_start_v(t_game *game)
 	{
 		start.x = game->player.px.x - (game->player.map.x * TILE);
 		start.y = game->player.px.y + start.x * tan(game->ray.angle);
-		start.x = game->player.px.x - start.x;		
+		start.x = game->player.px.x - start.x;
 	}
 	else
 	{
@@ -80,8 +79,8 @@ t_fpos	init_start_h(t_game *game)
 	else
 	{
 		start.y = game->player.map.y * TILE + TILE - game->player.px.y;
-		start.x = game->player.px.x + start.y / -tan(game->ray.angle) ;
-		start.y = game->player.px.y + start.y;		
+		start.x = game->player.px.x + start.y / -tan(game->ray.angle);
+		start.y = game->player.px.y + start.y;
 	}
 	return (start);
 }

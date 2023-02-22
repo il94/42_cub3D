@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_column.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/21 17:43:59 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:28:53 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static	int	get_scrolling(t_game *game)
 {
 	static int	tmp;
+
 	if (tmp >= SCROLLING_SKY)
 		tmp = 0;
 	tmp++;
@@ -89,8 +90,8 @@ int	get_scrolling_offset(t_game *game, int temp)
 
 void	put_column(t_game *game, int n)
 {
-	static int temp;
-	static int temp2;
+	static int	temp;
+	static int	temp2;
 	float		ray_dist;
 	float		size_column;
 	int			middle;

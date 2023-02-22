@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_data_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/17 18:15:44 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:43:27 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ static void	check_array_sprite_content(t_game *game)
 		free_all_and_exit(game, "Missing informations\n");
 }
 
-void	check_sprite(t_game *game, char **file_content)
+static void	put_sprite_in_array(t_game *game, char **file_content)
 {
 	int	i;
 	int	tmp;
 	int	index;
 
 	i = 0;
-	game->sprite = ft_calloc(sizeof(char *), (6 + 1));
-	verify_alloc(game, game->sprite);
 	index = enum_check(file_content[i]);
 	while (file_content[i] && (index != ERROR || file_content[i][0] == '\n'))
 	{
@@ -52,8 +50,16 @@ void	check_sprite(t_game *game, char **file_content)
 		}
 		i++;
 	}
+}
+
+void	check_sprite(t_game *game, char **file_content)
+{
+	game->sprite = ft_calloc(sizeof(char *), (6 + 1));
+	verify_alloc(game, game->sprite);
+	put_sprite_in_array(game, file_content);
 	check_array_sprite_content(game);
 }
+// ci dessus fonction merdique
 
 static void	assign_rgb_value(t_game *game, char **values, int trgt[3])
 {
