@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 17:31:29 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:47:05 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static t_fpos	get_vertical_collision(t_game *game, t_fpos start)
 	point = start;
 	while (!is_vertical_wall(game->map, point, !game->ray.left))
 	{
-		// put_point(game, point.x, point.y, GREEN);
 		if (game->ray.up)
 			point.y -= game->ray.offset_v.y;
 		else
@@ -39,7 +38,6 @@ static t_fpos	get_horizontal_collision(t_game *game, t_fpos start)
 	point = start;
 	while (!is_horizontal_wall(game->map, point, !game->ray.up))
 	{
-		// put_point(game, point.x, point.y, GREEN);
 		if (game->ray.up)
 			point.y -= game->ray.offset_h.y;
 		else
@@ -91,6 +89,7 @@ void	put_environnement(t_game *game)
 {
 	t_fpos	start_h;
 	t_fpos	start_v;
+	float	ray_dist;
 	int		i;
 
 	game->ray.angle = correc_angle(game->player.angle + to_rad(FOV / 2));
@@ -104,7 +103,10 @@ void	put_environnement(t_game *game)
 		init_offset(game);
 		game->ray.px = get_collision(game, start_h, start_v);
 		catch_special_ray(game, i);
-		put_column(game, i);
+		ray_dist = hypotenus(game->player.px, game->ray.px);
+		ray_dist *= cos(game->player.angle - game->ray.angle);
+		ray_dist = fabs(TILE / ray_dist * HEIGHT);
+		put_column(game, get_image(game), ray_dist, i);
 		game->ray.angle = correc_angle(game->ray.angle - to_rad(FOV) / (WIDTH));
 		i++;
 	}

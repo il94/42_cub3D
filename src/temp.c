@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:23:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 18:04:31 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/24 00:04:05 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,6 @@ void	put_column_color(t_game *game, int n)
 	}
 }
 
-void	put_vertical_line(t_game *game, int y_start)
-{
-	int	y;
-	int	y_end;
-
-	y = game->player.px.y;
-	y_end = game->ray.px.y;
-	while ((y != y_end))
-	{
-		put_pixel(&game->minimap, game->player.px.x, y, RED);
-		if (y_start > y_end)
-			y--;
-		else
-			y++;
-	}
-}
-
 void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff)
 {
 	t_pos	pos;
@@ -96,29 +79,6 @@ void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff)
 		}
 		pos.x++;
 	}
-}
-
-void	put_direction_line(t_game *game)
-{
-	t_fpos	start;
-	t_fpos	end;
-	t_fpos	pos;
-
-	start.x = game->player.px.x;
-	start.y = game->player.px.y;
-	end.x = game->ray.px.x;
-	end.y = game->ray.px.y;
-	if (start.x > end.x)
-	{
-		swap(&start.x, &end.x);
-		swap(&start.y, &end.y);
-	}
-	pos.x = start.x;
-	pos.y = start.y;
-	if (start.x == end.x && pos.y != end.y)
-		put_vertical_line(game, start.y);
-	else
-		put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
 }
 
 void	put_minimap_ray(t_game *game, float angle, t_fpos ray)
@@ -149,10 +109,7 @@ void	put_minimap_ray(t_game *game, float angle, t_fpos ray)
 	}
 	pos.x = start.x;
 	pos.y = start.y;
-	if (start.x == end.x && pos.y != end.y)
-		put_vertical_line(game, start.y);
-	else
-		put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
+	put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
 }
 
 void	put_point(t_game *game, int x, int y, int color)

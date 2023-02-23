@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 17:51:26 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/23 23:57:01 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-# define KEY_W 119
-# define KEY_D 100
-# define KEY_S 115
-# define KEY_A 97
-
-/* AZERTY */
-// # define KEY_W 122
+// # define KEY_W 119
 // # define KEY_D 100
 // # define KEY_S 115
-// # define KEY_A 113
+// # define KEY_A 97
+
+/* AZERTY */
+# define KEY_W 122
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -81,8 +81,7 @@
 # define SENSI_KEY 0.025
 # define SENSI_MOUSE 0.02
 
-# define ANIMATION 20000
-# define SCROLLING 128000
+# define SCROLLING 512000
 # define SCROLLING_SKY 512000
 
 # define POINT 9
@@ -213,7 +212,8 @@ int		run(t_game *game);
 /*============================================================================*/
 
 /* put_environnement.c */
-void	put_column(t_game *game, int n);
+t_img	*get_image(t_game *game);
+void	put_column(t_game *game, t_img *to_print, float ray_dist, int n);
 void	put_environnement(t_game *game);
 
 /* put_environnement_utils.c*/
@@ -224,14 +224,18 @@ t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
 t_bool	is_horizontal_wall(char **map, t_fpos src, t_bool to_right);
 
 /* door.c */
-void	check_for_door(t_game *game);
+void	close_door(t_game *game, t_pos old_pos_map);
+void	open_door(t_game *game);
 
 /* put_minimap.c */
 void	put_minimap(t_game *game);
 
 /* draw_minimap.c */
-void	put_direction_line(t_game *game);
 void	draw_minimap(t_game *game);
+
+/* put_sky.c */
+void	put_sky(t_game *game);
+
 
 /* put_utils.c */
 int		get_color(t_game *game, t_img *src, int x, int y);
@@ -285,7 +289,6 @@ int	main(int ac, char **av);
 /* temp.c */
 void	put_vertical_line(t_game *game, int y_start);
 void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff);
-void	put_direction_line(t_game *game);
 void	put_minimap_ray(t_game *game, float angle, t_fpos ray);
 void	put_point(t_game *game, int x, int y, int color);
 void	print_ray(t_ray ray);

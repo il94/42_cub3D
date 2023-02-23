@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 17:29:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:05:03 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	init_mlx_addr(t_game *game)
 	game->south.addr = new_get_data_addr(game, &game->south);
 	game->west.addr = new_get_data_addr(game, &game->west);
 	game->east.addr = new_get_data_addr(game, &game->east);
-	game->sky.addr = new_get_data_addr(game, &game->sky);
+	// if (game->image_sky)
+		game->sky.addr = new_get_data_addr(game, &game->sky);
 	// game->star.addr = new_get_data_addr(game, &game->star);
 }
 
@@ -42,7 +43,7 @@ static void	init_mlx_img(t_game *game)
 	game->west.img = new_xpm_to_image(game, &game->west, game->sprite[WE]);
 	// if (game->image_sky)
 	// 	game->sky.img = new_xpm_to_image(game, &game->sky, game->sprite[C]);
-	game->sky.img = new_xpm_to_image(game, &game->sky, "sprites/xpm/stars.xpm");
+		game->sky.img = new_xpm_to_image(game, &game->sky, "sprites/xpm/stars.xpm");
 	// game->star.img = new_xpm_to_image(game, &game->star, "sprites/xpm/stars.xpm");
 }
 
@@ -60,7 +61,7 @@ void	init_mlx(t_game *game)
 	mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);
 	draw_minimap(game);
 	mlx_hook(game->win_ptr, 17, 0, mlx_loop_end, game->mlx_ptr);
-	system("cvlc sounds/star_way.wav &");
+	// system("cvlc sounds/star_way.wav &");
 	mlx_loop_hook(game->mlx_ptr, run, game);
 	mlx_loop(game->mlx_ptr);
 }

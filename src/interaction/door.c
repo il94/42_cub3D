@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:15:56 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/22 18:48:59 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/23 23:19:28 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 void	door_animation(t_game *game)
 {
+}
+
+void	close_door(t_game *game, t_pos old_pos_map)
+{
+	if (old_pos_map.x != game->player.map.x
+		|| old_pos_map.y != game->player.map.y)
+	{
+		if (game->map[old_pos_map.y][old_pos_map.x] == '3')
+		{
+			system("cvlc sounds/close_bar.wav &");
+			game->map[old_pos_map.y][old_pos_map.x] = '2';
+		}
+	}
 }
 
 void	open_door(t_game *game)

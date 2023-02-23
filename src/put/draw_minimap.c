@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 14:09:32 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:47:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	put_image_tile(t_game *game, int color, int x, int y)
 		{
 			if (x_tile < 1 || x_tile > MNMP_TILE - 1
 				|| y_tile < 1 || y_tile > MNMP_TILE - 1
-				|| x + x_tile == game->size_map.x - 1 || y + y_tile == game->size_map.y - 1)
+				|| x + x_tile == game->size_map.x - 1
+				|| y + y_tile == game->size_map.y - 1)
 				put_pixel(&game->full_minimap, x + x_tile, y + y_tile, BLACK);
 			else
 				put_pixel(&game->full_minimap, x + x_tile, y + y_tile, color);
@@ -76,5 +77,4 @@ void	draw_minimap(t_game *game)
 		}
 		y++;
 	}
-	// put_image(&game->render, &game->full_minimap, MNMP_TILE, MNMP_TILE);
 }

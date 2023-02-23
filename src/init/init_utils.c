@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:26:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 17:30:31 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/23 23:48:26 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*new_get_data_addr(t_game *game, t_img *sprite)
 {
 	void	*addr;
-	
+
 	addr = mlx_get_data_addr(sprite->img, &sprite->bpp,
 			&sprite->line, &sprite->end);
 	verify_alloc(game, addr);

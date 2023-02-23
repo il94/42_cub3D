@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 14:54:49 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:57:55 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,30 @@ void	verify_alloc(t_game *game, void *ptr)
 		free_all_and_exit(game, ERROR_MALLOC);
 }
 
+static void	new_mlx_destroy_image(t_game *game, t_img *sprite)
+{
+	if (sprite->img)
+		mlx_destroy_image(game->mlx_ptr, sprite->img);
+}
+
+static void	destroy_mlx_images(t_game *game)
+{
+	// new_mlx_destroy_image(game, &game->star);
+	new_mlx_destroy_image(game, &game->sky);
+	new_mlx_destroy_image(game, &game->west);
+	new_mlx_destroy_image(game, &game->east);
+	new_mlx_destroy_image(game, &game->south);
+	new_mlx_destroy_image(game, &game->north);
+	new_mlx_destroy_image(game, &game->minimap);
+	new_mlx_destroy_image(game, &game->full_minimap);
+	new_mlx_destroy_image(game, &game->environnement);
+	new_mlx_destroy_image(game, &game->render);
+}
+
 void	free_all_elements(t_game *game)
 {
 	system("pkill vlc");
+	destroy_mlx_images(game);
 	if (game->fd != -1)
 		close(game->fd);
 	if (game->sprite)
@@ -29,34 +50,8 @@ void	free_all_elements(t_game *game)
 		ft_free_array(game->file_content);
 	if (game->map)
 		ft_free_array(game->map);
-
-
-	// if (game->star.img)
-	// 	mlx_destroy_image(game->mlx_ptr, game->star.img);
-	if (game->sky.img)
-		mlx_destroy_image(game->mlx_ptr, game->sky.img);
-	if (game->west.img)
-		mlx_destroy_image(game->mlx_ptr, game->west.img);
-	if (game->east.img)
-		mlx_destroy_image(game->mlx_ptr, game->east.img);
-	if (game->south.img)
-		mlx_destroy_image(game->mlx_ptr, game->south.img);
-	if (game->north.img)
-		mlx_destroy_image(game->mlx_ptr, game->north.img);
-	if (game->minimap.img)
-		mlx_destroy_image(game->mlx_ptr, game->minimap.img);
-	if (game->full_minimap.img)
-		mlx_destroy_image(game->mlx_ptr, game->full_minimap.img);
-	if (game->environnement.img)
-		mlx_destroy_image(game->mlx_ptr, game->environnement.img);
-	if (game->render.img)
-		mlx_destroy_image(game->mlx_ptr, game->render.img);
-
-
-
 	if (game->win_ptr)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-
 	if (game->mlx_ptr)
 	{
 		mlx_destroy_display(game->mlx_ptr);

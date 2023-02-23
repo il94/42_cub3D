@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_inputs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/22 18:38:25 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/23 23:18:28 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,7 @@ static void	move_player(t_game *game, float x, float y)
 		game->player.map.x = game->player.px.x / TILE;
 		game->player.map.y = game->player.px.y / TILE;
 	}
-	if (old_pos_map.x != game->player.map.x
-		|| old_pos_map.y != game->player.map.y)
-		if (game->map[old_pos_map.y][old_pos_map.x] == '3')
-		{
-			system("cvlc sounds/close_bar.wav &");
-			game->map[old_pos_map.y][old_pos_map.x] = '2';
-		}
+	close_door(game, old_pos_map);
 }
 
 void	process_inputs(t_game *game)
