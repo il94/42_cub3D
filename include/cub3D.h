@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/23 23:57:01 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:34:37 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-// # define KEY_W 119
-// # define KEY_D 100
-// # define KEY_S 115
-// # define KEY_A 97
-
-/* AZERTY */
-# define KEY_W 122
+# define KEY_W 119
 # define KEY_D 100
 # define KEY_S 115
-# define KEY_A 113
+# define KEY_A 97
+
+/* AZERTY */
+// # define KEY_W 122
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -143,8 +143,8 @@ typedef struct s_game{
     char    	**map;
 	t_pos		size_map;
     char    	**sprite;
-	int			f_rgb[3];
-	int			c_rgb[3];
+	int			f_color;
+	int			c_color;
 	int			fd;
 	char		**file_content;
 
@@ -177,10 +177,11 @@ typedef struct s_game{
 	t_img		west;
 	t_img		east;
 
-	t_bool		image_sky;
 	t_img		sky;
+	t_bool		image_sky;
 
 	t_img		star;
+	t_bool		stars_apparead;
 	
 }   t_game;
 
@@ -234,8 +235,11 @@ void	put_minimap(t_game *game);
 void	draw_minimap(t_game *game);
 
 /* put_sky.c */
-void	put_sky(t_game *game);
+void	put_sky_image(t_game *game);
+void	put_sky_color(t_game *game);
 
+/* put_sky.c */
+void	put_stars(t_game *game);
 
 /* put_utils.c */
 int		get_color(t_game *game, t_img *src, int x, int y);
@@ -249,7 +253,7 @@ void	put_render(t_game *game);
 
 /* parsing_data_map.c */
 void	check_sprite(t_game *game, char **file_content);
-void	get_rgb_value(t_game *game, int idx, int target[3]);
+int		get_color_to_rgb(t_game *game, char *rgb_code, t_bool color_sky);
 
 /* parsing_map.c */
 void	check_map(t_game *game, char **file_content);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_data_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/22 17:43:27 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/24 21:12:25 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ static void	check_array_sprite_content(t_game *game)
 		free_all_and_exit(game, "Missing informations\n");
 }
 
-static void	put_sprite_in_array(t_game *game, char **file_content)
+void	check_sprite(t_game *game, char **file_content)
 {
 	int	i;
 	int	tmp;
 	int	index;
 
 	i = 0;
+	game->sprite = ft_calloc(sizeof(char *), (6 + 1));
+	verify_alloc(game, game->sprite);
 	index = enum_check(file_content[i]);
 	while (file_content[i] && (index != ERROR || file_content[i][0] == '\n'))
 	{
@@ -38,6 +40,7 @@ static void	put_sprite_in_array(t_game *game, char **file_content)
 		{
 			if (!game->sprite[index])
 			{
+				
 				game->sprite[index] = ft_strcut_right(file_content[i], ' ');
 				tmp = 0;
 				while (game->sprite[index][tmp] != '\n')
@@ -50,16 +53,8 @@ static void	put_sprite_in_array(t_game *game, char **file_content)
 		}
 		i++;
 	}
-}
-
-void	check_sprite(t_game *game, char **file_content)
-{
-	game->sprite = ft_calloc(sizeof(char *), (6 + 1));
-	verify_alloc(game, game->sprite);
-	put_sprite_in_array(game, file_content);
 	check_array_sprite_content(game);
 }
-// ci dessus fonction merdique
 
 static void	assign_rgb_value(t_game *game, char **values, int trgt[3])
 {
@@ -81,17 +76,28 @@ static void	assign_rgb_value(t_game *game, char **values, int trgt[3])
 	}
 }
 
-void	get_rgb_value(t_game *game, int idx, int target[3])
+int	get_color_to_rgb(t_game *game, char *rgb_code, t_bool color_sky)
 {
 	char	**values;
+	int		rgb[3];
+	int		result;
 
-	values = ft_split(game->sprite[idx], ", CF\n");
+	values = ft_split(rgb_code, ", CF\n");
 	verify_alloc(game, values);
 	if (ft_get_size_array(values) != 3)
 	{
 		ft_free_array(values);
-		free_all_and_exit(game, "RGB value is invalid 1\n");
+		values = NULL;
+		if (!color_sky)
+			free_all_and_exit(game, "RGB value is invalid 1\n");
+		else
+			game->image_sky = TRUE;
 	}
-	assign_rgb_value(game, values, target);
-	ft_free_array(values);
+	if (values)
+	{
+		assign_rgb_value(game, values, rgb);
+		ft_free_array(values);
+	}
+	result = rgb[0] * 65536 + rgb[1] * 256 + rgb[2];
+	return (result);
 }

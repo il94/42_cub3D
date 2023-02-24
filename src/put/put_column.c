@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/23 23:47:38 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:20:41 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	put_column(t_game *game, t_img *to_print, float ray_dist, int n)
 				get_color(game, to_print, i * ratio + TILE / 2, offset));
 		}
 		else
-			put_pixel(&game->environnement, n, HEIGHT / 2 + i, FLOOR);
+			put_pixel(&game->environnement, n, HEIGHT / 2 + i, game->f_color);
 		i++;
 	}
 }

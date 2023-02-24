@@ -4,8 +4,8 @@ EA sprites/xpm/wall_clouds.xpm
 WE sprites/xpm/wall_clouds.xpm
 
 
-F 220,100,99
-C 225,30,0
+F 31,163,224
+C sprites/xpm/stars.xpm
 
    1111111
    1000001

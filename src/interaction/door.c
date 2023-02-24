@@ -6,15 +6,11 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:15:56 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/23 23:19:28 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:31:47 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-void	door_animation(t_game *game)
-{
-}
 
 void	close_door(t_game *game, t_pos old_pos_map)
 {
@@ -45,7 +41,7 @@ void	open_door(t_game *game)
 	map_ray3.y /= TILE;
 	if (distance < 2 * TILE && game->map[map_ray3.y][map_ray3.x] == '2')
 	{
-		door_animation(game);
+		game->stars_apparead = TRUE;
 		system("cvlc sounds/open_bar.wav &");
 		game->map[map_ray3.y][map_ray3.x] = '3';
 	}
