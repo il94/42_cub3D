@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:15:56 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/24 21:31:47 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/25 04:41:16 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	close_door(t_game *game, t_pos old_pos_map)
 	{
 		if (game->map[old_pos_map.y][old_pos_map.x] == '3')
 		{
-			system("cvlc sounds/close_bar.wav &");
+			// system("cvlc sounds/close_bar.wav &");
 			game->map[old_pos_map.y][old_pos_map.x] = '2';
 		}
 	}
@@ -42,7 +42,7 @@ void	open_door(t_game *game)
 	if (distance < 2 * TILE && game->map[map_ray3.y][map_ray3.x] == '2')
 	{
 		game->stars_apparead = TRUE;
-		system("cvlc sounds/open_bar.wav &");
+		// system("cvlc sounds/open_bar.wav &");
 		game->map[map_ray3.y][map_ray3.x] = '3';
 	}
 }

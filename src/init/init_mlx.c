@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/24 21:17:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/24 23:46:26 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_mlx(t_game *game)
 	mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);
 	draw_minimap(game);
 	mlx_hook(game->win_ptr, 17, 0, mlx_loop_end, game->mlx_ptr);
-	system("cvlc sounds/star_way.wav &");
+	// system("cvlc sounds/star_way.wav &");
 	mlx_loop_hook(game->mlx_ptr, run, game);
 	mlx_loop(game->mlx_ptr);
 }
