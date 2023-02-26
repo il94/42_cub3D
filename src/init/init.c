@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/24 21:29:52 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:27:50 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ static void	init_images(t_game *game)
 	game->environnement.img = NULL;
 	game->full_minimap.img = NULL;
 	game->minimap.img = NULL;
-
 	game->north.img = NULL;
 	game->south.img = NULL;
 	game->west.img = NULL;
 	game->east.img = NULL;
-
 	game->sky.img = NULL;
 	game->image_sky = FALSE;
-
 	game->star.img = NULL;
 	game->stars_apparead = FALSE;
 }
@@ -60,17 +57,14 @@ static void	init_game(t_game *game)
 {
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
-
 	game->map = NULL;
 	game->size_map.x = 0;
 	game->size_map.y = 0;
 	game->sprite = NULL;
 	game->fd = -1;
 	game->file_content = NULL;
-
 	game->mouse.x = WIDTH / 2;
 	game->mouse.y = HEIGHT / 2;
-
 	game->move_up = FALSE;
 	game->move_right = FALSE;
 	game->move_down = FALSE;
@@ -78,6 +72,7 @@ static void	init_game(t_game *game)
 	game->move_dir_left = FALSE;
 	game->move_dir_right = FALSE;
 	game->mouse_on = FALSE;
+	game->star_state = 0;
 }
 
 void	init(t_game *game)

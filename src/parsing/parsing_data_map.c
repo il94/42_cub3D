@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/24 21:12:25 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/27 00:08:24 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,22 @@ static void	check_array_sprite_content(t_game *game)
 		free_all_and_exit(game, "Missing informations\n");
 }
 
+static char	*get_sprite_path(t_game *game, char *str)
+{
+	char	*result;
+
+	result = ft_strcut_right(str, ' ');
+	verify_alloc(game, &str);
+	result = ft_strcut_left_free(result, '\n');
+	verify_alloc(game, &str);
+	return (result);
+}
+
 void	check_sprite(t_game *game, char **file_content)
 {
-	int	i;
-	int	tmp;
-	int	index;
+	int		i;
+	int		tmp;
+	int		index;
 
 	i = 0;
 	game->sprite = ft_calloc(sizeof(char *), (6 + 1));
@@ -39,15 +50,7 @@ void	check_sprite(t_game *game, char **file_content)
 		if (index != ERROR)
 		{
 			if (!game->sprite[index])
-			{
-				
-				game->sprite[index] = ft_strcut_right(file_content[i], ' ');
-				tmp = 0;
-				while (game->sprite[index][tmp] != '\n')
-					tmp++;
-				game->sprite[index][tmp] = '\0';
-				verify_alloc(game, game->sprite[index]);
-			}
+				game->sprite[index] = get_sprite_path(game, file_content[i]);
 			else
 				free_all_and_exit(game, "Doublon\n");
 		}

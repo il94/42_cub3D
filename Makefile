@@ -44,13 +44,15 @@ SRC = main.c temp.c \
 		init/init.c init/init_utils.c init/init_mlx.c \
 		\
 		parsing/parsing.c parsing/parsing_utils.c parsing/parsing_map.c \
-		parsing/parsing_data_map.c \
+		parsing/parsing_map_utils.c parsing/parsing_data_map.c \
+		parsing/parsing_data_map_utils.c \
 		\
 		interaction/door.c \
 		\
-		put/put_render.c put/put_utils.c put/draw_minimap.c put/put_column.c \
-		put/put_environnement.c put/put_environnement_utils.c \
-		put/put_minimap.c put/put_sky.c put/put_stars.c \
+		put_render/put_render.c put_render/put_utils.c put_render/draw_minimap.c put_render/put_column.c \
+		put_render/put_environnement.c put_render/put_environnement_utils.c \
+		put_render/put_minimap.c put_render/put_sky.c put_render/put_stars.c \
+		\
 		run/run.c run/utils.c run/process_inputs.c run/free_memory.c \
 		\
 

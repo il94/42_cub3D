@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 00:50:41 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 19:35:20 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:38:40 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void		ft_free_array_size(char **elements, int n);
 void		ft_print_array_n(char **elements);
 char		**ft_split_charset_n(char const *s, char *charset);
 char		*ft_strtrim_free(char *s1, char const *set);
+char		*ft_strcut_left_free(char *s, int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/24 23:47:42 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/27 00:19:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define _USE_MATH_DEFINES
 # define PI_0 0
+# define PI_45 M_PI / 4
 # define PI_90 M_PI / 2
 # define PI_180 M_PI
 # define PI_270 3 * M_PI / 2
@@ -78,11 +79,15 @@
 # define FOV 60	
 # define ANGLE_PLAYER 90	
 # define SPEED 5
-# define SENSI_KEY 0.025
+# define SENSI_KEY 0.05
 # define SENSI_MOUSE 0.02
 
 # define SCROLLING 512000
 # define SCROLLING_SKY 512000
+
+# define STAR_START 150
+# define STAR_DIST 75
+# define STAR_SPEED 0.15
 
 # define POINT 9
 
@@ -182,6 +187,7 @@ typedef struct s_game{
 
 	t_img		star;
 	t_bool		stars_apparead;
+	float		star_state;
 	
 }   t_game;
 
@@ -194,10 +200,10 @@ void	free_all_elements(t_game *game);
 void    free_all_and_exit(t_game *game, char *str_error);
 
 /* process_inputs */
+void	process_inputs(t_game *game);
+int 	mouse_move(int x, int y, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
-int 	mouse_move(int x, int y, t_game *game);
-void	process_inputs(t_game *game);
 
 /* utils.c */
 float	correc_angle(float angle);
@@ -209,39 +215,36 @@ float	to_rad(float degrees);
 /* run.c */
 int		run(t_game *game);
 
-
 /*============================================================================*/
-
-/* put_environnement.c */
-t_img	*get_image(t_game *game);
-void	put_column(t_game *game, t_img *to_print, float ray_dist, int n);
-void	put_environnement(t_game *game);
-
-/* put_environnement_utils.c*/
-void	init_offset(t_game *game);
-t_fpos	init_start_v(t_game *game);
-t_fpos	init_start_h(t_game *game);
-t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
-t_bool	is_horizontal_wall(char **map, t_fpos src, t_bool to_right);
-
-/* door.c */
-void	close_door(t_game *game, t_pos old_pos_map);
-void	open_door(t_game *game);
-
-/* put_minimap.c */
-void	put_minimap(t_game *game);
 
 /* draw_minimap.c */
 void	draw_minimap(t_game *game);
+
+/* put_column.c*/
+void	put_column(t_game *game, t_img *to_print, float ray_dist, int n);
+
+/* put_environnement_utils.c*/
+void	init_offset(t_game *game);
+t_bool	is_vertical_wall(char **map, t_fpos src, t_bool to_right);
+t_bool	is_horizontal_wall(char **map, t_fpos src, t_bool to_right);
+t_fpos	init_start_v(t_game *game);
+t_fpos	init_start_h(t_game *game);
+
+/* put_environnement.c */
+void	put_environnement(t_game *game);
+
+/* put_minimap.c */
+void	put_minimap(t_game *game);
 
 /* put_sky.c */
 void	put_sky_image(t_game *game);
 void	put_sky_color(t_game *game);
 
-/* put_sky.c */
+/* put_stars.c */
 void	put_stars(t_game *game);
 
 /* put_utils.c */
+t_img	*get_image(t_game *game);
 int		get_color(t_game *game, t_img *src, int x, int y);
 void	put_pixel(t_img *dst_img, int x, int y, int color);
 void	put_image(t_img *dst_img, t_img *src_img, int x, int y);
@@ -251,39 +254,47 @@ void	put_render(t_game *game);
 
 /*============================================================================*/
 
+/* parsing_data_map_utils.c */
+t_texture	enum_check(char *tmp);
+
 /* parsing_data_map.c */
 void	check_sprite(t_game *game, char **file_content);
 int		get_color_to_rgb(t_game *game, char *rgb_code, t_bool color_sky);
+
+/* parsing_map_utils.c */
+int		valid_carac(int c);
+int		check_player_carac(char c);
+int		check_space_around(char **map, int i, int j);
 
 /* parsing_map.c */
 void	check_map(t_game *game, char **file_content);
 
 /* parsing_utils.c */
-int			check_space_around(char **map, int i, int j);
-int			check_player_carac(char c);
-void		check_file_format(t_game *game, char *file);
-t_texture	enum_check(char *tmp);
+void	dup_line_into_map(t_game *game, int tmp);
+void	get_map(t_game *game, char **file_content);
+void	check_file_format(t_game *game, char *file);
 
 /* parsing.c */
 void    parser(t_game *game, int nb_parameters, char *file);
 
 /*============================================================================*/
 
-/* door.c */
+/* interaction.c */
+void	close_door(t_game *game, t_pos old_pos_map);
 void	open_door(t_game *game);
 
 /*============================================================================*/
 
-/* init/init.c */
-void	init(t_game *src);
+/* init_mlx.c */
+void	init_mlx(t_game *game);
 
-/* init/utils.c */
+/* init_utils.c */
 void	*new_get_data_addr(t_game *game, t_img *sprite);
 void	*new_mlx_new_image(t_game *game, t_img *sprite, int width, int height);
 void	*new_xpm_to_image(t_game *game, t_img *sprite, char *path);
 
-/* init_mlx.c */
-void	init_mlx(t_game *game);
+/* init/init.c */
+void	init(t_game *src);
 
 /*============================================================================*/
 

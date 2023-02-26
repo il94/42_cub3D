@@ -6,35 +6,46 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:54:56 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/11 16:38:35 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/27 00:05:58 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	check_space_around(char **map, int i, int j)
+void	dup_line_into_map(t_game *game, int tmp)
 {
-	int	n;
+	int	i;
 
-	n = 0;
-	if (j == 0 || (!map[i][j - 1] || map[i][j - 1] == ' '))
-		n++;
-	if (j == (ft_strlen(map[i]) - 1) || (!map[i][j + 1]
-		|| map[i][j + 1] == ' '))
-		n++;
-	if (i == 0 || j > ft_strlen(map[i - 1]) || map[i - 1][j] == ' ')
-		n++;
-	if (i == (ft_get_size_array(map) - 1) || j > ft_strlen(map[i + 1])
-		|| map[i + 1][j] == ' ')
-		n++;
-	return (n);
+	i = 0;
+	while (game->file_content[tmp])
+	{
+		game->map[i] = ft_strdup(game->file_content[tmp]);
+		verify_alloc(game, game->map[i]);
+		if (game->map[i][ft_strlen(game->map[i]) - 1]
+			&& game->map[i][ft_strlen(game->map[i]) - 1] == '\n')
+			game->map[i][ft_strlen(game->map[i]) - 1] = '\0';
+		i++;
+		tmp++;
+	}
+	game->map[i] = 0;
 }
 
-int	check_player_carac(char c)
+void	get_map(t_game *game, char **file_content)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
-	return (0);
+	int	i;
+	int	tmp;
+
+	i = 0;
+	while (file_content[i] && file_content[i][0] != '1'
+		&& file_content[i][0] != ' ')
+		i++;
+	tmp = i;
+	i = 0;
+	while (file_content[i])
+		i++;
+	game->map = malloc(sizeof(char *) * (i - tmp + 1));
+	verify_alloc(game, game->map);
+	dup_line_into_map(game, tmp);
 }
 
 void	check_file_format(t_game *game, char *file)
@@ -52,21 +63,4 @@ void	check_file_format(t_game *game, char *file)
 		free_all_and_exit(game, ".cub extension required\n");
 	}
 	free (extension);
-}
-
-t_texture	enum_check(char *tmp)
-{
-	if (!ft_strncmp(tmp, "NO ", 3))
-		return (NO);
-	if (!ft_strncmp(tmp, "SO ", 3))
-		return (SO);
-	if (!ft_strncmp(tmp, "WE ", 3))
-		return (WE);
-	if (!ft_strncmp(tmp, "EA ", 3))
-		return (EA);
-	if (!ft_strncmp(tmp, "F ", 2))
-		return (F);
-	if (!ft_strncmp(tmp, "C ", 2))
-		return (C);
-	return (ERROR);
 }

@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/19 16:52:25 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/27 00:09:49 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-static void	dup_line_into_map(t_game *game, int tmp)
-{
-	int	i;
-
-	i = 0;
-	while (game->file_content[tmp])
-	{
-		game->map[i] = ft_strdup(game->file_content[tmp]);
-		verify_alloc(game, game->map[i]);
-		if (game->map[i][ft_strlen(game->map[i]) - 1]
-			&& game->map[i][ft_strlen(game->map[i]) - 1] == '\n')
-			game->map[i][ft_strlen(game->map[i]) - 1] = '\0';
-		i++;
-		tmp++;
-	}
-	game->map[i] = 0;
-}
 
 static void	check_map_surended_wall(t_game *game, char **map)
 {
@@ -67,62 +49,35 @@ static void	get_player_info(t_game *game, int i, int j)
 		game->player.angle = to_rad(180);
 	if (game->map[i][j] == 'E')
 		game->player.angle = to_rad(0);
-		
-}
-
-static int	valid_carac(int c)
-{
-	if (c == '0' || c == '1' || c == '2' || c == '3' || c == ' ')
-		return (1);
-	return (0);
 }
 
 static void	check_carac(t_game *game, char **map)
 {
-	int	i;
-	int	j;
-	int	n;
+	t_pos	i;
+	int		n;
 
-	i = 0;
+	i.y = 0;
 	n = 0;
-	while (map[i])
+	while (map[i.y])
 	{
-		j = 0;
-		while (map[i][j])
+		i.x = 0;
+		while (map[i.y][i.x])
 		{
-			if (!valid_carac(map[i][j]))
+			if (!valid_carac(map[i.y][i.x]))
 			{
-				if (!check_player_carac(map[i][j]))
+				if (!check_player_carac(map[i.y][i.x]))
 					free_all_and_exit(game, "Parsing Error : Invalide carac\n");
-				get_player_info (game, i, j);
+				get_player_info (game, i.y, i.x);
 				n++;
 			}
-			j++;
+			i.x++;
 		}
-		if (j == 0)
+		if (i.x == 0)
 			free_all_and_exit(game, "Parsing Error : Empty line in map\n");
-		i++;
+		i.y++;
 	}
 	if (n != 1)
 		free_all_and_exit(game, "Need only one player\n");
-}
-
-static void	get_map(t_game *game, char **file_content)
-{
-	int	i;
-	int	tmp;
-
-	i = 0;
-	while (file_content[i] && file_content[i][0] != '1'
-		&& file_content[i][0] != ' ')
-		i++;
-	tmp = i;
-	i = 0;
-	while (file_content[i])
-		i++;
-	game->map = malloc(sizeof(char *) * (i - tmp + 1));
-	verify_alloc(game, game->map);
-	dup_line_into_map(game, tmp);
 }
 
 static t_pos	get_size_map(char **map)

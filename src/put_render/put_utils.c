@@ -6,11 +6,29 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/21 17:44:03 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/27 00:19:13 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+t_img	*get_image(t_game *game)
+{
+	if (game->ray.wall_h)
+	{
+		if (game->ray.up)
+			return (&game->north);
+		else
+			return (&game->south);
+	}
+	else
+	{
+		if (game->ray.left)
+			return (&game->west);
+		else
+			return (&game->east);
+	}
+}
 
 int	get_color(t_game *game, t_img *src, int x, int y)
 {

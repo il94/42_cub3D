@@ -36,7 +36,7 @@ static	t_bool	is_outside_map(t_game *game, t_pos start, int x, int y)
 	return (FALSE);
 }
 
-void	put_minimap_line(t_game *game, t_pos start, int y)
+static void	put_minimap_line(t_game *game, t_pos start, int y)
 {
 	int	x;
 
