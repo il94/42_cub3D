@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 14:49:02 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:30:24 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ static void	new_mlx_destroy_image(t_game *game, t_myimg *sprite)
 static void	destroy_mlx_images(t_game *game)
 {
 	new_mlx_destroy_image(game, &game->player_minimap);
-	new_mlx_destroy_image(game, &game->star);
+	new_mlx_destroy_image(game, &game->star[0]);
+	new_mlx_destroy_image(game, &game->star[1]);
+	new_mlx_destroy_image(game, &game->star[2]);
 	new_mlx_destroy_image(game, &game->sky);
 	new_mlx_destroy_image(game, &game->west);
 	new_mlx_destroy_image(game, &game->east);

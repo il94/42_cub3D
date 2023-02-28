@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 18:31:44 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:29:54 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ typedef struct s_game{
 	t_myimg		sky;
 	t_bool		image_sky;
 
-	t_myimg		star;
+	t_myimg		star[3];
 	t_bool		stars_apparead;
 	float		star_state;
 	
