@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 19:29:54 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:54:42 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,7 @@ void    parser(t_game *game, int nb_parameters, char *file);
 /* door.c */
 void	close_door(t_game *game, t_pos old_pos_map);
 void	open_door(t_game *game);
+int		near_door(t_game *game);
 
 /* move.c */
 int		move_mouse(int x, int y, t_game *game);
