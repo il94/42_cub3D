@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/27 00:47:57 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:48:34 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	init_mlx_addr(t_game *game)
 	if (game->image_sky)
 		game->sky.addr = new_get_data_addr(game, &game->sky);
 	game->star.addr = new_get_data_addr(game, &game->star);
+	game->player_minimap.addr = new_get_data_addr(game, &game->player_minimap);
 }
 
 static void	init_mlx_img(t_game *game)
@@ -44,6 +45,8 @@ static void	init_mlx_img(t_game *game)
 		game->sky.img = new_xpm_to_image(game, &game->sky, game->sprite[C]);
 	game->star.img = new_xpm_to_image(game, &game->star,
 			"sprites/xpm/yellow_star.xpm");
+	game->player_minimap.img = new_xpm_to_image(game, &game->player_minimap,
+			"sprites/xpm/m_40.xpm");
 }
 
 void	init_mlx(t_game *game)
@@ -54,13 +57,12 @@ void	init_mlx(t_game *game)
 	verify_alloc(game, game->win_ptr);
 	init_mlx_img(game);
 	init_mlx_addr(game);
-	// mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
 	mlx_hook(game->win_ptr, 2, 1L << 0, key_press, game);
 	mlx_hook(game->win_ptr, 3, 1L << 1, key_release, game);
-	mlx_hook(game->win_ptr, 6, 1L << 6, mouse_move, game);
+	mlx_hook(game->win_ptr, 6, 1L << 6, move_mouse, game);
 	draw_minimap(game);
 	mlx_hook(game->win_ptr, 17, 0, mlx_loop_end, game->mlx_ptr);
-	// system("cvlc sounds/star_way.wav &");
+	system("cvlc sounds/star_way.wav &");
 	mlx_loop_hook(game->mlx_ptr, run, game);
 	mlx_loop(game->mlx_ptr);
 }

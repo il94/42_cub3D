@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/27 00:08:24 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:49:47 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ int	get_color_to_rgb(t_game *game, char *rgb_code, t_bool color_sky)
 		if (!color_sky)
 			free_all_and_exit(game, "RGB value is invalid 1\n");
 		else
+		{
 			game->image_sky = TRUE;
+			return (SKY);
+		}
 	}
 	if (values)
 	{

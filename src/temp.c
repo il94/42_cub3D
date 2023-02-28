@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:23:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/24 00:04:05 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:37:02 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,24 +110,6 @@ void	put_minimap_ray(t_game *game, float angle, t_fpos ray)
 	pos.x = start.x;
 	pos.y = start.y;
 	put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
-}
-
-void	put_point(t_game *game, int x, int y, int color)
-{
-	int	x_index;
-	int	y_index;
-
-	x_index = x - (POINT / 2);
-	while (x_index < x + (POINT / 2))
-	{
-		y_index = y - (POINT / 2);
-		while (y_index < y + (POINT / 2))
-		{
-			put_pixel(&game->minimap, x_index, y_index, color);
-			y_index++;
-		}
-		x_index++;
-	}
 }
 
 void	print_ray(t_ray ray)

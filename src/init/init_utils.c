@@ -6,13 +6,13 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:26:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/23 23:48:26 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:00:57 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void	*new_get_data_addr(t_game *game, t_img *sprite)
+void	*new_get_data_addr(t_game *game, t_myimg *sprite)
 {
 	void	*addr;
 
@@ -22,7 +22,7 @@ void	*new_get_data_addr(t_game *game, t_img *sprite)
 	return (addr);
 }
 
-void	*new_mlx_new_image(t_game *game, t_img *sprite, int width, int height)
+void	*new_mlx_new_image(t_game *game, t_myimg *sprite, int width, int height)
 {
 	void	*image;
 
@@ -33,7 +33,7 @@ void	*new_mlx_new_image(t_game *game, t_img *sprite, int width, int height)
 	return (image);
 }
 
-void	*new_xpm_to_image(t_game *game, t_img *sprite, char *path)
+void	*new_xpm_to_image(t_game *game, t_myimg *sprite, char *path)
 {
 	void	*image;
 

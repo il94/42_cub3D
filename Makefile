@@ -16,7 +16,7 @@ MAKE_SILENT = make --no-print-directory
 
 LIBFT = -L libft -lft
 LIBX = -L mlx_linux -lmlx_Linux
-LIBXFLAGS = -lmlx -lXext -lX11
+LIBXFLAGS = -lmlx -lXext -lX11 -lXfixes
 LIBMATHS = -lm
 
 #==============================================================================#
@@ -47,9 +47,10 @@ SRC = main.c temp.c \
 		parsing/parsing_map_utils.c parsing/parsing_data_map.c \
 		parsing/parsing_data_map_utils.c \
 		\
-		interaction/door.c \
+		interaction/door.c interaction/move.c \
 		\
-		put_render/put_render.c put_render/put_utils.c put_render/draw_minimap.c put_render/put_column.c \
+		put_render/put_render.c put_render/put_utils.c \
+		put_render/draw_minimap.c put_render/put_column.c \
 		put_render/put_environnement.c put_render/put_environnement_utils.c \
 		put_render/put_minimap.c put_render/put_sky.c put_render/put_stars.c \
 		\

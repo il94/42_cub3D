@@ -12,6 +12,24 @@
 
 #include "../../include/cub3D.h"
 
+static void	put_point(t_game *game, int x, int y, int color)
+{
+	int	x_index;
+	int	y_index;
+
+	x_index = x - (POINT / 2);
+	while (x_index < x + (POINT / 2))
+	{
+		y_index = y - (POINT / 2);
+		while (y_index < y + (POINT / 2))
+		{
+			put_pixel(&game->minimap, x_index, y_index, color);
+			y_index++;
+		}
+		x_index++;
+	}
+}
+
 static	t_bool	is_outside_map(t_game *game, t_pos start, int x, int y)
 {
 	t_pos	target;
@@ -47,7 +65,7 @@ static void	put_minimap_line(t_game *game, t_pos start, int y)
 		if (x == 0 || x == MINIMAP - 1 || y == 0 || y == MINIMAP - 1)
 			put_pixel(&game->minimap, x, y, BLACK);
 		else if (is_outside_map(game, start, x, y))
-			put_pixel(&game->minimap, x, y, SKY);
+			put_pixel(&game->minimap, x, y, game->c_color);
 		else
 			put_pixel(&game->minimap, x, y,
 				get_color(game, &game->full_minimap, start.y, start.x));

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/27 00:19:08 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:29:25 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	get_scrolling_offset(t_game *game)
 	}
 }
 
-void	put_column(t_game *game, t_img *to_print, float ray_dist, int n)
+void	put_column(t_game *game, t_myimg *to_print, float ray_dist, int n)
 {
 	int			i;
 	int			offset;

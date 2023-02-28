@@ -6,35 +6,65 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/23 23:18:28 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 14:31:53 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	move_player(t_game *game, float x, float y)
+static void	swicth_camera_mode(t_game *game)
 {
-	t_pos	target;
-	t_pos	old_pos_map;
-
-	old_pos_map = game->player.map;
-	target.x = x / TILE;
-	target.y = y / TILE;
-	if (game->map[game->player.map.y][target.x] == '0'
-		|| game->map[game->player.map.y][target.x] == '3'
-		|| check_player_carac(game->map[game->player.map.y][target.x]))
-		game->player.px.x = x;
-	if (game->map[target.y][game->player.map.x] == '0'
-		|| game->map[target.y][game->player.map.x] == '3'
-		|| check_player_carac(game->map[target.y][game->player.map.x]))
-		game->player.px.y = y;
-	if (game->map[(int)game->player.px.y / TILE]
-		[(int)game->player.px.x / TILE] != '1')
+	if (!game->mouse_on)
 	{
-		game->player.map.x = game->player.px.x / TILE;
-		game->player.map.y = game->player.px.y / TILE;
+		XFixesHideCursor(game->mlx_ptr->display, game->win_ptr->window);
+		mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIDTH / 2, HEIGHT / 2);
+		game->mouse_on = TRUE;
 	}
-	close_door(game, old_pos_map);
+	else
+	{
+		XFixesShowCursor(game->mlx_ptr->display, game->win_ptr->window);
+		game->mouse_on = FALSE;
+	}
+}
+
+int	key_release(int keycode, t_game *game)
+{
+	if (keycode == KEY_W)
+		game->move_up = FALSE;
+	else if (keycode == KEY_D)
+		game->move_right = FALSE;
+	else if (keycode == KEY_S)
+		game->move_down = FALSE;
+	else if (keycode == KEY_A)
+		game->move_left = FALSE;
+	else if (keycode == KEY_LEFT)
+		game->move_dir_left = FALSE;
+	else if (keycode == KEY_RIGHT)
+		game->move_dir_right = FALSE;
+	else if (keycode == KEY_SPACE)
+		open_door(game);
+	return (0);
+}
+
+int	key_press(int keycode, t_game *game)
+{
+	if (keycode == KEY_W)
+		game->move_up = TRUE;
+	else if (keycode == KEY_D)
+		game->move_right = TRUE;
+	else if (keycode == KEY_S)
+		game->move_down = TRUE;
+	else if (keycode == KEY_A)
+		game->move_left = TRUE;
+	else if (keycode == KEY_LEFT)
+		game->move_dir_left = TRUE;
+	else if (keycode == KEY_RIGHT)
+		game->move_dir_right = TRUE;
+	if (keycode == KEY_TAB)
+		swicth_camera_mode(game);
+	if (keycode == KEY_ESC)
+		mlx_loop_end(game->mlx_ptr);
+	return (0);
 }
 
 void	process_inputs(t_game *game)
@@ -59,56 +89,4 @@ void	process_inputs(t_game *game)
 	if (game->move_left)
 		move_player(game, game->player.px.x + game->player.dir_side.x,
 			game->player.px.y + game->player.dir_side.y);
-}
-
-int	mouse_move(int x, int y, t_game *game)
-{	
-	if (game->mouse_on)
-	{
-		if (x < game->mouse.x)
-			game->player.angle = correc_angle(game->player.angle + SENSI_MOUSE);
-		else if (x > game->mouse.x)
-			game->player.angle = correc_angle(game->player.angle - SENSI_MOUSE);
-		mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIDTH / 2, HEIGHT / 2);
-	}
-}
-
-int	key_release(int keycode, t_game *game)
-{
-	if (keycode == KEY_W)
-		game->move_up = FALSE;
-	else if (keycode == KEY_D)
-		game->move_right = FALSE;
-	else if (keycode == KEY_S)
-		game->move_down = FALSE;
-	else if (keycode == KEY_A)
-		game->move_left = FALSE;
-	else if (keycode == KEY_LEFT)
-		game->move_dir_left = FALSE;
-	else if (keycode == KEY_RIGHT)
-		game->move_dir_right = FALSE;
-	else if (keycode == KEY_SPACE)
-		open_door(game);
-	else if (keycode == KEY_TAB)
-		game->mouse_on = !game->mouse_on;
-	return (0);
-}
-
-int	key_press(int keycode, t_game *game)
-{
-	if (keycode == KEY_W)
-		game->move_up = TRUE;
-	else if (keycode == KEY_D)
-		game->move_right = TRUE;
-	else if (keycode == KEY_S)
-		game->move_down = TRUE;
-	else if (keycode == KEY_A)
-		game->move_left = TRUE;
-	else if (keycode == KEY_LEFT)
-		game->move_dir_left = TRUE;
-	else if (keycode == KEY_RIGHT)
-		game->move_dir_right = TRUE;
-	if (keycode == KEY_ESC)
-		mlx_loop_end(game->mlx_ptr);
-	return (0);
 }
