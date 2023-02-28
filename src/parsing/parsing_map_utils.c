@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 00:02:01 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/27 00:06:17 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:21:22 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	check_space_around(char **map, int i, int j)
 	if (j == (ft_strlen(map[i]) - 1) || (!map[i][j + 1]
 		|| map[i][j + 1] == ' '))
 		n++;
-	if (i == 0 || j > ft_strlen(map[i - 1]) || map[i - 1][j] == ' ')
+	if (i == 0 || j >= ft_strlen(map[i - 1]) || map[i - 1][j] == ' ')
 		n++;
-	if (i == (ft_get_size_array(map) - 1) || j > ft_strlen(map[i + 1])
+	if (i == (ft_get_size_array(map) - 1) || j >= ft_strlen(map[i + 1])
 		|| map[i + 1][j] == ' ')
 		n++;
 	return (n);

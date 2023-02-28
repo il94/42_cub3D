@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 15:09:55 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:31:44 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,8 @@ typedef struct s_game{
 	t_myimg		full_minimap;
 	t_myimg		minimap;
 	t_myimg		player_minimap;
+	
+	t_myimg		door;
 
 	t_myimg		north;
 	t_myimg		south;
@@ -225,6 +227,7 @@ int		run(t_game *game);
 void	draw_minimap(t_game *game);
 
 /* put_column.c*/
+void	put_column_anim(t_game *game, t_myimg *to_print, float ray_dist, int n);
 void	put_column(t_game *game, t_myimg *to_print, float ray_dist, int n);
 
 /* put_environnement_utils.c*/

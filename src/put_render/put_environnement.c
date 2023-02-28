@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_environnement.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 15:29:44 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:45:43 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,21 @@ static t_fpos	get_collision(t_game *game, t_fpos start_h, t_fpos start_v)
 	distance_v = hypotenus(game->player.px, result_v);
 	if (distance_h <= distance_v)
 	{
+		// printf("res = %f | res = %f\n", result_h.x, result_h.y);
+		if (game->map[(int)result_h.y / TILE - 1 + !game->ray.up][(int)result_h.x / TILE] == '2')
+			game->ray.door = TRUE;
+		else
+			game->ray.door = FALSE;
 		game->ray.wall_v = FALSE;
 		game->ray.wall_h = TRUE;
 		return (result_h);
 	}
 	else
 	{
+		if (game->map[(int)result_v.y / TILE][(int)result_v.x / TILE - 1 + !game->ray.left] == '2')
+			game->ray.door = TRUE;
+		else
+			game->ray.door = FALSE;
 		game->ray.wall_h = FALSE;
 		game->ray.wall_v = TRUE;
 		return (result_v);
@@ -106,9 +115,10 @@ void	put_environnement(t_game *game)
 		ray_dist = hypotenus(game->player.px, game->ray.px);
 		ray_dist *= cos(game->player.angle - game->ray.angle);
 		ray_dist = fabs(TILE / ray_dist * HEIGHT);
-		put_column(game, get_image(game), ray_dist, i);
-		
-		game->ray.angle = correc_angle(game->ray.angle - to_rad(FOV) / (WIDTH));
+		put_column_anim(game, get_image(game), ray_dist, i);
+		if (game->ray.door)
+			put_column(game, &game->door, ray_dist, i);
+		game->ray.angle = correc_angle(game->ray.angle - to_rad(FOV) / WIDTH);
 		i++;
 	}
 	put_image(&game->render, &game->environnement, 0, 0);

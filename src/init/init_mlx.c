@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 14:48:34 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:21:28 by adouay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_mlx_addr(t_game *game)
 		game->sky.addr = new_get_data_addr(game, &game->sky);
 	game->star.addr = new_get_data_addr(game, &game->star);
 	game->player_minimap.addr = new_get_data_addr(game, &game->player_minimap);
+	game->door.addr = new_get_data_addr(game, &game->door);
 }
 
 static void	init_mlx_img(t_game *game)
@@ -47,6 +48,8 @@ static void	init_mlx_img(t_game *game)
 			"sprites/xpm/yellow_star.xpm");
 	game->player_minimap.img = new_xpm_to_image(game, &game->player_minimap,
 			"sprites/xpm/m_40.xpm");
+	game->door.img = new_xpm_to_image(game, &game->door,
+			"sprites/xpm/frame.xpm");
 }
 
 void	init_mlx(t_game *game)
