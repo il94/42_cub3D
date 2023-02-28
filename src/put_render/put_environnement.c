@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_environnement.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 18:45:43 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:09:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void	put_environnement(t_game *game)
 		ray_dist *= cos(game->player.angle - game->ray.angle);
 		ray_dist = fabs(TILE / ray_dist * HEIGHT);
 		put_column_anim(game, get_image(game), ray_dist, i);
-		if (game->ray.door)
-			put_column(game, &game->door, ray_dist, i);
+		// if (game->ray.door)
+		// 	put_column(game, &game->door, ray_dist, i);
 		game->ray.angle = correc_angle(game->ray.angle - to_rad(FOV) / WIDTH);
 		i++;
 	}
