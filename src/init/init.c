@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/26 21:27:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:30:53 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ static void	init_images(t_game *game)
 	game->east.img = NULL;
 	game->sky.img = NULL;
 	game->image_sky = FALSE;
-	game->star.img = NULL;
+	game->star[0].img = NULL;
+	game->star[1].img = NULL;
+	game->star[2].img = NULL;
 	game->stars_apparead = FALSE;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:00:00 by 32:02 by il       #+#    #+#             */
-/*   Updated: 2023/02/26 20:25:03 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:30:37 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	put_stars(t_game *game)
 	i = 0;
 	while (i < 8)
 	{
-		put_image(&game->render, &game->star, get_pos_x(game) + get_dir_x(game),
+		put_image(&game->render, &game->star[0], get_pos_x(game) + get_dir_x(game),
 			get_pos_y(game) + get_dir_y(game));
 		i++;
 	}

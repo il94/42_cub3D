@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 18:31:44 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:54:42 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ typedef struct s_game{
 	t_myimg		sky;
 	t_bool		image_sky;
 
-	t_myimg		star;
+	t_myimg		star[3];
 	t_bool		stars_apparead;
 	float		star_state;
 	
@@ -289,6 +289,7 @@ void    parser(t_game *game, int nb_parameters, char *file);
 /* door.c */
 void	close_door(t_game *game, t_pos old_pos_map);
 void	open_door(t_game *game);
+int		near_door(t_game *game);
 
 /* move.c */
 int		move_mouse(int x, int y, t_game *game);
