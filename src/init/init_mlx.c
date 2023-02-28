@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 18:21:28 by adouay           ###   ########.fr       */
+/*   Updated: 2023/02/28 19:03:57 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	init_mlx_img(t_game *game)
 	game->player_minimap.img = new_xpm_to_image(game, &game->player_minimap,
 			"sprites/xpm/m_40.xpm");
 	game->door.img = new_xpm_to_image(game, &game->door,
-			"sprites/xpm/frame.xpm");
+			"sprites/xpm/cadre_jaune.xpm");
 }
 
 void	init_mlx(t_game *game)
