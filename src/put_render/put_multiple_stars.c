@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_stars.c                                        :+:      :+:    :+:   */
+/*   put_stars_dispersion.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:00:00 by 32:02 by il       #+#    #+#             */
-/*   Updated: 2023/02/28 19:30:37 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:19:13 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	get_pos_x(t_game *game)
 	return (mid + start);
 }
 
-void	put_stars(t_game *game)
+void	put_multiple_stars(t_game *game)
 {
 	int	i;
 

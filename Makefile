@@ -53,7 +53,8 @@ SRC = main.c temp.c \
 		put_render/put_render.c put_render/put_utils.c \
 		put_render/draw_minimap.c put_render/put_column.c \
 		put_render/put_environnement.c put_render/put_environnement_utils.c \
-		put_render/put_minimap.c put_render/put_sky.c put_render/put_stars.c \
+		put_render/put_minimap.c put_render/put_sky.c \
+		put_render/put_multiple_stars.c \
 		\
 		run/run.c run/utils.c run/process_inputs.c run/free_memory.c \
 		\

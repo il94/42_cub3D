@@ -6,13 +6,13 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 22:02:11 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:20:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	put_star_anim(t_game *game)
+static void	put_star_indicator(t_game *game)
 {
 	static int	tmp;
 
@@ -37,11 +37,11 @@ void	put_render(t_game *game)
 		put_sky_color(game);
 	put_environnement(game);
 	if (game->stars_apparead)
-		put_stars(game);
+		put_multiple_stars(game);
 	put_minimap(game);
 	near_door(game);
 	if (game->is_door)
-		put_star_anim(game);
+		put_star_indicator(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
 		game->render.img, 0, 0);
 }

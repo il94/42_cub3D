@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 21:59:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:19:31 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,8 +248,8 @@ void	put_minimap(t_game *game);
 void	put_sky_image(t_game *game);
 void	put_sky_color(t_game *game);
 
-/* put_stars.c */
-void	put_stars(t_game *game);
+/* put_multiple_stars.c */
+void	put_multiple_stars(t_game *game);
 
 /* put_utils.c */
 t_myimg	*get_image(t_game *game);
