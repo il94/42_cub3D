@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 19:54:42 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 21:59:50 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# include <X11/extensions/Xfixes.h>
+// # include <X11/extensions/Xfixes.h>
 
 # include "../mlx_linux/mlx.h"
 # include "../mlx_linux/mlx_int.h"
@@ -36,16 +36,16 @@
 # define KEY_ESC 65307
 
 /* QWERTY */
-# define KEY_W 119
-# define KEY_D 100
-# define KEY_S 115
-# define KEY_A 97
-
-/* AZERTY */
-// # define KEY_W 122
+// # define KEY_W 119
 // # define KEY_D 100
 // # define KEY_S 115
-// # define KEY_A 113
+// # define KEY_A 97
+
+/* AZERTY */
+# define KEY_W 122
+# define KEY_D 100
+# define KEY_S 115
+# define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -193,6 +193,7 @@ typedef struct s_game{
 
 	t_myimg		star[3];
 	t_bool		stars_apparead;
+	t_bool		is_door;
 	float		star_state;
 	
 }   t_game;
@@ -289,7 +290,7 @@ void    parser(t_game *game, int nb_parameters, char *file);
 /* door.c */
 void	close_door(t_game *game, t_pos old_pos_map);
 void	open_door(t_game *game);
-int		near_door(t_game *game);
+void	near_door(t_game *game);
 
 /* move.c */
 int		move_mouse(int x, int y, t_game *game);
