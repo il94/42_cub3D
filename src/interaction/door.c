@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:15:56 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/28 19:54:54 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 22:04:25 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	close_door(t_game *game, t_pos old_pos_map)
 	}
 }
 
-int	near_door(t_game *game)
+void	near_door(t_game *game)
 {
 	t_pos	map_ray3;
 	float	distance;
@@ -39,10 +39,17 @@ int	near_door(t_game *game)
 	distance = hypotenus(game->player.px, game->ray3.px);
 	map_ray3.x /= TILE;
 	map_ray3.y /= TILE;
-	if (distance < 2 * TILE && game->map[map_ray3.y][map_ray3.x] == '2')
-		return (1);
-	return (0);
+	if (distance < 2 * TILE && game->map[map_ray3.y][map_ray3.x] == '2'
+		&& game->is_door == FALSE)
+	{
+		system("cvlc sounds/navi.wav &");	
+		game->is_door = TRUE;
+	}
+	else if (!(distance < 2 * TILE && game->map[map_ray3.y][map_ray3.x] == '2')
+		&& game->is_door == TRUE)
+		game->is_door = FALSE;
 }
+
 void	open_door(t_game *game)
 {
 	t_pos	map_ray3;

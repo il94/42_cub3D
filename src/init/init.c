@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/28 19:30:53 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/02/28 22:06:50 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void	init_game(t_game *game)
 	game->move_dir_left = FALSE;
 	game->move_dir_right = FALSE;
 	game->mouse_on = FALSE;
+	game->is_door = FALSE;
 	game->star_state = 0;
 }
 
