@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 17:57:42 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/24 18:44:02 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:25:17 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	int	get_scrolling(t_game *game)
 {
 	static int	tmp;
 
-	if (tmp >= SCROLLING_SKY)
+	if (tmp >= SCROLLING)
 		tmp = 0;
 	tmp++;
 	return (tmp % game->sky.width * 2);
@@ -58,7 +58,7 @@ void	put_sky_image(t_game *game)
 		{
 			offset = abs((int)(j / ratio + scrolling) % (int)(WIDTH / ratio));
 			put_pixel(&game->environnement, j, i - 60,
-				get_color(game, &game->sky, i / ratio, offset));
+				get_color(&game->sky, i / ratio, offset));
 			j++;
 		}
 		i++;

@@ -8,8 +8,8 @@ NAME = cub3D
 #                                   COMMANDS                                   #
 #==============================================================================#
 
-CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
+CC = gcc -g3
+CFLAGS = -Wall -Wextra -Werror
 MKDIR = mkdir -p
 RM = rm -f
 MAKE_SILENT = make --no-print-directory
@@ -41,7 +41,8 @@ OBJ_DIR = obj/
 #                                   SOURCES                                    #
 #==============================================================================#
 
-SRC = main.c temp.c \
+SRC = main.c \
+		\
 		init/init.c init/init_utils.c init/init_mlx.c \
 		\
 		parsing/parsing.c parsing/parsing_utils.c parsing/parsing_map.c \
@@ -88,9 +89,6 @@ $(NAME) : $(OBJ)
 	echo "$(YELLOW)Making Cub3D$(END)"
 	$(CC) $(OBJ) $(LIBFT) $(LIBX) $(LIBXFLAGS) $(LIBMATHS) -o $(NAME)
 	echo "$(GREEN)Done$(END)"
-
-# $(OBJ_DIR) :
-# 	$(MKDIR) $(OBJ_DIR)
 
 bonus : all
 

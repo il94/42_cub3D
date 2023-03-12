@@ -6,13 +6,13 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:27:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 14:30:22 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:56:11 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	move_mouse(int x, int y, t_game *game)
+int	move_mouse(int x, t_game *game)
 {	
 	if (game->mouse_on)
 	{
@@ -22,6 +22,7 @@ int	move_mouse(int x, int y, t_game *game)
 			game->player.angle = correc_angle(game->player.angle - SENSI_MOUSE);
 		mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIDTH / 2, HEIGHT / 2);
 	}
+	return (0);
 }
 
 void	move_player(t_game *game, float x, float y)

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/26 21:29:23 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:33:20 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ int	run(t_game *game)
 {
 	put_render(game);
 	process_inputs(game);
+	return (0);
 }

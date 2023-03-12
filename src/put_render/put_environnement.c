@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:35:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 19:09:22 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:17:06 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,12 @@ static t_fpos	get_collision(t_game *game, t_fpos start_h, t_fpos start_v)
 	distance_v = hypotenus(game->player.px, result_v);
 	if (distance_h <= distance_v)
 	{
-		// printf("res = %f | res = %f\n", result_h.x, result_h.y);
-		if (game->map[(int)result_h.y / TILE - 1 + !game->ray.up][(int)result_h.x / TILE] == '2')
-			game->ray.door = TRUE;
-		else
-			game->ray.door = FALSE;
 		game->ray.wall_v = FALSE;
 		game->ray.wall_h = TRUE;
 		return (result_h);
 	}
 	else
 	{
-		if (game->map[(int)result_v.y / TILE][(int)result_v.x / TILE - 1 + !game->ray.left] == '2')
-			game->ray.door = TRUE;
-		else
-			game->ray.door = FALSE;
 		game->ray.wall_h = FALSE;
 		game->ray.wall_v = TRUE;
 		return (result_v);
@@ -87,11 +78,11 @@ static t_fpos	get_collision(t_game *game, t_fpos start_h, t_fpos start_v)
 static void	catch_special_ray(t_game *game, int i)
 {
 	if (i == 0)
-		game->ray1 = game->ray;
+		game->ray_first = game->ray;
 	else if (i == WIDTH - 1)
-		game->ray2 = game->ray;
+		game->ray_last = game->ray;
 	else if (i == WIDTH / 2)
-		game->ray3 = game->ray;
+		game->ray_mid = game->ray;
 }
 
 void	put_environnement(t_game *game)
@@ -116,8 +107,6 @@ void	put_environnement(t_game *game)
 		ray_dist *= cos(game->player.angle - game->ray.angle);
 		ray_dist = fabs(TILE / ray_dist * HEIGHT);
 		put_column_anim(game, get_image(game), ray_dist, i);
-		// if (game->ray.door)
-		// 	put_column(game, &game->door, ray_dist, i);
 		game->ray.angle = correc_angle(game->ray.angle - to_rad(FOV) / WIDTH);
 		i++;
 	}

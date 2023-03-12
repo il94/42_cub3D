@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 13:49:47 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:55:54 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static char	*get_sprite_path(t_game *game, char *str)
 void	check_sprite(t_game *game, char **file_content)
 {
 	int		i;
-	int		tmp;
 	int		index;
 
 	i = 0;

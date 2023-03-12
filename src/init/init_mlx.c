@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:36:12 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 19:33:27 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 01:13:56 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	init_mlx_addr(t_game *game)
 	game->star[0].addr = new_get_data_addr(game, &game->star[0]);
 	game->star[1].addr = new_get_data_addr(game, &game->star[1]);
 	game->star[2].addr = new_get_data_addr(game, &game->star[2]);
-	game->player_minimap.addr = new_get_data_addr(game, &game->player_minimap);
-	game->door.addr = new_get_data_addr(game, &game->door);
 }
 
 static void	init_mlx_img(t_game *game)
@@ -37,7 +35,8 @@ static void	init_mlx_img(t_game *game)
 	game->environnement.img = new_mlx_new_image(game, &game->environnement,
 			WIDTH, HEIGHT);
 	game->full_minimap.img = new_mlx_new_image(game, &game->full_minimap,
-			MNMP_WIDTH, MNMP_HEIGHT);
+			MNMP_TILE * (game->size_map.x / TILE) + 1,
+			MNMP_TILE * (game->size_map.y / TILE) + 1);
 	game->minimap.img = new_mlx_new_image(game, &game->minimap,
 			MINIMAP, MINIMAP);
 	game->north.img = new_xpm_to_image(game, &game->north, game->sprite[NO]);
@@ -47,15 +46,11 @@ static void	init_mlx_img(t_game *game)
 	if (game->image_sky)
 		game->sky.img = new_xpm_to_image(game, &game->sky, game->sprite[C]);
 	game->star[0].img = new_xpm_to_image(game, &game->star[0],
-			"sprites/xpm/yellow_star.xpm");
+			"sprites/yellow_star.xpm");
 	game->star[1].img = new_xpm_to_image(game, &game->star[1],
-			"sprites/xpm/yellow_star_2.xpm");
+			"sprites/yellow_star_2.xpm");
 	game->star[2].img = new_xpm_to_image(game, &game->star[2],
-			"sprites/xpm/yellow_star_3.xpm");
-	game->player_minimap.img = new_xpm_to_image(game, &game->player_minimap,
-			"sprites/xpm/m_40.xpm");
-	game->door.img = new_xpm_to_image(game, &game->door,
-			"sprites/xpm/cadre_jaune.xpm");
+			"sprites/yellow_star_3.xpm");
 }
 
 void	init_mlx(t_game *game)
@@ -71,7 +66,7 @@ void	init_mlx(t_game *game)
 	mlx_hook(game->win_ptr, 6, 1L << 6, move_mouse, game);
 	draw_minimap(game);
 	mlx_hook(game->win_ptr, 17, 0, mlx_loop_end, game->mlx_ptr);
-	system("cvlc sounds/star_way.wav &");
+	system("cvlc sounds/theme.wav &");
 	mlx_loop_hook(game->mlx_ptr, run, game);
 	mlx_loop(game->mlx_ptr);
 }

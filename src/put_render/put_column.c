@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_column.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:15:44 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/28 18:35:54 by adouay           ###   ########.fr       */
+/*   Updated: 2023/03/11 23:31:01 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static int	get_offset(t_game *game)
 {
-	int	scrolling;
-
 	if (game->ray.wall_h)
 	{
 		if (game->ray.up)
@@ -32,7 +30,7 @@ static int	get_offset(t_game *game)
 	}
 }
 
-void	put_column(t_game *game, t_myimg *to_print, float ray_dist, int n)
+void	put_column(t_game *game, t_mimg *to_print, float ray_dist, int n)
 {
 	int			i;
 	int			offset;
@@ -46,9 +44,9 @@ void	put_column(t_game *game, t_myimg *to_print, float ray_dist, int n)
 		if (i < ray_dist / 2)
 		{
 			put_pixel(&game->environnement, n, HEIGHT / 2 - i,
-				get_color(game, to_print, (ray_dist / 2 - i) * ratio, offset));
+				get_color(to_print, (ray_dist / 2 - i) * ratio, offset));
 			put_pixel(&game->environnement, n, HEIGHT / 2 + i,
-				get_color(game, to_print, i * ratio + TILE / 2, offset));
+				get_color(to_print, i * ratio + TILE / 2, offset));
 		}
 		else
 			put_pixel(&game->environnement, n, HEIGHT / 2 + i, game->f_color);
@@ -56,7 +54,7 @@ void	put_column(t_game *game, t_myimg *to_print, float ray_dist, int n)
 	}
 }
 
-static int	set_scrolling(int src, int max)
+static int	set_scrolling(int src)
 {
 	if (src > SCROLLING)
 		return (0);
@@ -70,9 +68,9 @@ static int	get_scrolling_offset(t_game *game)
 	static int	temp;
 	static int	temp2;
 
-	temp = set_scrolling(temp, SCROLLING);
+	temp = set_scrolling(temp);
 	if (temp % 15 == 0)
-		temp2 = set_scrolling(temp2, SCROLLING);
+		temp2 = set_scrolling(temp2);
 	scrolling = temp2 / TILE % TILE;
 	if (game->ray.wall_h)
 	{
@@ -90,7 +88,7 @@ static int	get_scrolling_offset(t_game *game)
 	}
 }
 
-void	put_column_anim(t_game *game, t_myimg *to_print, float ray_dist, int n)
+void	put_column_anim(t_game *game, t_mimg *to_print, float ray_dist, int n)
 {
 	int			i;
 	int			offset;
@@ -104,9 +102,9 @@ void	put_column_anim(t_game *game, t_myimg *to_print, float ray_dist, int n)
 		if (i < ray_dist / 2)
 		{
 			put_pixel(&game->environnement, n, HEIGHT / 2 - i,
-				get_color(game, to_print, (ray_dist / 2 - i) * ratio, offset));
+				get_color(to_print, (ray_dist / 2 - i) * ratio, offset));
 			put_pixel(&game->environnement, n, HEIGHT / 2 + i,
-				get_color(game, to_print, i * ratio + TILE / 2, offset));
+				get_color(to_print, i * ratio + TILE / 2, offset));
 		}
 		else
 			put_pixel(&game->environnement, n, HEIGHT / 2 + i, game->f_color);

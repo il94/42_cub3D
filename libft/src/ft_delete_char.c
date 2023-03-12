@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_delete_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilandols <ilyes@student.42.fr>             +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:00:24 by ilandols          #+#    #+#             */
-/*   Updated: 2022/11/13 18:12:39 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:01:18 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_delete_char(char *str, size_t index)
+char	*ft_delete_char(char *str, int index)
 {
 	char	*result;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 
 	if (!str)
 		return (NULL);

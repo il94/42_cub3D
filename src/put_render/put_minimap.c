@@ -12,6 +12,29 @@
 
 #include "../../include/cub3D.h"
 
+static void	put_minimap_ray(t_game *game, float angle, t_fpos ray)
+{
+	t_fpos	start;
+	t_fpos	end;
+	t_fpos	tmp1;
+	t_fpos	tmp2;
+
+	tmp1.x = (MNMP_TILE * game->player.px.x / TILE);
+	tmp1.y = (MNMP_TILE * game->player.px.y / TILE);
+	tmp2.x = (MNMP_TILE * ray.x / TILE);
+	tmp2.y = (MNMP_TILE * ray.y / TILE);
+	start.x = MINIMAP / 2;
+	start.y = MINIMAP / 2;
+	end.x = MINIMAP / 2 + (cos(angle) * hypotenus(tmp1, tmp2));
+	end.y = MINIMAP / 2 + (-sin(angle) * hypotenus(tmp1, tmp2));
+	if (start.x > end.x)
+	{
+		swap(&start.x, &end.x);
+		swap(&start.y, &end.y);
+	}
+	put_line(game, start, end, get_coeff(end.y, start.y, end.x, start.x));
+}
+
 static void	put_point(t_game *game, int x, int y, int color)
 {
 	int	x_index;
@@ -30,7 +53,7 @@ static void	put_point(t_game *game, int x, int y, int color)
 	}
 }
 
-static	t_bool	is_outside_map(t_game *game, t_pos start, int x, int y)
+static	t_bool	is_outside_map(t_game *game, t_pos start)
 {
 	t_pos	target;
 
@@ -64,11 +87,11 @@ static void	put_minimap_line(t_game *game, t_pos start, int y)
 	{
 		if (x == 0 || x == MINIMAP - 1 || y == 0 || y == MINIMAP - 1)
 			put_pixel(&game->minimap, x, y, BLACK);
-		else if (is_outside_map(game, start, x, y))
+		else if (is_outside_map(game, start))
 			put_pixel(&game->minimap, x, y, game->c_color);
 		else
 			put_pixel(&game->minimap, x, y,
-				get_color(game, &game->full_minimap, start.y, start.x));
+				get_color(&game->full_minimap, start.y, start.x));
 		x++;
 		start.x++;
 	}
@@ -88,7 +111,9 @@ void	put_minimap(t_game *game)
 		start.y++;
 	}
 	put_point(game, MINIMAP / 2, MINIMAP / 2, PURPLE);
-	put_minimap_ray(game, game->player.angle + to_rad(FOV / 2), game->ray1.px);
-	put_minimap_ray(game, game->player.angle - to_rad(FOV / 2), game->ray2.px);
+	put_minimap_ray(game, game->player.angle + to_rad(FOV / 2),
+		game->ray_first.px);
+	put_minimap_ray(game, game->player.angle - to_rad(FOV / 2),
+		game->ray_last.px);
 	put_image(&game->render, &game->minimap, MNMP_TILE, MNMP_TILE);
 }

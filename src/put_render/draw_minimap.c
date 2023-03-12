@@ -6,29 +6,11 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:55:20 by ilandols          #+#    #+#             */
-/*   Updated: 2023/03/02 18:10:44 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:56:40 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-static void	put_player(t_game *game)
-{
-	int	x;
-	int	y;
-
-	x = game->player.px.x - (MNMP_PLAYER / 2);
-	while (x < game->player.px.x + (MNMP_PLAYER / 2))
-	{
-		y = game->player.px.y - (MNMP_PLAYER / 2);
-		while (y < game->player.px.y + (MNMP_PLAYER / 2))
-		{
-			put_pixel(&game->full_minimap, x, y, PURPLE);
-			y++;
-		}
-		x++;
-	}
-}
 
 static void	put_image_tile(t_game *game, int color, int x, int y)
 {

@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/03/02 18:19:31 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 01:15:46 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,11 @@
 
 # define _USE_MATH_DEFINES
 # define PI_0 0
-# define PI_45 M_PI / 4
-# define PI_90 M_PI / 2
-# define PI_180 M_PI
-# define PI_270 3 * M_PI / 2
+# define PI_45 0.785398163397448309615
+# define PI_90 1.57079632679489661923
+# define PI_270 4.71238898038468985769
 
 # define ERROR_MALLOC "Error malloc\n"
-
-# define KEY_ESC 65307
 
 /* QWERTY */
 // # define KEY_W 119
@@ -50,6 +47,7 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
+# define KEY_ESC 65307
 # define KEY_SPACE 32
 # define KEY_TAB 65289
 
@@ -65,28 +63,20 @@
 # define CYAN 0x00FFFF
 
 # define SKY 0x072533
-# define FLOOR 0x1FA3E0
 
 # define TILE 128
 # define WIDTH 960
 # define HEIGHT 600
-// # define WIDTH 1920
-// # define HEIGHT 1080
 
 # define MNMP_TILE 48
-# define MINIMAP 4 * MNMP_TILE
-# define MNMP_WIDTH MNMP_TILE * (game->size_map.x / TILE) + 1
-# define MNMP_HEIGHT MNMP_TILE * (game->size_map.y / TILE) + 1
-# define MNMP_PLAYER 9
+# define MINIMAP 192 // 4 * MNMP_TILE
 
 # define FOV 60	
-# define ANGLE_PLAYER 90	
 # define SPEED 5
 # define SENSI_KEY 0.05
 # define SENSI_MOUSE 0.02
 
 # define SCROLLING 512000
-# define SCROLLING_SKY 512000
 
 # define STAR_START 150
 # define STAR_DIST 75
@@ -102,55 +92,51 @@ typedef enum e_texture{
 	F,
 	C,
 	ERROR
-}	t_texture;
+}	t_text;
 
 typedef struct s_fpos{
-	float	x;
-	float	y;	
+	float		x;
+	float		y;	
 }	t_fpos;
 
-
 typedef struct s_player{
-	t_pos	map;
-	t_fpos	px;
-	t_fpos	dir;
-	t_fpos	dir_side;
-	float	angle;
+	t_pos		map;
+	t_fpos		px;
+	t_fpos		dir;
+	t_fpos		dir_side;
+	float		angle;
 }	t_player;
 
 typedef struct s_ray
 {
-	t_fpos	px;
-	t_fpos	offset_h;
-	t_fpos	offset_v;
-	float	angle;
-	t_bool	up;
-	t_bool	left;
-	
-	t_bool	wall_h;
-	t_bool	wall_v;
+	t_fpos		px;
+	t_fpos		offset_h;
+	t_fpos		offset_v;
+	float		angle;
+	t_bool		up;
+	t_bool		left;
 
-	int		door;
+	t_bool		wall_h;
+	t_bool		wall_v;
 }	t_ray;
 
-
 typedef struct s_myimg {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line;
-	int		end;
-	int		width;
-	int		height;
-}				t_myimg;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line;
+	int			end;
+	int			width;
+	int			height;
+}				t_mimg;
 
 typedef struct s_game{
 	t_xvar		*mlx_ptr;
 	t_win_list	*win_ptr;
 
-    char    	**map;
+	char		**map;
 	t_pos		size_map;
-    char    	**sprite;
+	char		**sprite;
 	int			f_color;
 	int			c_color;
 	int			fd;
@@ -158,57 +144,51 @@ typedef struct s_game{
 
 	t_pos		mouse;
 
-	t_bool	move_up;
-	t_bool	move_right;
-	t_bool	move_down;
-	t_bool	move_left;
-	t_bool	move_dir_left;
-	t_bool	move_dir_right;
-	t_bool	mouse_on;
+	t_bool		move_up;
+	t_bool		move_right;
+	t_bool		move_down;
+	t_bool		move_left;
+	t_bool		move_dir_left;
+	t_bool		move_dir_right;
+	t_bool		mouse_on;
 
 	t_ray		ray;
-	/* temp */
-	t_ray		ray1;
-	t_ray		ray2;
-	t_ray		ray3;
-	/**/
+	t_ray		ray_first;
+	t_ray		ray_last;
+	t_ray		ray_mid;
 
 	t_player	player;
 
-	t_myimg		render;
-	t_myimg		environnement;
-	t_myimg		full_minimap;
-	t_myimg		minimap;
-	t_myimg		player_minimap;
-	
-	t_myimg		door;
+	t_mimg		render;
+	t_mimg		environnement;
+	t_mimg		full_minimap;
+	t_mimg		minimap;
 
-	t_myimg		north;
-	t_myimg		south;
-	t_myimg		west;
-	t_myimg		east;
+	t_mimg		north;
+	t_mimg		south;
+	t_mimg		west;
+	t_mimg		east;
 
-	t_myimg		sky;
+	t_mimg		sky;
 	t_bool		image_sky;
 
-	t_myimg		star[3];
+	t_mimg		star[3];
 	t_bool		stars_apparead;
 	t_bool		is_door;
 	float		star_state;
-	
-}   t_game;
 
+}	t_game;
 
 /*============================================================================*/
 
 /* free_memory.c */
 void	verify_alloc(t_game *game, void *ptr);
 void	free_all_elements(t_game *game);
-void    free_all_and_exit(t_game *game, char *str_error);
+void	free_all_and_exit(t_game *game, char *str_error);
 
 /* process_inputs */
 void	process_inputs(t_game *game);
-int 	move_mouse(int x, int y, t_game *game);
+int		move_mouse(int x, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
 
@@ -228,8 +208,8 @@ int		run(t_game *game);
 void	draw_minimap(t_game *game);
 
 /* put_column.c*/
-void	put_column_anim(t_game *game, t_myimg *to_print, float ray_dist, int n);
-void	put_column(t_game *game, t_myimg *to_print, float ray_dist, int n);
+void	put_column(t_game *game, t_mimg *to_print, float ray_dist, int n);
+void	put_column_anim(t_game *game, t_mimg *to_print, float ray_dist, int n);
 
 /* put_environnement_utils.c*/
 void	init_offset(t_game *game);
@@ -252,10 +232,11 @@ void	put_sky_color(t_game *game);
 void	put_multiple_stars(t_game *game);
 
 /* put_utils.c */
-t_myimg	*get_image(t_game *game);
-int		get_color(t_game *game, t_myimg *src, int x, int y);
-void	put_pixel(t_myimg *dst_myimg, int x, int y, int color);
-void	put_image(t_myimg *dst_myimg, t_myimg *src_img, int x, int y);
+t_mimg	*get_image(t_game *game);
+int		get_color(t_mimg *src, int x, int y);
+void	put_pixel(t_mimg *dst_myimg, int x, int y, int color);
+void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff);
+void	put_image(t_mimg *dst_myimg, t_mimg *src_img, int x, int y);
 
 /* put_render.c */
 void	put_render(t_game *game);
@@ -263,7 +244,7 @@ void	put_render(t_game *game);
 /*============================================================================*/
 
 /* parsing_data_map_utils.c */
-t_texture	enum_check(char *tmp);
+t_text	enum_check(char *tmp);
 
 /* parsing_data_map.c */
 void	check_sprite(t_game *game, char **file_content);
@@ -283,17 +264,17 @@ void	get_map(t_game *game, char **file_content);
 void	check_file_format(t_game *game, char *file);
 
 /* parsing.c */
-void    parser(t_game *game, int nb_parameters, char *file);
+void	parser(t_game *game, int nb_parameters, char *file);
 
 /*============================================================================*/
 
 /* door.c */
 void	close_door(t_game *game, t_pos old_pos_map);
-void	open_door(t_game *game);
 void	near_door(t_game *game);
+void	open_door(t_game *game);
 
 /* move.c */
-int		move_mouse(int x, int y, t_game *game);
+int		move_mouse(int x, t_game *game);
 void	move_player(t_game *game, float x, float y);
 
 /*============================================================================*/
@@ -302,9 +283,9 @@ void	move_player(t_game *game, float x, float y);
 void	init_mlx(t_game *game);
 
 /* init_utils.c */
-void	*new_get_data_addr(t_game *game, t_myimg *sprite);
-void	*new_mlx_new_image(t_game *game, t_myimg *sprite, int width, int height);
-void	*new_xpm_to_image(t_game *game, t_myimg *sprite, char *path);
+void	*new_get_data_addr(t_game *game, t_mimg *sprite);
+void	*new_mlx_new_image(t_game *game, t_mimg *sprite, int width, int height);
+void	*new_xpm_to_image(t_game *game, t_mimg *sprite, char *path);
 
 /* init/init.c */
 void	init(t_game *src);
@@ -312,12 +293,6 @@ void	init(t_game *src);
 /*============================================================================*/
 
 /* main.c */
-int	main(int ac, char **av);
-
-/* temp.c */
-// void	put_column_color(t_game *game, int n)
-void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff);
-void	put_minimap_ray(t_game *game, float angle, t_fpos ray);
-// void	print_ray(t_ray ray);
+int		main(int ac, char **av);
 
 #endif

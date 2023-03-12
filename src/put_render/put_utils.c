@@ -6,13 +6,13 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:57:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 14:51:36 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:31:01 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-t_myimg	*get_image(t_game *game)
+t_mimg	*get_image(t_game *game)
 {
 	if (game->ray.wall_h)
 	{
@@ -30,12 +30,12 @@ t_myimg	*get_image(t_game *game)
 	}
 }
 
-int	get_color(t_game *game, t_myimg *src, int x, int y)
+int	get_color(t_mimg *src, int x, int y)
 {
 	return (*(int *)(src->addr + x * src->line + y * 4));
 }
 
-void	put_pixel(t_myimg *dst_myimg, int x, int y, int color)
+void	put_pixel(t_mimg *dst_myimg, int x, int y, int color)
 {
 	char	*dst;
 
@@ -46,7 +46,33 @@ void	put_pixel(t_myimg *dst_myimg, int x, int y, int color)
 		*(unsigned int *)dst = color;
 }
 
-void	put_image(t_myimg *dst_myimg, t_myimg *src_img, int x, int y)
+void	put_line(t_game *game, t_fpos start, t_fpos end, double coeff)
+{
+	t_pos	pos;
+	double	error;
+
+	pos.x = start.x;
+	pos.y = start.y;
+	error = 0;
+	while (pos.x <= end.x)
+	{
+		put_pixel(&game->minimap, pos.x, pos.y, RED);
+		error -= coeff;
+		while (error < -0.5)
+		{
+			if (pos.x < end.x)
+				put_pixel(&game->minimap, pos.x, pos.y, RED);
+			if (start.y > end.y)
+				pos.y--;
+			else
+				pos.y++;
+			error += 1.0;
+		}
+		pos.x++;
+	}
+}
+
+void	put_image(t_mimg *dst_myimg, t_mimg *src_img, int x, int y)
 {
 	int		color;
 	int		i;

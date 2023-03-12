@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 19:30:24 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:31:01 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	verify_alloc(t_game *game, void *ptr)
 		free_all_and_exit(game, ERROR_MALLOC);
 }
 
-static void	new_mlx_destroy_image(t_game *game, t_myimg *sprite)
+static void	new_mlx_destroy_image(t_game *game, t_mimg *sprite)
 {
 	if (sprite->img)
 		mlx_destroy_image(game->mlx_ptr, sprite->img);
@@ -26,7 +26,6 @@ static void	new_mlx_destroy_image(t_game *game, t_myimg *sprite)
 
 static void	destroy_mlx_images(t_game *game)
 {
-	new_mlx_destroy_image(game, &game->player_minimap);
 	new_mlx_destroy_image(game, &game->star[0]);
 	new_mlx_destroy_image(game, &game->star[1]);
 	new_mlx_destroy_image(game, &game->star[2]);

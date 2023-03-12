@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_stars_dispersion.c                             :+:      :+:    :+:   */
+/*   put_multiple_stars.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:00:00 by 32:02 by il       #+#    #+#             */
-/*   Updated: 2023/03/02 18:19:13 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:38:51 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static float	get_dir_y(t_game *game)
+static float	get_dir_y(float state)
 {
 	float		angle;
 	static int	i;
 
 	if (i >= 8)
 		i = 0;
-	angle = game->star_state + i * PI_45;
+	angle = state + i * PI_45;
 	i++;
-	return (game->star_state * sin(angle) * STAR_DIST);
+	return (state * sin(angle) * STAR_DIST);
 }
 
-static float	get_dir_x(t_game *game)
+static float	get_dir_x(float state)
 {
 	float		angle;
 	static int	i;
 
 	if (i >= 8)
 		i = 0;
-	angle = game->star_state + i * PI_45;
+	angle = state + i * PI_45;
 	i++;
-	return (game->star_state * cos(angle) * STAR_DIST);
+	return (state * cos(angle) * STAR_DIST);
 }
 
-static int	get_pos_y(t_game *game)
+static int	get_pos_y(void)
 {
 	int			mid;
 	int			start;
@@ -57,7 +57,7 @@ static int	get_pos_y(t_game *game)
 	return (mid + start);
 }
 
-static int	get_pos_x(t_game *game)
+static int	get_pos_x(void)
 {
 	int			mid;
 	int			start;
@@ -85,8 +85,9 @@ void	put_multiple_stars(t_game *game)
 	i = 0;
 	while (i < 8)
 	{
-		put_image(&game->render, &game->star[0], get_pos_x(game) + get_dir_x(game),
-			get_pos_y(game) + get_dir_y(game));
+		put_image(&game->render, &game->star[0],
+			get_pos_x() + get_dir_x(game->star_state),
+			get_pos_y() + get_dir_y(game->star_state));
 		i++;
 	}
 	game->star_state += STAR_SPEED;

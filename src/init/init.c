@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:43:19 by adouay            #+#    #+#             */
-/*   Updated: 2023/02/28 22:06:50 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:12:36 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	init_ray(t_game *game)
 	game->ray.offset_v.x = 0;
 	game->ray.offset_v.y = 0;
 	game->ray.angle = 0;
-	game->ray.door = 0;
 }
 
 static void	init_game(t_game *game)
