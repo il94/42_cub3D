@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:56:58 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/27 00:09:49 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:42:45 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static void	check_map_surended_wall(t_game *game, char **map)
 		while (map[i][j])
 		{
 			n = check_space_around(map, i, j);
-			if ((map[i][j] == '0' || check_player_carac(map[i][j])) && n != 0)
-				free_all_and_exit(game, "Invalid map\n");
+			if ((map[i][j] == '0' || map[i][j] == '2' || map[i][j] == '3'
+				|| check_player_carac(map[i][j])) && n != 0)
+				free_all_and_exit(game, "ERROR : Invalid map\n");
 			else if (map[i][j] == '1' && n > 3)
-				free_all_and_exit(game, "Invalid map\n");
+				free_all_and_exit(game, "ERROR : Invalid map\n");
 			j++;
 		}
 		i++;
@@ -66,18 +67,18 @@ static void	check_carac(t_game *game, char **map)
 			if (!valid_carac(map[i.y][i.x]))
 			{
 				if (!check_player_carac(map[i.y][i.x]))
-					free_all_and_exit(game, "Parsing Error : Invalide carac\n");
+					free_all_and_exit(game, "ERROR : Invalid carac\n");
 				get_player_info (game, i.y, i.x);
 				n++;
 			}
 			i.x++;
 		}
 		if (i.x == 0)
-			free_all_and_exit(game, "Parsing Error : Empty line in map\n");
+			free_all_and_exit(game, "ERROR : Empty line in map\n");
 		i.y++;
 	}
 	if (n != 1)
-		free_all_and_exit(game, "Need only one player\n");
+		free_all_and_exit(game, "ERROR : Need only one player\n");
 }
 
 static t_pos	get_size_map(char **map)
@@ -101,9 +102,9 @@ static t_pos	get_size_map(char **map)
 	return (result);
 }
 
-void	check_map(t_game *game, char **file_content)
+void	check_map(t_game *game, char **file_content, int start)
 {
-	get_map(game, file_content);
+	get_map(game, file_content, start);
 	check_carac(game, game->map);
 	check_map_surended_wall(game, game->map);
 	game->size_map = get_size_map(game->map);

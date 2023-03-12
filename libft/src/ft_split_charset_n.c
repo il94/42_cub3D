@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_charset_n.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adouay <adouay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 12:40:35 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/08 15:33:45 by adouay           ###   ########.fr       */
+/*   Updated: 2023/03/12 18:08:33 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	get_size_word(char const *s, char *charset, int index)
 	}
 	while (s[index] && is_charset(s[index], charset))
 	{
-		result++;		
+		result++;
 		index++;
 	}
 	return (result);
@@ -80,6 +80,12 @@ static int	count_words(char const *s, char *charset)
 		return (1);
 	result = 0;
 	i = 0;
+	if (is_charset(s[0], charset))
+	{
+		result++;
+		while (is_charset(s[i], charset))
+			i++;
+	}
 	while (s[i])
 	{
 		if (s[i] && !is_charset(s[i], charset)

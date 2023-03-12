@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:54:56 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/27 00:05:58 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 18:09:07 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,16 @@ void	dup_line_into_map(t_game *game, int tmp)
 	game->map[i] = 0;
 }
 
-void	get_map(t_game *game, char **file_content)
+void	get_map(t_game *game, char **file_content, int start)
 {
 	int	i;
-	int	tmp;
 
-	i = 0;
-	while (file_content[i] && file_content[i][0] != '1'
-		&& file_content[i][0] != ' ')
-		i++;
-	tmp = i;
 	i = 0;
 	while (file_content[i])
 		i++;
-	game->map = malloc(sizeof(char *) * (i - tmp + 1));
+	game->map = malloc(sizeof(char *) * (i - start + 1));
 	verify_alloc(game, game->map);
-	dup_line_into_map(game, tmp);
+	dup_line_into_map(game, start);
 }
 
 void	check_file_format(t_game *game, char *file)
@@ -53,14 +47,14 @@ void	check_file_format(t_game *game, char *file)
 	char	*extension;
 
 	if (read(game->fd, NULL, 0) == -1)
-		free_all_and_exit(game, "Is not a file\n");
+		free_all_and_exit(game, "ERROR : Is not a file\n");
 	extension = ft_strcut_right(file, '.');
 	if (!extension)
 		free_all_and_exit(game, ERROR_MALLOC);
 	if (ft_strcmp(extension, "cub"))
 	{
 		free (extension);
-		free_all_and_exit(game, ".cub extension required\n");
+		free_all_and_exit(game, "ERROR : .cub extension required\n");
 	}
 	free (extension);
 }

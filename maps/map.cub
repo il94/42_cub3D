@@ -1,27 +1,28 @@
 NO sprites/wall_clouds.xpm
 SO sprites/wall_clouds.xpm
-EA sprites/wall_clouds.xpm
-WE sprites/wall_clouds.xpm
+EA sprites/wall_clouds_2.xpm
+WE sprites/wall_clouds_2.xpm
 
 
 F 31,163,224
 C sprites/wall_stars.xpm
+
 
    1111111
    1000001
    1000001
 1110000000111
 1000000000001
-1000002000001
+1020002000201
 1000012100001
 1000200020001
-1000012100001
+1020012100201
 1000002000001
 1110000000111
    1000001
    100N001
    1000001
-   1000001
+   1222221
    1000001
    1000001
     11111

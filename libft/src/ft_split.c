@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:44:13 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/08 18:23:17 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:20:21 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	get_size_word(char const *s, char *charset, int index)
 	return (result);
 }
 
-static char	*get_word(char const *s, char* charset, int *index, int size_word)
+static char	*get_word(char const *s, char *charset, int *index, int size_word)
 {
 	int		j;
 	char	*result;
@@ -62,7 +62,7 @@ static char	*get_word(char const *s, char* charset, int *index, int size_word)
 	return (result);
 }
 
-static int	count_words(char const *s, char* charset)
+static int	count_words(char const *s, char *charset)
 {
 	int	result;
 	int	i;

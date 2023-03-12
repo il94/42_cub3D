@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:25:47 by ilandols          #+#    #+#             */
-/*   Updated: 2023/03/11 23:31:01 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:00:19 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	free_all_and_exit(t_game *game, char *str_error)
 {
 	free_all_elements(game);
 	if (str_error)
-		perror(str_error);
+		ft_printf_fd(2, str_error);
 	exit(EXIT_FAILURE);
 }

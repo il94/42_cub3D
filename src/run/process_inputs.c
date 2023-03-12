@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:45:10 by ilandols          #+#    #+#             */
-/*   Updated: 2023/02/28 20:12:09 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:44:19 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static void	swicth_camera_mode(t_game *game)
 {
 	if (!game->mouse_on)
 	{
-		// XFixesHideCursor(game->mlx_ptr->display, game->win_ptr->window);
+		XFixesHideCursor(game->mlx_ptr->display, game->win_ptr->window);
 		mlx_mouse_move(game->mlx_ptr, game->win_ptr, WIDTH / 2, HEIGHT / 2);
 		game->mouse_on = TRUE;
 	}
 	else
 	{
-		// XFixesShowCursor(game->mlx_ptr->display, game->win_ptr->window);
+		XFixesShowCursor(game->mlx_ptr->display, game->win_ptr->window);
 		game->mouse_on = FALSE;
 	}
 }

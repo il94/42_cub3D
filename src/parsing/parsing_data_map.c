@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:53:26 by ilandols          #+#    #+#             */
-/*   Updated: 2023/03/11 22:55:54 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:32:50 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	check_array_sprite_content(t_game *game)
 	while (game->sprite[i])
 		i++;
 	if (i != 6)
-		free_all_and_exit(game, "Missing informations\n");
+		free_all_and_exit(game, "ERROR : Missing informations\n");
 }
 
 static char	*get_sprite_path(t_game *game, char *str)
@@ -34,7 +34,7 @@ static char	*get_sprite_path(t_game *game, char *str)
 	return (result);
 }
 
-void	check_sprite(t_game *game, char **file_content)
+int	check_sprite(t_game *game, char **file_content)
 {
 	int		i;
 	int		index;
@@ -45,17 +45,18 @@ void	check_sprite(t_game *game, char **file_content)
 	index = enum_check(file_content[i]);
 	while (file_content[i] && (index != ERROR || file_content[i][0] == '\n'))
 	{
-		index = enum_check(file_content[i]);
 		if (index != ERROR)
 		{
 			if (!game->sprite[index])
 				game->sprite[index] = get_sprite_path(game, file_content[i]);
 			else
-				free_all_and_exit(game, "Doublon\n");
+				free_all_and_exit(game, "ERROR : Doublon\n");
 		}
 		i++;
+		index = enum_check(file_content[i]);
 	}
 	check_array_sprite_content(game);
+	return (i);
 }
 
 static void	assign_rgb_value(t_game *game, char **values, int trgt[3])
@@ -72,7 +73,7 @@ static void	assign_rgb_value(t_game *game, char **values, int trgt[3])
 		else
 		{
 			ft_free_array(values);
-			free_all_and_exit(game, "RGB value is invalid\n");
+			free_all_and_exit(game, "ERROR : Invalid RGB value\n");
 		}
 		i++;
 	}
@@ -91,7 +92,7 @@ int	get_color_to_rgb(t_game *game, char *rgb_code, t_bool color_sky)
 		ft_free_array(values);
 		values = NULL;
 		if (!color_sky)
-			free_all_and_exit(game, "RGB value is invalid 1\n");
+			free_all_and_exit(game, "ERROR : Invalid RGB value\n");
 		else
 		{
 			game->image_sky = TRUE;

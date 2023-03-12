@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 00:02:03 by ilandols          #+#    #+#             */
-/*   Updated: 2023/03/11 23:34:04 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:11:22 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_text	enum_check(char *tmp)
 {
+	if (!tmp)
+		return (ERROR);
 	if (!ft_strncmp(tmp, "NO ", 3))
 		return (NO);
 	if (!ft_strncmp(tmp, "SO ", 3))

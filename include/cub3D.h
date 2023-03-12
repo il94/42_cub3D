@@ -6,7 +6,7 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:50:34 by ilandols          #+#    #+#             */
-/*   Updated: 2023/03/12 01:15:46 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:45:02 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-// # include <X11/extensions/Xfixes.h>
+# include <X11/extensions/Xfixes.h>
 
 # include "../mlx_linux/mlx.h"
 # include "../mlx_linux/mlx_int.h"
@@ -33,16 +33,16 @@
 # define ERROR_MALLOC "Error malloc\n"
 
 /* QWERTY */
-// # define KEY_W 119
-// # define KEY_D 100
-// # define KEY_S 115
-// # define KEY_A 97
-
-/* AZERTY */
-# define KEY_W 122
+# define KEY_W 119
 # define KEY_D 100
 # define KEY_S 115
-# define KEY_A 113
+# define KEY_A 97
+
+/* AZERTY */
+// # define KEY_W 122
+// # define KEY_D 100
+// # define KEY_S 115
+// # define KEY_A 113
 
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -188,7 +188,6 @@ void	free_all_and_exit(t_game *game, char *str_error);
 
 /* process_inputs */
 void	process_inputs(t_game *game);
-int		move_mouse(int x, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		key_press(int keycode, t_game *game);
 
@@ -247,7 +246,7 @@ void	put_render(t_game *game);
 t_text	enum_check(char *tmp);
 
 /* parsing_data_map.c */
-void	check_sprite(t_game *game, char **file_content);
+int		check_sprite(t_game *game, char **file_content);
 int		get_color_to_rgb(t_game *game, char *rgb_code, t_bool color_sky);
 
 /* parsing_map_utils.c */
@@ -256,11 +255,11 @@ int		check_player_carac(char c);
 int		check_space_around(char **map, int i, int j);
 
 /* parsing_map.c */
-void	check_map(t_game *game, char **file_content);
+void	check_map(t_game *game, char **file_content, int start);
 
 /* parsing_utils.c */
 void	dup_line_into_map(t_game *game, int tmp);
-void	get_map(t_game *game, char **file_content);
+void	get_map(t_game *game, char **file_content, int start);
 void	check_file_format(t_game *game, char *file);
 
 /* parsing.c */
@@ -274,7 +273,7 @@ void	near_door(t_game *game);
 void	open_door(t_game *game);
 
 /* move.c */
-int		move_mouse(int x, t_game *game);
+int		move_mouse(int x, int y, t_game *game);
 void	move_player(t_game *game, float x, float y);
 
 /*============================================================================*/

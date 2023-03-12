@@ -16,8 +16,7 @@ MAKE_SILENT = make --no-print-directory
 
 LIBFT = -L libft -lft
 LIBX = -L mlx_linux -lmlx_Linux
-# LIBXFLAGS = -lmlx -lXext -lX11 -lXfixes
-LIBXFLAGS = -lmlx -lXext -lX11
+LIBXFLAGS = -lmlx -lXext -lX11 -lXfixes
 LIBMATHS = -lm
 
 #==============================================================================#

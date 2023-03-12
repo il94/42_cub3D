@@ -6,14 +6,15 @@
 /*   By: ilandols <ilandols@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 14:27:44 by ilandols          #+#    #+#             */
-/*   Updated: 2023/03/11 22:56:11 by ilandols         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:53:27 by ilandols         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	move_mouse(int x, t_game *game)
+int	move_mouse(int x, int y, t_game *game)
 {	
+	(void)y;
 	if (game->mouse_on)
 	{
 		if (x < game->mouse.x)
