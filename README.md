@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://i.goopics.net/99ky68.gif">
+	<img src="https://i.goopics.net/bp0krn.gif">
 </p>
 
 <h1 align="center">
@@ -169,7 +169,7 @@ C sprites/wall_stars.xpm</br>
 		<li>being surrounded by walls</li>
 		<li>containing only one player</li>
 		<li>being composed by only valid characters</li>
-		<li>the file containing map must be at .cub format</li>
+		<li>the file containing map must be .cub</li>
 	</ul>
 </p>
 <p>
