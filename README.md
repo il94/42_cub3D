@@ -6,11 +6,11 @@
 	Description
 </h1>
 <p align="center">
-	This is a 42 School project. The project consists in creating a small 3D environnement using raycasting with the MiniLibX, the school's graphic library. Some walls are a bit special. If so, a little fairy will let you know ;)
+	This is a 42 School group project. The project consists in creating a small 3D environnement using raycasting with the MiniLibX, the school's graphic library. Some walls are a bit special. If so, a little fairy will let you know ;)
 </p>
 
 <p align="center">
-	Two people worked on this project, so big up to my mate @AntoineDouay.
+	This project has been completed in collaboration with <a href="https://github.com/AntoineDouay" target="_blank">@AntoineDouay</a>.
 </p>
 
 <h2 align="center">
